@@ -1,0 +1,22 @@
+#leftMenuPull {
+    position: absolute;
+    float: left;
+    display: inline-block;
+    margin-left: 0px;
+
+    background: #000;
+    height: 100%;
+    width: 20px;
+}
+
+#rightMenuPull {
+    float: right;
+
+    background: #FF0;
+    height: 100%;
+    width: 20px;
+}
+
+#tableLayout {
+    margin-left: 20px;
+}

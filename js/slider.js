@@ -18,7 +18,7 @@ $(document).ready(function() {
     }
 
     function showSidebarRight() {
-        sidebarRight.css('margin-left', '1000');
+        sidebarRight.css('margin-left', $(window).width() - sidebarRight.width());
 
         overlay.show(0, function() {
             overlayRight.fadeTo('500', 0.5);
