@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     // hide sidebar and overlay
     function hideSidebar() {
-        sidebarLeft.css('margin-left', sidebarRight.width() * -1 + 'px');
+        sidebarLeft.css('margin-left', sidebarLeft.width() * -1 + 'px');
 
         overlay.fadeTo('500', 0, function() {
             overlay.hide();
@@ -18,7 +18,7 @@ $(document).ready(function() {
     }
 
     function showSidebarRight() {
-        sidebarRight.css('margin-left', '0');
+        sidebarRight.css('margin-left', '1000');
 
         overlay.show(0, function() {
             overlayRight.fadeTo('500', 0.5);
@@ -27,7 +27,7 @@ $(document).ready(function() {
 
     // hide sidebar and overlay
     function hideSidebarRight() {
-        sidebarRight.css('margin-left', sidebarRight.width() * -1 + 'px');
+        sidebarRight.css('margin-left', 1500 + 'px');
 
         overlayRight.fadeTo('500', 0, function() {
             overlayRight.hide();
@@ -38,7 +38,7 @@ $(document).ready(function() {
     var sidebarLeft = $('[data-sidebar-left]');
     var sidebarRight = $('[data-sidebar-right]');
     var buttonLeft = $('[data-sidebar-button]');
-    var buttonRight = $('[data-sidebar-button]');
+    var buttonRight = $('[data-sidebar-button-right]');
     var overlay = $('[data-sidebar-overlay]');
     var overlayRight = $('[data-sidebar-overlay-right]');
 
@@ -47,7 +47,7 @@ $(document).ready(function() {
 
     // hide sidebar on load
     sidebarLeft.css('margin-left', sidebarLeft.width() * -1 + 'px');
-    sidebarRight.css('margin-right', sidebarRight.width() * -1 + 'px');
+    sidebarRight.css('margin-left', sidebarRight.width() + 1500 + 'px');
 
     sidebarLeft.show(0, function() {
         sidebarLeft.css('transition', 'all 0.5s ease');
@@ -68,7 +68,7 @@ $(document).ready(function() {
     });
     // toggle sidebar on click
     buttonRight.click(function() {
-        if (overlay.is(':visible')) {
+        if (overlayRight.is(':visible')) {
             hideSidebarRight();
         } else {
             showSidebarRight();
