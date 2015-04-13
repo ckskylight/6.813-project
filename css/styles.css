@@ -4,17 +4,20 @@
     display: inline-block;
     margin-left: 0px;
 
-    background: #000;
+    background: #FF0;
     height: 100%;
     width: 20px;
+
+    cursor: pointer;
 }
 
 #rightMenuPull {
     float: right;
-
     background: #FF0;
     height: 100%;
     width: 20px;
+
+    cursor: pointer;
 }
 
 #tableLayout {

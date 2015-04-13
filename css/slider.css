@@ -16,7 +16,7 @@ body {
 [data-sidebar-right] {
     display: none;
     position: fixed;
-    width: 200px;
+    width: 350px;
     height: 100%;
     z-index: 100;
 }
