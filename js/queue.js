@@ -34,7 +34,7 @@ function addResClickListener(resNum) {
     });
     $('#deleteRes' + resNum).click(function(e) {
         $('#res' + resNum).addClass('hidden');
-        $('#deleteRes' + resNum).addClass('hidden');
+        $('#optionRes' + resNum).addClass('hidden');
     });
 }
 
