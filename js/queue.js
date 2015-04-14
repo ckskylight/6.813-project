@@ -14,7 +14,7 @@ function addParty(details) {
             '<div>Table 10</div>' +
             '</div><br /><hr>';
 
-    $('[data-sidebar-button-right]').after(html);
+    $('#queueContent').after(html);
 }
 
 $(document).ready(function() {
