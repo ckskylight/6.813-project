@@ -1,3 +1,4 @@
+
 var TableUI = function(model) {
 
     var xoffset = 0;
@@ -6,27 +7,55 @@ var TableUI = function(model) {
     var curRect = null;
     var rectList = [];
 
-    var isCollide = function(s, o) { // self, other
-        var sPoints = []
-        var oPoints = []
-        sPoints.push([s.attr('x'),s.attr('y')]);
-        sPoints.push([s.attr('x')+s.attr('width'), s.attr('y')]);
-        sPoints.push([s.attr('x'), s.attr('y') + s.attr('height')]);
-        sPoints.push([s.attr('x') + s.attr('width'), s.attr('y') + s.attr('height')]);
-        oPoints.push([o.attr('x'),o.attr('y')]); // Top left
-        oPoints.push([o.attr('x')+o.attr('width'), o.attr('y')]); // Top right
-        oPoints.push([o.attr('x'), o.attr('y') + o.attr('height')]); // Bottom left
-        oPoints.push([o.attr('x') + o.attr('width'), o.attr('y') + o.attr('height')]); // Bottom right
+    var collectRectPoints = function(rect) {
+        points = [];
+        points.push([rect.attr('x'),rect.attr('y')]); // top left
+        points.push([rect.attr('x')+rect.attr('width'), rect.attr('y')]); // top right
+        points.push([rect.attr('x'), rect.attr('y') + rect.attr('height')]); // bottom left
+        points.push([rect.attr('x') + rect.attr('width'), rect.attr('y') + rect.attr('height')]); // bottom right
+        return points;
+    }
 
-        for (var i=0; i < sPoints; i++) {
+    var connectRects = function(s, o) {  // for now we want to connect the bottom of s to top of o
+        var sPoints = collectRectPoints(s);
+        var oPoints = collectRectPoints(o);
+
+        // we want to position the top left of o on the bottom left of s
+        sBottomLeft = sPoints[2];
+        o.attr('x', sBottomLeft[0]);
+        o.attr('y', sBottomLeft[1]);
+    }
+
+    var isCollide = function(s, o) { // self, other
+        var sPoints = collectRectPoints(s);
+        var oPoints = collectRectPoints(o);
+
+        var inside = false;
+
+        for (var i=0; i < sPoints.length; i++) {
             var x = sPoints[i][0];
             var y = sPoints[i][1];
-            for (var j=0; j < oPoints; j++) {
-                if (j == 0) {
-
+            var pointInside = true;
+            for (var j=0; j < oPoints.length; j++) {
+                var oPoint = oPoints[j];
+                if (j == 0 && !(x >= oPoint[0] && y >= oPoint[1])) {
+                    pointInside = false;
+                }
+                else if (j == 1 && !(x <= oPoint[0] && y >= oPoint[1])) {
+                    pointInside = false;
+                }
+                else if (j == 2 && !(x >= oPoint[0] && y <= oPoint[1])) {
+                    pointInside = false;
+                }
+                else if (j == 3 && !(x <= oPoint[0] && y <= oPoint[1])) {
+                    pointInside = false;
                 }
             }
+
+            if (pointInside == true) inside = true;
         }
+
+        return inside;
 
     }
 
@@ -80,14 +109,14 @@ var TableUI = function(model) {
                 console.log(curRect);
             })
             .on('drag', function(e) {
-                console.log("drag");
                 this.attr('x', e.x - xoffset);
                 this.attr('y', e.y - yoffset);
                 // Collision detection
                 for (var i=0; i < rectList.length; i++) {
                     var rect = rectList[i];
-                    if (rect != this) {
-                        isCollide(this,rect);
+                    if (rect != this && isCollide(this,rect)) {
+                        console.log("Collide with rect " + i);
+                        connectRects(rect, this);
                     }
                 }
             })
@@ -103,7 +132,7 @@ var TableUI = function(model) {
             .fill('maroon')
             .attr('filters', new filter.DropShadow(1, 1, 5, 0x000000FF));
 
-        rectList.push(rect1);
+        //rectList.push(rect1);
         rectList.push(rect2);
         rectList.push(rect3);
         rectList.push(rect4);
