@@ -5,7 +5,7 @@ $(document).ready(function() {
 
         overlay.show(0, function() {
             overlay.fadeTo('500', 0.5);
-        });   
+        });
     }
 
     // hide sidebar and overlay
@@ -22,7 +22,7 @@ $(document).ready(function() {
 
         overlay.show(0, function() {
             overlayRight.fadeTo('500', 0.5);
-        });   
+        });
     }
 
     // hide sidebar and overlay
