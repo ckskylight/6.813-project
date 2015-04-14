@@ -11,10 +11,25 @@ function addParty(details) {
             '<div>' + time + '</div>' +
             '<div>' + name + '</div>' +
             '<div>' + size + '</div>' +
-            '<div>Table 10</div>' +
-            '</div><br /><hr>';
+            '<div>?</div>' +
+            '</div>';
+    html = html + optionsPanel();
+    html = html + '<br /><hr>';
 
     $('#queueContent').after(html);
+
+    addResClickListener(resNum);
+}
+
+//creates a select listener for each reservation added to the queue
+function addResClickListener(resNum) {
+
+}
+
+//returns the hidden options panel, which the listener can unhide
+function optionsPanel() {
+    return '<div id="optionsRes' + resNum + '"><button name="assignTable" id="assignTable">Assign Table</button>' + 
+        '<button name="deleteRes" id="deleteRes">Delete</button></div>';
 }
 
 $(document).ready(function() {
