@@ -2,31 +2,31 @@
 
 <html>
 <head>
-
-<link rel="stylesheet" href="css/slider.css">
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/index.css">
-
+    <title>TableMaestro</title>
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bonsai/0.4/bonsai.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
-<div id="leftMenuPull" data-sidebar-button></div>
-<div id="rightMenuPull" data-sidebar-button-right></div>
+<div id="leftMenuPull" data-sidebar-button><img id="arrowImgRight" src="img/arrow.png" width="30px" height="30px"/></div>
+<div id="rightMenuPull" data-sidebar-button-right><img id="arrowImgLeft" src="img/arrow.png" width="30px" height="30px"/></div>
 
     <aside data-sidebar-left>
         <div class="padding">
             Add Party<br /><br />
             Name: <input type="text" id="partyName" /><br />
             Time: <input type="text" id="partyTime" /><br />
+            Date: <input type="text" id="partyDate" /><br />
             Phone: <input type="text" id="partyPhone" /><br />
             Email: <input type="text" id="partyEmail" /><br />
             Party Size: <input type="text" id="partySize" /><br />
             <br />
             <br />
-            Estimated Wait: <br />
+            Estimated Wait: 15 Minutes<br />
 
             <button name="addPartyConfirm" id="addPartyConfirm">Confirm</button><br />
         <a href="#" data-sidebar-button>Hide Sidebar</a>
@@ -55,10 +55,7 @@
         });
     </script>
 
-    <!--<a href="#" data-sidebar-button>Show Sidebar</a>-->
     <div class="overlay" data-sidebar-overlay></div>
-
-    <!--<a href="#" data-sidebar-button-right>Show Sidebar Right</a>-->
     <div class="overlay" data-sidebar-overlay-right></div>
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>

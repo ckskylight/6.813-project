@@ -3,18 +3,21 @@ var resNum = 0; //number of reservations made (to uniquely identify them)
 function addParty(details) {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
+    var date = $('#partyDate').val();
     var phone = $('#partyPhone').val();
     var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
     $('#partyName').val('');
     $('#partyTime').val('');
+    $('#partyDate').val('');
     $('#partyPhone').val('');
     $('#partyEmail').val('');
     $('#partySize').val('');
 
     var html = '<div id="res' + resNum + '">' + 
             '<div>' + time + '</div>' +
+            '<div>' + date + '</div' +
             '<div>' + name + '</div>' +
             '<div>' + size + '</div>' +
             '<div>?</div>' +
