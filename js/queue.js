@@ -32,12 +32,16 @@ function addResClickListener(resNum) {
     $('#res' + resNum).click(function(e) {
         $('#optionsRes' + resNum).removeClass('hidden');
     });
+    $('#deleteRes' + resNum).click(function(e) {
+        $('#res' + resNum).addClass('hidden');
+        $('#deleteRes' + resNum).addClass('hidden');
+    });
 }
 
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum) {
     return '<div class="hidden" id="optionsRes' + resNum + '"><button name="assignTable" id="assignTable">Assign Table</button>' + 
-        '<button name="deleteRes" id="deleteRes">Delete</button></div>';
+        '<button name="deleteRes" id="deleteRes' + resNum + '">Delete</button></div>';
 }
 
 $(document).ready(function() {
