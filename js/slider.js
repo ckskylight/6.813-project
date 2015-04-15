@@ -13,6 +13,14 @@ var overlay;
 $(document).ready(function() {
     // show sidebar and overlay
     function showSidebar() {
+
+        $('#partyTime').val('');
+        $('#partyDate').val('');
+        $('#partySize').val('');
+        $('#partyName').val('');
+        $('#partyPhone').val('');
+        $('#partyEmail').val('');
+
         sidebarLeft.css('margin-left', '0');
 
         overlay.show(0, function() {

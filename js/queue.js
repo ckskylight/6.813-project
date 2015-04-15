@@ -14,13 +14,6 @@ function addParty() {
     console.log(size);
 
     if (name != '' && time != '' && date != '' && size != '') {
-        console.log('closing!');
-        $('#partyTime').val('');
-        $('#partyDate').val('');
-        $('#partySize').val('');
-        $('#partyName').val('');
-        $('#partyPhone').val('');
-        $('#partyEmail').val('');
         hideSidebar();
     
         var html = '<div class="inQueue" id="res' + resNum + '">' + 
