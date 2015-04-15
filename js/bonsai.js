@@ -1,12 +1,12 @@
 var TableUI = function(model) {
 
     stage.on('message', function(data) {
-        //if (data.bonsai === 'tree') {
-            //text.attr('textFillColor', 'red');
-        //}
         console.log(data);
         if (data.command == "show available") {
             showNotFull();
+        }
+        else if (data.command == "remove shading") {
+            removeShading();
         }
     });
 
@@ -17,8 +17,46 @@ var TableUI = function(model) {
     var rectList = [];
     var timeList = [];
 
+    var removeShading = function() {
+        darkShadeRect.animate('0.5s', {
+            fillColor: '#00000000'
+        });
+    }
+
     var showNotFull = function() {
-        console.log("showing available tables");
+        darkShadeRect.addTo(stage);
+        darkShadeRect.animate('0.5s', {
+            fillColor: '#00000077'
+        });
+        for (var i=0; i < timeList.length; i++) {
+            if (timeList[i] == 0) {
+                var rect = rectList[i];
+                rect.destroy();
+                rect.addTo(stage)
+                .on('pointerdown', function(e) {
+                    var w = this.attr('width');
+                    var h = this.attr('height');
+                    var x = this.attr('x');
+                    var y = this.attr('y');
+                    xoffset = e.x - x;
+                    yoffset = e.y - y;
+                    curRect = this;
+                    console.log(curRect);
+                })
+                .on('drag', function(e) {
+                    this.attr('x', e.x - xoffset);
+                    this.attr('y', e.y - yoffset);
+                    // Collision detection
+                    for (var i=0; i < rectList.length; i++) {
+                        var rect = rectList[i];
+                        if (rect != this && isCollide(this,rect)) {
+                            console.log("Collide with rect " + i);
+                            connectRects(rect, this);
+                        }
+                    }
+                });
+            }
+        }
     }
 
     var collectRectPoints = function(rect) {
@@ -73,6 +111,15 @@ var TableUI = function(model) {
 
     }
 
+    var darkShadeRect = new Rect(0,0,900,600)
+        .fill('#00000000')
+        .on('click', function(e) {
+            stage.sendMessage({
+                harro: "hamster"
+            });
+        });
+
+
     this.drawTables = function() {
         var time_percent = 80;
 
@@ -82,19 +129,21 @@ var TableUI = function(model) {
         var yOffset = 100;
 
 
-        var rect1 = new Rect(0,0,900,600)
-            .addTo(stage)
-            .stroke('black', 10)
-            .on('click', function(e) {
-                stage.sendMessage({
-                    harro: "hamster"
-                });
-            });
+        //var rect1 = new Rect(0,0,900,600)
+            //.addTo(stage)
+            //.stroke('black', 10)
+            //.on('click', function(e) {
+                //stage.sendMessage({
+                    //harro: "hamster"
+                //});
+            //});
 
 
         for (var i=0; i < rows; i++) {
             for (var j=0; j < cols; j++) {
-                time_percent = Math.random() * 100;
+                if (j == 1) time_percent = 0;
+                else if (j == 3 && i == 1) time_percent = 0;
+                else time_percent = Math.random() * 100;
                 timeList.push(time_percent);
                 var newRect = new Rect(190*j + xOffset, 190*i + yOffset, 150,150)
                     .addTo(stage)
