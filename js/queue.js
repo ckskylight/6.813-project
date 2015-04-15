@@ -42,15 +42,16 @@ function addResClickListener(resNum, phone, email) {
             optsDiv.remove();
         }
         else {
+            //remove all other options panels
+            for (var i = 0; i < 25; i++) {
+                $('#optionsRes' + i).remove();
+            }
+            //put on this options panel as the only one
             $('#res' + resNum).append(optionsPanel(resNum, phone, email));
         }
     });
-    $(document).click(function(e) {
-        $('#res' + resNum).remove();
-    });
     $('#deleteRes' + resNum).click(function(e) {
         $('#res' + resNum).remove();
-
     });
     $('#res' + resNum).mouseover(function(e) {
         $('#res' + resNum).addClass('mousedOver');
@@ -71,5 +72,9 @@ $(document).ready(function() {
     $('#addPartyConfirm').click(function (e) {
         resNum = resNum + 1;
         addParty();
+    });
+
+    $('#myModal').blur(function() {
+        console.log('Document blur');
     });
 });
