@@ -83,89 +83,88 @@
                 <h1> Queue </h1>
                 </center>
                 <hr>
-                
-                <!-- old filtering stuff -->
-                <!--    
-                <div class="inputFilter">
-                <h4 style="font-weight:200"> Filter | Party Size <input class="form-control numberInput" id="partySizeFilter" type="text" placeholder=""></h4>
-                </div>
 
-                <div class="inputFilter">
-                <h4 style="font-weight:200"> Search | Name <input class="form-control numberInput" id="partySizeFilter" type="text" placeholder=""></h4>
-                </div> -->
+                <!-- old filtering stuff -->
+                <!--<div class="inputFilter">-->
+
+
+            <!--<div class="inputFilter">-->
+                <!--<h4 style="font-weight:200"> Filter | Party Size <input class="form-control numberInput" id="partySizeFilter" type="text" placeholder=""></h4>-->
+                <!--</div>-->
+
+                <!--<div class="inputFilter">-->
+                <!--<h4 style="font-weight:200"> Search | Name <input class="form-control numberInput" id="partySizeFilter" type="text" placeholder=""></h4>-->
+                <!--</div> -->
 
                 <!-- search box -->
                 <div class="form-group">
                 <input type="text" class="form-control" placeholder="Party Size or Name">
                 </div>
                 <hr>
-                
-                <!--
-                <center>  
-                <button class="btn btn-primary" name="assignTable" id="assignTable">Assign Table</button>
-                <button class="btn btn-primary" name="deleteRes" id="deleteRes1">Delete</button><hr>
-                </div></div>
-                </center>
-                -->
 
-            
+                <!-- <div class="queueName">Time, name, size | table</div>
+                <div class="queueName">Time, name, size | table</div>
+                <div class="queueName">Time, name, size | table</div>
+                <div class="queueName">Time, name, size | table</div> -->
+
+                <hr>
+                <div id="optionsRes1"><div></div> <div></div>
+
             </div>
         <a href="#" data-sidebar-button-right>Hide Sidebar</a>
         </div>
     </aside>
 
-   <!-- Button trigger modal -->
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content" style="height:400px">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <center> <h2 class="modal-title" id="myModalLabel">Table: 10</h2> </center>
-      </div>
-        <div class="modal-body">
-               <div class="first-column">
-                    <img src="chef.jpg" style="width:100%">
-               </div>
-           <div class="second-column">
-            <center>
-                    
-                    <!--
-                    <table class = "table">
-                        <tr class = "row">
-                            <td> <h3 style="font-weight:200">Server</td>
-                            <td>|</td>
-                            <td>John</td>
-                        </tr>
-
-                        <tr class = "row">
-                            <td>Estimated Time Remaining</td>
-                            <td>|</td>
-                            <td>30</td>
-                        </tr>
-
-                        <tr class = "row">
-                            <td>Party Size</td>
-                            <td>|</td>
-                            <td>5</td>
-                        </tr>
-
-                    </table>
-                    -->
-                    <div class="row">
-                    <h3 style="font-weight:200"> Server | John </h3>
-                    <hr>
-                    <h3 style="font-weight:200"> Time Seated | 30pm </h3>
-                    <hr>
-                    <h3 style="font-weight:200"> Party Size | 5 </h3>
-                    <hr>
-                </div>
-            </center>
+    <!-- Button trigger modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="height:400px">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <center> <h2 class="modal-title" id="myModalLabel">Table: 10</h2> </center>
+          </div>
+          <div class="modal-body">
+            <div class="first-column">
+              <img src="chef.jpg" style="width:100%">
             </div>
+            <div class="second-column">
+              <center>
+
+                <table class = "table">
+                  <tr class = "row">
+                    <td>Server</td>
+                    <td id="server">John</td>
+                  </tr>
+
+                  <tr class = "row">
+                    <td>Customer Name</td>
+                    <td id="name">Jack</td>
+                  </tr>
+
+                  <tr class = "row">
+                    <td>Time Seated</td>
+                    <td id="time-seated">30</td>
+                  </tr>
+
+                  <tr class = "row">
+                    <td>Estimated Time Remaining</td>
+                    <td id="est-time-remaining">10</td>
+                  </tr>
+
+                  <tr class = "row">
+                    <td>Party Size</td>
+                    <td id="party-size">5</td>
+                  </tr>
+
+                </table>
+
+              </center>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-  </div>
-</div>
 
 
     <div id="tableLayout"></div>
@@ -178,10 +177,10 @@
         });
 
         bonsai.on('message', function(data) {
-          if (data.bonsai === 'tree') {
-            text.attr('textFillColor', 'red');
+          if (data.command === 'modal') {
+            openModal(data);
           }
-          });
+        });
 
         var messageFunc = function() {
           bonsai.sendMessage({
@@ -211,6 +210,21 @@
             });
         }
 
+        var openModal = function(data) {
+          console.log('modal');
+          console.log(data);
+          var customerName = $("#name");
+          var timeSeated = $("#time-seated");
+          var timeRemaining = $("#est-time-remaining");
+          var partySize = $("#party-size");
+          partySize.text(data.details.partySize);
+          timeSeated.text("0");
+          timeRemaining.text('40');
+          customerName.text(data.details.name);
+          jQuery.noConflict();
+          $('#myModal').modal('show');
+        }
+
     </script>
 
     <button id="modalbutton" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
@@ -220,6 +234,7 @@
     <button onclick="showAvailableFunc()">CLICK ME</button>
     <button onclick="regularViewFunc()">REGULAR VIEW</button>
     <button onclick="assignTableFunc()">ASSIGN</button>
+    <button onclick="openModal()">MODAL</button>
 
     <!--<a href="#" data-sidebar-button>Show Sidebar</a>-->
     <div class="overlay" data-sidebar-overlay></div>
