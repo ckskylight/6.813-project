@@ -10,16 +10,23 @@ function addParty() {
 
     if (name != '' && time != '' && date != '' && size != '') {
         hideSidebar();
-        
-        var html = '<div class="inQueue" id="res' + resNum + '">' + 
-                '<table><tr>' +
-                '<td class="col1">' + time + '</td>' +
-                '<td class="col2">' + date + '</td>' +
-                '<td class="col3">' + name + '</td>' +
-                '<td class="col4">' + size + '</td>' +
+    
+        var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
+                '<table style="width:100%;max-width:100%;font-weight:200;"><tr>' +
+                '<td class="col-md-4 queue-column">' + time + '</td>' +
+                '<td class="col-md-4 queue-column">' + name + '</td>' +
+                '<td class="col-md-4 queue-column">' + size + '</td>' +
                 '</tr></table>';
 
-        html = html + '<hr></div>';
+        /*var html = '<div class="inQueue" id="res' + resNum + '">' + 
+                '<div>' + time + '</div>' +
+                '<div>' + date + '</div' +
+                '<div>' + name + '</div>' +
+                '<div>' + size + '</div>' +
+                '<div>?</div>';*/
+        //html = html + optionsPanel(resNum, phone, email);
+        html = html + '</div>';
+
         $('#queueContent').after(html);
 
         addResClickListener(resNum, phone, email);

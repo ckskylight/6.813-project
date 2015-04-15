@@ -76,11 +76,18 @@ var TableUI = function(model) {
                         removeShading();
                         assignMode = false;
                     }
-                    //this.destroy();
-                    // NOTE: listeners aren't included in the object so just adding
-                    // the object to the stage won't work. The listeners have to be
-                    // re-added for functionality to work
-                    //this.addTo(stage);
+                    else {
+                        var info = null;
+                        for (var k=0; k < rectList.length; k++) {
+                            if (rectList[k] == this) {
+                                info = tables[k].info
+                            }
+                        }
+                        stage.sendMessage({
+                            command: "modal",
+                            details: info
+                        });
+                    }
                 })
                 .on('drag', function(e) {
                     this.attr('x', e.x - xoffset);
@@ -240,11 +247,18 @@ var TableUI = function(model) {
                             removeShading();
                             assignMode = false;
                         }
-                        //this.destroy();
-                        // NOTE: listeners aren't included in the object so just adding
-                        // the object to the stage won't work. The listeners have to be
-                        // re-added for functionality to work
-                        //this.addTo(stage);
+                        else {
+                            var info = null;
+                            for (var k=0; k < rectList.length; k++) {
+                                if (rectList[k] == this) {
+                                    info = tables[k].info
+                                }
+                            }
+                            stage.sendMessage({
+                                command: "modal",
+                                details: info
+                            });
+                        }
                     });
 
                 rectList.push(newRect);
