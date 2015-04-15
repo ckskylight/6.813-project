@@ -49,3 +49,7 @@
     right: 0;
     bottom: 0;
 }
+
+.mousedOver {
+    background-color: #FF0;
+}

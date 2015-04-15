@@ -20,10 +20,9 @@ function addParty(details) {
             '<div>' + date + '</div' +
             '<div>' + name + '</div>' +
             '<div>' + size + '</div>' +
-            '<div>?</div>' +
-            '</div>';
+            '<div>?</div>';
     html = html + optionsPanel(resNum);
-    html = html + '<br /><hr>';
+    html = html + '<br /><hr></div>';
 
     $('#queueContent').after(html);
 
@@ -36,8 +35,13 @@ function addResClickListener(resNum) {
         $('#optionsRes' + resNum).removeClass('hidden');
     });
     $('#deleteRes' + resNum).click(function(e) {
-        $('#res' + resNum).addClass('hidden');
-        $('#optionRes' + resNum).addClass('hidden');
+        $('#res' + resNum).remove();
+    });
+    $('#res' + resNum).mouseover(function(e) {
+        $('#res' + resNum).addClass('mousedOver');
+    });
+    $('#res' + resNum).mouseout(function(e) {
+        $('#res' + resNum).removeClass('mousedOver');
     });
 }
 
