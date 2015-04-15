@@ -45,10 +45,11 @@ function addResClickListener(resNum, phone, email) {
             $('#res' + resNum).append(optionsPanel(resNum, phone, email));
         }
     });
-    $('#deleteRes' + resNum).click(function(e) {
-        console.log('deleting');
+    $(document).click(function(e) {
         $('#res' + resNum).remove();
-        console.log($('#res' + resNum));
+    });
+    $('#deleteRes' + resNum).click(function(e) {
+        $('#res' + resNum).remove();
 
     });
     $('#res' + resNum).mouseover(function(e) {
