@@ -8,25 +8,63 @@ function addParty(details) {
     var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
-    $('#partyName').val('');
-    $('#partyTime').val('');
-    $('#partyDate').val('');
-    $('#partyPhone').val('');
-    $('#partyEmail').val('');
-    $('#partySize').val('');
+    if (name != '' && time != '' && date != '' && size != '') {
+        hideSidebar();
+    }
 
-    var html = '<div id="res' + resNum + '">' + 
-            '<div>' + time + '</div>' +
-            '<div>' + date + '</div' +
-            '<div>' + name + '</div>' +
-            '<div>' + size + '</div>' +
-            '<div>?</div>';
-    //html = html + optionsPanel(resNum, phone, email);
-    html = html + '<hr></div>';
+    console.log(name);
+    console.log(time);
+    console.log(date);
+    console.log(size);
 
-    $('#queueContent').after(html);
+    var close = true;
+    if (name != '') {
+        
+    }
+    else {
+        close = false;
+    }
+    if (time != '') {
+        
+    }
+    else {
+        close = false;
+    }
+    if (date != '') {
+        
+    }
+    else {
+        close = false;
+    }
+    if (size != '') {
+        
+    }
+    else {
+        close = false;
+    }
 
-    addResClickListener(resNum, phone, email);
+    if (close) {
+        $('#partyTime').val('');
+        $('#partyDate').val('');
+        $('#partySize').val('');
+        $('#partyName').val('');
+        $('#partyPhone').val('');
+        $('#partyEmail').val('');
+        hideSidebar();
+    
+        var html = '<div id="res' + resNum + '">' + 
+                '<div>' + time + '</div>' +
+                '<div>' + date + '</div' +
+                '<div>' + name + '</div>' +
+                '<div>' + size + '</div>' +
+                '<div>?</div>';
+        //html = html + optionsPanel(resNum, phone, email);
+        html = html + '<hr></div>';
+
+        $('#queueContent').after(html);
+
+        addResClickListener(resNum, phone, email);
+    }
 }
 
 //creates a select listener for each reservation added to the queue
