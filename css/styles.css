@@ -53,3 +53,7 @@
 .mousedOver {
     background-color: #FF0;
 }
+
+.inQueue {
+    cursor: pointer;
+}

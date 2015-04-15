@@ -8,14 +8,9 @@ function addParty() {
     var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
-    console.log(name);
-    console.log(time);
-    console.log(date);
-    console.log(size);
-
     if (name != '' && time != '' && date != '' && size != '') {
         hideSidebar();
-    
+        
         var html = '<div class="inQueue" id="res' + resNum + '">' + 
                 '<table><tr>' +
                 '<td class="col1">' + time + '</td>' +
@@ -24,15 +19,7 @@ function addParty() {
                 '<td class="col4">' + size + '</td>' +
                 '</tr></table>';
 
-        /*var html = '<div class="inQueue" id="res' + resNum + '">' + 
-                '<div>' + time + '</div>' +
-                '<div>' + date + '</div' +
-                '<div>' + name + '</div>' +
-                '<div>' + size + '</div>' +
-                '<div>?</div>';*/
-        //html = html + optionsPanel(resNum, phone, email);
         html = html + '<hr></div>';
-
         $('#queueContent').after(html);
 
         addResClickListener(resNum, phone, email);
@@ -44,8 +31,6 @@ function addResClickListener(resNum, phone, email) {
     $('#res' + resNum).click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
         var optsDiv = $('#optionsRes' + resNum);
-        console.log(optsDiv);
-        console.log(optsDiv.val());
         if (optsDiv.val() != undefined) {
             optsDiv.remove();
         }
@@ -54,7 +39,10 @@ function addResClickListener(resNum, phone, email) {
         }
     });
     $('#deleteRes' + resNum).click(function(e) {
+        console.log('deleting');
         $('#res' + resNum).remove();
+        console.log($('#res' + resNum));
+
     });
     $('#res' + resNum).mouseover(function(e) {
         $('#res' + resNum).addClass('mousedOver');
