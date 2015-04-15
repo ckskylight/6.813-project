@@ -23,7 +23,7 @@ function addParty() {
         $('#partyEmail').val('');
         hideSidebar();
     
-        var html = '<div id="res' + resNum + '">' + 
+        var html = '<div class="inQueue" id="res' + resNum + '">' + 
                 '<div>' + time + '</div>' +
                 '<div>' + date + '</div' +
                 '<div>' + name + '</div>' +
@@ -66,8 +66,8 @@ function addResClickListener(resNum, phone, email) {
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone, email) {
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
-        '<button name="assignTable" id="assignTable">Assign Table</button>' + 
-        '<button name="deleteRes" id="deleteRes' + resNum + '">Delete</button><hr></div>';
+        '<button name="assignTable" id="assignTable" class="btn btn-primary">Assign Table</button>' + 
+        '<button name="deleteRes" id="deleteRes' + resNum + '" class="btn btn-primary">Delete</button><hr></div>';
 }
 
 $(document).ready(function() {
