@@ -1,6 +1,6 @@
 var resNum = 0; //number of reservations made (to uniquely identify them)
 
-function addParty(details) {
+function addParty() {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
     var date = $('#partyDate').val();
@@ -8,42 +8,13 @@ function addParty(details) {
     var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
-    if (name != '' && time != '' && date != '' && size != '') {
-        hideSidebar();
-    }
-
     console.log(name);
     console.log(time);
     console.log(date);
     console.log(size);
 
-    var close = true;
-    if (name != '') {
-        
-    }
-    else {
-        close = false;
-    }
-    if (time != '') {
-        
-    }
-    else {
-        close = false;
-    }
-    if (date != '') {
-        
-    }
-    else {
-        close = false;
-    }
-    if (size != '') {
-        
-    }
-    else {
-        close = false;
-    }
-
-    if (close) {
+    if (name != '' && time != '' && date != '' && size != '') {
+        console.log('closing!');
         $('#partyTime').val('');
         $('#partyDate').val('');
         $('#partySize').val('');

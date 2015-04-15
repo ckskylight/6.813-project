@@ -9,7 +9,7 @@ $(document).ready(function() {
     }
 
     // hide sidebar and overlay
-    function hideSidebar() {
+    var hideSidebar =  function() {
         sidebarLeft.css('margin-left', sidebarLeft.width() * -1 + 'px');
 
         overlay.fadeTo('500', 0, function() {
