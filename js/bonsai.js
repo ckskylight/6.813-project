@@ -5,6 +5,9 @@ var TableUI = function(model) {
             //text.attr('textFillColor', 'red');
         //}
         console.log(data);
+        if (data.command == "show available") {
+            showNotFull();
+        }
     });
 
     var xoffset = 0;
@@ -12,6 +15,11 @@ var TableUI = function(model) {
     var draglock = false;
     var curRect = null;
     var rectList = [];
+    var timeList = [];
+
+    var showNotFull = function() {
+        console.log("showing available tables");
+    }
 
     var collectRectPoints = function(rect) {
         points = [];
@@ -87,13 +95,13 @@ var TableUI = function(model) {
         for (var i=0; i < rows; i++) {
             for (var j=0; j < cols; j++) {
                 time_percent = Math.random() * 100;
+                timeList.push(time_percent);
                 var newRect = new Rect(190*j + xOffset, 190*i + yOffset, 150,150)
                     .addTo(stage)
                     .fill(
                         gradient.linear('top', [['#D42207',time_percent] , ['#FFC50A',time_percent]])
                         )
                     .stroke('#222222', 1)
-                    //.attr('filters', new filter.DropShadow(1, 1, 5, 0x000000FF))
                     .on('pointerdown', function(e) {
                         var w = this.attr('width');
                         var h = this.attr('height');
