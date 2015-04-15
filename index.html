@@ -46,15 +46,25 @@
         </div>
     </aside>
 
+
     <div id="tableLayout"></div>
     <script>
-        bonsai.run(document.getElementById('tableLayout'), {
+        var bonsai = bonsai.run(document.getElementById('tableLayout'), {
         url: 'js/bonsai.js',
         width: 900,
         height: 600
         });
+
+        var messageFunc = function() {
+          bonsai.sendMessage({
+            bonsai: "tree"
+            });
+        }
     </script>
 
+    <button onclick="messageFunc()">CLICK ME</button>
+
+    <!--<a href="#" data-sidebar-button>Show Sidebar</a>-->
     <div class="overlay" data-sidebar-overlay></div>
     <div class="overlay" data-sidebar-overlay-right></div>
 
