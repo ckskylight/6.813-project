@@ -4,6 +4,7 @@ var Table = function() {
         partySize: 0,
         capacity: 0
     };
+    this.number = null;
 }
 
 var TableUI = function(model) {
@@ -18,6 +19,8 @@ var TableUI = function(model) {
         }
         else if (data.command == "assign") {
             currentCustomerInfo = data.details;
+            showNotFull();
+            assignMode = true;
         }
     });
 
@@ -29,6 +32,7 @@ var TableUI = function(model) {
     var curRect = null;
     var rectList = [];
     var timeList = [];
+    var assignMode = false;
 
     var tables = [];
 
@@ -56,7 +60,27 @@ var TableUI = function(model) {
                     xoffset = e.x - x;
                     yoffset = e.y - y;
                     curRect = this;
-                    console.log(curRect);
+                    //console.log(curRect);
+                })
+                .on('click', function(e) {
+                    // Look for the rect's index and use that to modify
+                    // the table
+                    if (assignMode) {
+                        for (var k=0; k < rectList.length; k++) {
+                            if (rectList[k] == this) {
+                                tables[k].info.name = currentCustomerInfo.name;
+                                tables[k].info.partySize = currentCustomerInfo.partySize;
+                            }
+                        }
+                        console.log(tables);
+                        removeShading();
+                        assignMode = false;
+                    }
+                    //this.destroy();
+                    // NOTE: listeners aren't included in the object so just adding
+                    // the object to the stage won't work. The listeners have to be
+                    // re-added for functionality to work
+                    //this.addTo(stage);
                 })
                 .on('drag', function(e) {
                     this.attr('x', e.x - xoffset);
@@ -145,16 +169,6 @@ var TableUI = function(model) {
         var tableSizes = [[100, 150, 150, 150], [100, 150, 100, 100]];
 
 
-        //var rect1 = new Rect(0,0,900,600)
-            //.addTo(stage)
-            //.stroke('black', 10)
-            //.on('click', function(e) {
-                //stage.sendMessage({
-                    //harro: "hamster"
-                //});
-            //});
-
-
         for (var i=0; i < rows; i++) {
             for (var j=0; j < cols; j++) {
 
@@ -164,15 +178,20 @@ var TableUI = function(model) {
                 timeList.push(time_percent);
 
                 var size = tableSizes[i][j];
+
                 var table = new Table();
                 if (size == 150) table.info["capacity"] = 5;
                 else table.info["capacity"] = 2;
-                tables.push(table);
+
+                var numLabel = new Text(table.info.capacity).attr('fontSize', '80px')
+                    .attr('x', 190*j + xOffset + size/2 - 25)
+                    .attr('y', 190*i + yOffset + size/2 - 25)
+                    .addTo(stage);
 
                 var newRect = new Rect(190*j + xOffset, 190*i + yOffset, size,size)
                     .addTo(stage)
                     .fill(
-                        gradient.linear('top', [['#D42207',time_percent] , ['#FFC50A',time_percent]])
+                        gradient.linear('top', [['#D42207AA',time_percent] , ['#FFC50AAA',time_percent]])
                         )
                     .stroke('#222222', 1)
                     .on('pointerdown', function(e) {
@@ -183,7 +202,7 @@ var TableUI = function(model) {
                         xoffset = e.x - x;
                         yoffset = e.y - y;
                         curRect = this;
-                        console.log(curRect);
+                        //console.log(curRect);
                     })
                     .on('drag', function(e) {
                         this.attr('x', e.x - xoffset);
@@ -191,106 +210,51 @@ var TableUI = function(model) {
                         // Collision detection
                         for (var i=0; i < rectList.length; i++) {
                             var rect = rectList[i];
-                            if (rect != this && isCollide(this,rect)) {
-                                console.log("Collide with rect " + i);
-                                connectRects(rect, this);
+                            if (rect != this) {
+                                if (isCollide(this,rect)) {
+                                    console.log("Collide with rect " + i);
+                                    connectRects(rect, this);
+                                    var num = tables[i].number;
+                                    num.attr('x', rect.attr('x') + rect.attr('height')/2 - 25);
+                                    num.attr('y', rect.attr('y') + rect.attr('height')/2 - 25);
+                                }
+                            }
+                            else {
+                                var num = tables[i].number;
+                                num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                                num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
                             }
                         }
                     })
                     .on('click', function(e) {
                         // Look for the rect's index and use that to modify
                         // the table
-                        for (var k=0; k < rectList.length; k++) {
-                            if (rectList[k] == this) {
-                                tables[k].info.name = currentCustomerInfo.name;
-                                tables[k].info.partySize = currentCustomerInfo.partySize;
+                        if (assignMode) {
+                            for (var k=0; k < rectList.length; k++) {
+                                if (rectList[k] == this) {
+                                    tables[k].info.name = currentCustomerInfo.name;
+                                    tables[k].info.partySize = currentCustomerInfo.partySize;
+                                }
                             }
+                            console.log(tables);
+                            removeShading();
+                            assignMode = false;
                         }
-                        console.log(tables);
-                        this.destroy();
+                        //this.destroy();
                         // NOTE: listeners aren't included in the object so just adding
                         // the object to the stage won't work. The listeners have to be
                         // re-added for functionality to work
-                        this.addTo(stage);
+                        //this.addTo(stage);
                     });
 
                 rectList.push(newRect);
-            }
 
+
+                table.number = numLabel;
+                tables.push(table);
+            }
             console.log(tables);
         }
-
-
-        //var rect2 = new Rect(20,20,150,150)
-            //.addTo(stage)
-            //.fill(
-                //gradient.linear('top', [['red',time_percent] , ['blue',time_percent]])
-                //)
-            //.attr('filters', new filter.DropShadow(1, 1, 5, 0x000000FF))
-            //.on('click', function(e) {
-                //this.destroy();
-                //// NOTE: listeners aren't included in the object so just adding
-                //// the object to the stage won't work. The listeners have to be
-                //// re-added for functionality to work
-                //this.addTo(stage);
-                //this.on('pointermove', function(e) {
-                    //time_percent = 100*((150-(e.y-20))/150);
-                    //this.fill(
-                        //gradient.linear('top', [['red',time_percent] , ['blue',time_percent]])
-                    //);
-                //});
-            //})
-            //.on('pointermove', function(e) {
-                //time_percent = 100*((150-(e.y-20))/150);
-                //this.fill(
-                    //gradient.linear('top', [['red',time_percent] , ['blue',time_percent]])
-                //);
-            //});
-
-
-        //var rect3 = new Rect(190,20,150,150)
-            //.addTo(stage)
-            //.fill('orange')
-            //.on('pointerdown', function(e) {
-                //var w = this.attr('width');
-                //var h = this.attr('height');
-                //var x = this.attr('x');
-                //var y = this.attr('y');
-                //xoffset = e.x - x;
-                //yoffset = e.y - y;
-                //curRect = this;
-                //console.log(curRect);
-            //})
-            //.on('drag', function(e) {
-                //this.attr('x', e.x - xoffset);
-                //this.attr('y', e.y - yoffset);
-                //// Collision detection
-                //for (var i=0; i < rectList.length; i++) {
-                    //var rect = rectList[i];
-                    //if (rect != this && isCollide(this,rect)) {
-                        //console.log("Collide with rect " + i);
-                        //connectRects(rect, this);
-                    //}
-                //}
-            //})
-            //.attr('filters', new filter.DropShadow(1, 1, 5, 0x000000FF));
-
-        //var rect4 = new Rect(360, 20, 150, 150)
-            //.addTo(stage)
-            //.fill('orange')
-            //.attr('filters', new filter.DropShadow(1, 1, 5, 0x000000FF));
-
-        //var rect5 = new Rect(530, 20, 200, 200)
-            //.addTo(stage)
-            //.fill('maroon')
-            //.attr('filters', new filter.DropShadow(1, 1, 5, 0x000000FF));
-
-        ////rectList.push(rect1);
-        //rectList.push(rect2);
-        //rectList.push(rect3);
-        //rectList.push(rect4);
-        //rectList.push(rect5);
-
         console.log(rectList);
     }
 }
