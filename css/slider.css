@@ -111,10 +111,18 @@ aside  a { color:#fff; text-decoration:none;}
   height: 100%;
 }
 
+.light-font{
+    font-weight:200;
+}
+
 .modal-dialog {
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+}
+
+.modal-content{
+    font-weight:200;
 }
 
 .first-column {
@@ -123,8 +131,9 @@ aside  a { color:#fff; text-decoration:none;}
 }
 
 .second-column {
-  width: 40%;
+  width: 50%;
   float: right;
+  padding: 20px;
 }
 
 section {
@@ -296,4 +305,3 @@ table {
 .queue-column{
     text-align:center;
 }
-
