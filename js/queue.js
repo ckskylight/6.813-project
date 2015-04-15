@@ -21,18 +21,19 @@ function addParty(details) {
             '<div>' + name + '</div>' +
             '<div>' + size + '</div>' +
             '<div>?</div>';
-    html = html + optionsPanel(resNum);
-    html = html + '<br /><hr></div>';
+    //html = html + optionsPanel(resNum, phone, email);
+    html = html + '<hr></div>';
 
     $('#queueContent').after(html);
 
-    addResClickListener(resNum);
+    addResClickListener(resNum, phone, email);
 }
 
 //creates a select listener for each reservation added to the queue
-function addResClickListener(resNum) {
+function addResClickListener(resNum, phone, email) {
     $('#res' + resNum).click(function(e) {
-        $('#optionsRes' + resNum).removeClass('hidden');
+        //$('#optionsRes' + resNum).removeClass('hidden');
+        $('#res' + resNum).append(optionsPanel(resNum, phone, email));
     });
     $('#deleteRes' + resNum).click(function(e) {
         $('#res' + resNum).remove();
@@ -46,9 +47,10 @@ function addResClickListener(resNum) {
 }
 
 //returns the hidden options panel, which the listener can unhide
-function optionsPanel(resNum) {
-    return '<div class="hidden" id="optionsRes' + resNum + '"><button name="assignTable" id="assignTable">Assign Table</button>' + 
-        '<button name="deleteRes" id="deleteRes' + resNum + '">Delete</button></div>';
+function optionsPanel(resNum, phone, email) {
+    return '<div>' + phone + '</div> <div>' + email + '</div>' +
+        '<div id="optionsRes' + resNum + '"><button name="assignTable" id="assignTable">Assign Table</button>' + 
+        '<button name="deleteRes" id="deleteRes' + resNum + '">Delete</button></div><hr>';
 }
 
 $(document).ready(function() {
