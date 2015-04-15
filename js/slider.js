@@ -1,3 +1,15 @@
+// hide sidebar and overlay
+var hideSidebar =  function() {
+    sidebarLeft.css('margin-left', sidebarLeft.width() * -1 + 'px');
+
+    overlay.fadeTo('500', 0, function() {
+        overlay.hide();
+    });;
+}
+
+var sidebarLeft;
+var overlay;
+
 $(document).ready(function() {
     // show sidebar and overlay
     function showSidebar() {
@@ -6,15 +18,6 @@ $(document).ready(function() {
         overlay.show(0, function() {
             overlay.fadeTo('500', 0.5);
         });
-    }
-
-    // hide sidebar and overlay
-    var hideSidebar =  function() {
-        sidebarLeft.css('margin-left', sidebarLeft.width() * -1 + 'px');
-
-        overlay.fadeTo('500', 0, function() {
-            overlay.hide();
-        });;
     }
 
     function showSidebarRight() {
@@ -35,11 +38,11 @@ $(document).ready(function() {
     }
 
     // selectors
-    var sidebarLeft = $('[data-sidebar-left]');
+    sidebarLeft = $('[data-sidebar-left]');
     var sidebarRight = $('[data-sidebar-right]');
     var buttonLeft = $('[data-sidebar-button]');
     var buttonRight = $('[data-sidebar-button-right]');
-    var overlay = $('[data-sidebar-overlay]');
+    overlay = $('[data-sidebar-overlay]');
     var overlayRight = $('[data-sidebar-overlay-right]');
 
     // add height to content area
