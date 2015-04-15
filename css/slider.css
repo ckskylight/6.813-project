@@ -39,7 +39,7 @@ body {
     width: 100%;
     min-height: inherit;
 }
-/*reference: http://stackoverflow.com/questions/12200544/override-twitter-bootstrap-textbox-glow-and-shadows*/
+/* Reference: http://stackoverflow.com/questions/12200544/override-twitter-bootstrap-textbox-glow-and-shadows*/
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -56,7 +56,7 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
 .uneditable-input:focus {
-  border-color: rgba(128, 128, 128, 0.8);
+  border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted \9;
   /* IE6-9 */
@@ -73,14 +73,14 @@ input[type="color"]:focus,
     -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
 }
 
-.mine{
+.form-control .mine{
     border: 0px solid #fff;
     border-radius:0px;
     box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
     -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
 }
 
-.mine:active{
+.form-control .mine:active{
     border: 0px solid #fff;
     border-radius:0px;
     box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
