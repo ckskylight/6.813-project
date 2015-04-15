@@ -1,3 +1,11 @@
+var Table = function() {
+    this.info = {
+        name: "empty",
+        partySize: 0,
+        capacity: 0
+    };
+}
+
 var TableUI = function(model) {
 
     stage.on('message', function(data) {
@@ -8,7 +16,12 @@ var TableUI = function(model) {
         else if (data.command == "remove shading") {
             removeShading();
         }
+        else if (data.command == "assign") {
+            currentCustomerInfo = data.details;
+        }
     });
+
+    var currentCustomerInfo = null;
 
     var xoffset = 0;
     var yoffset = 0;
@@ -16,6 +29,8 @@ var TableUI = function(model) {
     var curRect = null;
     var rectList = [];
     var timeList = [];
+
+    var tables = [];
 
     var removeShading = function() {
         darkShadeRect.animate('0.5s', {
@@ -127,6 +142,7 @@ var TableUI = function(model) {
         var cols = 4;
         var xOffset = 85;
         var yOffset = 100;
+        var tableSizes = [[100, 150, 150, 150], [100, 150, 100, 100]];
 
 
         //var rect1 = new Rect(0,0,900,600)
@@ -141,11 +157,19 @@ var TableUI = function(model) {
 
         for (var i=0; i < rows; i++) {
             for (var j=0; j < cols; j++) {
+
                 if (j == 1) time_percent = 0;
                 else if (j == 3 && i == 1) time_percent = 0;
                 else time_percent = Math.random() * 100;
                 timeList.push(time_percent);
-                var newRect = new Rect(190*j + xOffset, 190*i + yOffset, 150,150)
+
+                var size = tableSizes[i][j];
+                var table = new Table();
+                if (size == 150) table.info["capacity"] = 5;
+                else table.info["capacity"] = 2;
+                tables.push(table);
+
+                var newRect = new Rect(190*j + xOffset, 190*i + yOffset, size,size)
                     .addTo(stage)
                     .fill(
                         gradient.linear('top', [['#D42207',time_percent] , ['#FFC50A',time_percent]])
@@ -174,6 +198,15 @@ var TableUI = function(model) {
                         }
                     })
                     .on('click', function(e) {
+                        // Look for the rect's index and use that to modify
+                        // the table
+                        for (var k=0; k < rectList.length; k++) {
+                            if (rectList[k] == this) {
+                                tables[k].info.name = currentCustomerInfo.name;
+                                tables[k].info.partySize = currentCustomerInfo.partySize;
+                            }
+                        }
+                        console.log(tables);
                         this.destroy();
                         // NOTE: listeners aren't included in the object so just adding
                         // the object to the stage won't work. The listeners have to be
@@ -183,6 +216,8 @@ var TableUI = function(model) {
 
                 rectList.push(newRect);
             }
+
+            console.log(tables);
         }
 
 

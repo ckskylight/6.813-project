@@ -205,7 +205,16 @@
           bonsai.sendMessage({
             command: "remove shading"
             });
+        }
 
+        var assignTableFunc = function() {
+          bonsai.sendMessage({
+            command: "assign",
+            details: {
+              name: "person",
+              partySize: 3
+              }
+            });
         }
 
     </script>
@@ -216,6 +225,7 @@
 
     <button onclick="showAvailableFunc()">CLICK ME</button>
     <button onclick="regularViewFunc()">REGULAR VIEW</button>
+    <button onclick="assignTableFunc()">ASSIGN</button>
 
     <!--<a href="#" data-sidebar-button>Show Sidebar</a>-->
     <div class="overlay" data-sidebar-overlay></div>
