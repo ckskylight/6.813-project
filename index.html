@@ -16,27 +16,112 @@
 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/bonsai/0.4/bonsai.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <div id="leftMenuPull" data-sidebar-button><img id="arrowImgRight" src="img/arrow.png" width="30px" height="30px"/></div>
 <div id="rightMenuPull" data-sidebar-button-right><img id="arrowImgLeft" src="img/arrow.png" width="30px" height="30px"/></div>
 
     <aside data-sidebar-left>
-        <div class="padding">
-            Add Party<br /><br />
-            Name: <input type="text" id="partyName" /><br />
-            Time: <input type="text" id="partyTime" /><br />
-            Date: <input type="text" id="partyDate" /><br />
-            Phone: <input type="text" id="partyPhone" /><br />
-            Email: <input type="text" id="partyEmail" /><br />
-            Party Size: <input type="text" id="partySize" /><br />
-            <br />
-            <br />
-            Estimated Wait: 15 Minutes<br />
+        <div class="form-horizontal">
+            <div class = "padding form-group"> 
+            
+            <div style="margin-bottom:20px;margin-top:0px">
+                <center> <h2> Add Party </h2> </center>
+            </div>
+             <form action="#">
+                <center>
+              <div class="input-group">
+                 <input class="btn btn-lg" id="partyName" type="text" placeholder="Name" required>
+              </div>
+             <div class="input-group">
+                 <input class="btn btn-lg" id="partyTime" type="text" placeholder="Time" required>
+              </div>
+                <div class="input-group">
+                 <input class="btn btn-lg" id="partyDate" type="text" placeholder="Date" required>
+              </div>
+            <div class="input-group">
+                 <input class="btn btn-lg" id="partySize" type="text" placeholder="Party Size" required>
+              </div>
 
-            <button name="addPartyConfirm" id="addPartyConfirm">Confirm</button><br />
+            <hr>
+
+            <h4 style="font-weight:200"> Optional Fields </h4>
+
+             <div class="input-group">
+                 <input class="btn btn-lg" id="partyPhone" type="text" placeholder="Phone">
+              </div>
+
+            <div class="input-group">
+                 <input class="btn btn-lg" id="partyEmail" type="text" placeholder="Email">
+              </div>
+            <hr>
+            
+            <div class="input-group">
+            <button class="btn btn-primary btn-lg" style = "border-radius:4px;margin-bottom:20px;width:150px" name="addPartyConfirm" id="addPartyConfirm">Confirm</button>
+            </div>
+
+
+            <h4 style="font-weight:200"> Estimated Wait: 15 min </h4>
+             </form>
         <a href="#" data-sidebar-button>Hide Sidebar</a>
+        </center>
         </div>
+
     </aside>
+         </div>
+<!---
+                <div class="form-group">
+                    <label for="partyName" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text"  class="form-control mine" id="partyName" placeholder="Name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="partyTime" class="col-sm-2 control-label">Time</label>
+                    <div class="col-sm-10">
+                        <input type="time" class="form-control mine" id="partyTime" placeholder="Time">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="partyDate" class="col-sm-2 control-label">Date</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control mine" id="partyDate" placeholder="Date">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="partyPhone" class="col-sm-2 control-label">Phone</label>
+                <div class="col-sm-10">
+                    <input type="phone" class="form-control mine" id="partyPhone" placeholder="Phone">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="partyEmail" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control mine" id="partyEmail" placeholder="Email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="partySize" class="col-sm-2 control-label">Size</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control mine" id="partySize" placeholder="Party Size">
+                </div>
+   !-->         
+
+
 
     <aside data-sidebar-right>
         <div class="padding">
