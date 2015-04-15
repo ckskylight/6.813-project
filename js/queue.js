@@ -24,11 +24,19 @@ function addParty() {
         hideSidebar();
     
         var html = '<div class="inQueue" id="res' + resNum + '">' + 
+                '<table><tr>' +
+                '<td class="col1">' + time + '</td>' +
+                '<td class="col2">' + date + '</td>' +
+                '<td class="col3">' + name + '</td>' +
+                '<td class="col4">' + size + '</td>' +
+                '</tr></table>';
+
+        /*var html = '<div class="inQueue" id="res' + resNum + '">' + 
                 '<div>' + time + '</div>' +
                 '<div>' + date + '</div' +
                 '<div>' + name + '</div>' +
                 '<div>' + size + '</div>' +
-                '<div>?</div>';
+                '<div>?</div>';*/
         //html = html + optionsPanel(resNum, phone, email);
         html = html + '<hr></div>';
 
