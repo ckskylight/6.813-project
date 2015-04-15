@@ -87,6 +87,7 @@ input[type="color"]:focus,
     -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
 }
 
+
 aside { background-color: #fff;box-shadow: ; }
 aside  a { color:#fff; text-decoration:none;}
 .overlay { background-color: #ddd; }
@@ -128,23 +129,23 @@ input.btn.btn-lg,
 input.btn.btn-lg:focus {
     outline: none;
     width: 60%;
-    height: 60px;
+    height: 45px;
     /*border-top-left-radius: 0;
     border-bottom-left-radius: 0;*/
 }
 input.btn.btn-lg:active {
     outline: none;
     width: 60%;
-    height: 60px;
+    height: 45px;
     /*border-top-left-radius: 0;
     border-bottom-left-radius: 0;*/
 }
-btn:active{
+.btn:active{
     box-shadow:0;
 }
 button.btn {
     width: 40%;
-    height: 60px;
+    height: 45px;
     /*border-top-right-radius: 0;
     border-bottom-right-radius: 0;*/
     
@@ -155,5 +156,81 @@ button.btn {
 
 .queueName {
     padding-bottom: 15px;
+    margin-left: 5px;
 }
+
+input.numberInput,
+input.numberInput:focus {
+    outline: none;
+    width: 40%;
+    height: 30px;
+    display: inline;
+}
+
+input.numberInput:active {
+    outline: none;
+    width: 40%;
+    height: 30px;
+    display: inline;
+}
+
+input.nameInput,
+input.nameInput:focus {
+    outline: none;
+    width: 100%;
+    height: 30px;
+    display: inline;
+}
+
+input.nameInput:active {
+    outline: none;
+    width: 100%;
+    height: 30px;
+    display: inline;
+}
+
+
+
+
+hr.queue {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+table {
+    border: 0;
+    margin-left: 5px;
+}
+
+.col1 {
+    padding: 0;
+    width: 25%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.col2 {
+    width: 40%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.col3 {
+    width: 10%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.col4 {
+    width: 25%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+
+
 
