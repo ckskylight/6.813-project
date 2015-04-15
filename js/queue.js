@@ -33,7 +33,15 @@ function addParty(details) {
 function addResClickListener(resNum, phone, email) {
     $('#res' + resNum).click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
-        $('#res' + resNum).append(optionsPanel(resNum, phone, email));
+        var optsDiv = $('#optionsRes' + resNum);
+        console.log(optsDiv);
+        console.log(optsDiv.val());
+        if (optsDiv.val() != undefined) {
+            optsDiv.remove();
+        }
+        else {
+            $('#res' + resNum).append(optionsPanel(resNum, phone, email));
+        }
     });
     $('#deleteRes' + resNum).click(function(e) {
         $('#res' + resNum).remove();
@@ -48,9 +56,9 @@ function addResClickListener(resNum, phone, email) {
 
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone, email) {
-    return '<div>' + phone + '</div> <div>' + email + '</div>' +
-        '<div id="optionsRes' + resNum + '"><button name="assignTable" id="assignTable">Assign Table</button>' + 
-        '<button name="deleteRes" id="deleteRes' + resNum + '">Delete</button></div><hr>';
+    return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
+        '<button name="assignTable" id="assignTable">Assign Table</button>' + 
+        '<button name="deleteRes" id="deleteRes' + resNum + '">Delete</button><hr></div>';
 }
 
 $(document).ready(function() {
