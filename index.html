@@ -67,7 +67,6 @@
             <button class="btn btn-primary btn-lg" style = "border-radius:4px;margin-bottom:20px;width:150px" name="addPartyConfirm" id="addPartyConfirm">Confirm</button>
             </div>
 
-
             <h4 style="font-weight:200"> Estimated Wait: 15 min </h4>
              </form>
         <a href="#" data-sidebar-button>Hide Sidebar</a>
@@ -154,9 +153,30 @@
         </div>
     </aside>
 
+   <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <div id="tableLayout"></div>
     <script>
+        var modalbutton = $('modalbutton');
         var bonsai = bonsai.run(document.getElementById('tableLayout'), {
         url: 'js/bonsai.js',
         width: 900,
@@ -164,7 +184,9 @@
         });
 
         bonsai.on('message', function(data) {
-          console.log(data);
+          if (data.bonsai === 'tree') {
+            text.attr('textFillColor', 'red');
+          }
           });
 
         var messageFunc = function() {
@@ -187,6 +209,10 @@
         }
 
     </script>
+
+    <button id="modalbutton" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+      Launch demo modal
+    </button>
 
     <button onclick="showAvailableFunc()">CLICK ME</button>
     <button onclick="regularViewFunc()">REGULAR VIEW</button>
