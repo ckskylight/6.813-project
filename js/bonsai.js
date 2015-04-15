@@ -74,9 +74,14 @@ var TableUI = function(model) {
         var yOffset = 100;
 
 
-        //var rect1 = new Rect(0,0,900,600)
-            //.addTo(stage)
-            //.stroke('black', 10);
+        var rect1 = new Rect(0,0,900,600)
+            .addTo(stage)
+            .stroke('black', 10)
+            .on('click', function(e) {
+                stage.sendMessage({
+                    harro: "hamster"
+                });
+            });
 
 
         for (var i=0; i < rows; i++) {

@@ -55,6 +55,10 @@
         height: 600
         });
 
+        bonsai.on('message', function(data) {
+          console.log(data);
+          });
+
         var messageFunc = function() {
           bonsai.sendMessage({
             bonsai: "tree"
