@@ -198,9 +198,9 @@ var TableUI = function(model) {
                 var newRect = new Rect(190*j + xOffset, 190*i + yOffset, size,size)
                     .addTo(stage)
                     .fill(
-                        gradient.linear('top', [['#D42207AA',time_percent] , ['#FFC50AAA',time_percent]])
+                        gradient.linear('top', [['#A040FFAA',time_percent] , ['#CCCCCCAA',time_percent]])
                         )
-                    .stroke('#222222', 1)
+                    //.stroke('#222222', 1)
                     .on('pointerdown', function(e) {
                         var w = this.attr('width');
                         var h = this.attr('height');
