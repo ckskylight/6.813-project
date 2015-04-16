@@ -4,7 +4,7 @@ var hideSidebar =  function() {
 
     overlay.fadeTo('500', 0, function() {
         overlay.hide();
-    });;
+    });
 }
 
 // hide sidebar and overlay
