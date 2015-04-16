@@ -1,4 +1,4 @@
-var resNum = 0; //number of reservations made (to uniquely identify them)
+var resNum = 2; //number of reservations made (to uniquely identify them)
 
 var partyData = [];
 
@@ -105,4 +105,34 @@ $(document).ready(function() {
             addParty();
         }
     });*/
+
+    //listeners for hard-coded example
+    $('#res1').click(function(e) {
+        //$('#optionsRes' + resNum).removeClass('hidden');
+        var optsDiv = $('#optionsRes1');
+        console.log(optsDiv);
+        console.log(optsDiv.val());
+        if (optsDiv.val() != undefined) {
+            optsDiv.remove();
+        }
+        else {
+            $('#res1').append(optionsPanel(1, '555-123-4567', 'tmaestro@mit.edu'));
+
+            //add event listeners in options panel
+            $('#deleteRes1').click(function(e) {
+                deleteReservation(1);
+            });
+            $('#assignTable1').click(function(e) {
+                console.log('in Assign table');
+                deleteReservation(1);
+                hideSidebarRight();
+            });
+        }
+    });
+    $('#res1').mouseover(function(e) {
+        $('#res1').addClass('mousedOver');
+    });
+    $('#res1').mouseout(function(e) {
+        $('#res1').removeClass('mousedOver');
+    });
 });
