@@ -51,7 +51,7 @@
 }
 
 .mousedOver {
-    background-color: #FF0;
+    background-color: rgba(182,64,255,.3);
 }
 
 .inQueue {

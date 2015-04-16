@@ -82,8 +82,8 @@ function addResClickListener(resNum, phone, email) {
 function optionsPanel(resNum, phone, email) {
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
         '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr>' + 
-        '<td name="assignTable" onclick="assignTableFunc()" id="assignTable' + resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
-        '<td name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table>';
+        '<td style="font-weight:400" name="assignTable" onclick="assignTableFunc()" id="assignTable' + resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
+        '<td style="font-weight:400" name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table>';
     /*
     Dirk's Previous code:
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
