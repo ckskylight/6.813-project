@@ -37,8 +37,15 @@
 <!-- https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js -->
 <script src="js/bootstrap.min.js"></script>
 
-<div id="leftMenuPull" data-sidebar-button><img id="arrowImgRight" src="img/arrow.png" width="30px" height="30px"/></div>
-<div id="rightMenuPull" data-sidebar-button-right><img id="arrowImgLeft" src="img/arrow.png" width="30px" height="30px"/></div>
+<div id="leftMenuPull" data-sidebar-button>
+  <!--<img id="arrowImgRight" src="img/arrow.png" width="30px" height="30px"/>-->
+  <span class="glyphicon glyphicon-menu-right" id="right-arrow"></span>
+</div>
+
+<div id="rightMenuPull" data-sidebar-button-right>
+  <!--<img id="arrowImgLeft" src="img/arrow.png" width="30px" height="30px"/>-->
+  <span class="glyphicon glyphicon-menu-left" id="left-arrow"></span>
+</div>
 
     <aside data-sidebar-left>
         <div class="form-horizontal">
