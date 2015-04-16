@@ -48,10 +48,17 @@ function addResClickListener(resNum, phone, email) {
             }
             //put on this options panel as the only one
             $('#res' + resNum).append(optionsPanel(resNum, phone, email));
+
+            //add event listeners in options panel
+            $('#deleteRes' + resNum).click(function(e) {
+                $('#res' + resNum).remove();
+            });
+            $('#assignTable' + resNum).click(function(e) {
+                console.log('in Assign table');
+                hideSidebar();
+                $('#res' + resNum).remove();
+            });
         }
-    });
-    $('#deleteRes' + resNum).click(function(e) {
-        $('#res' + resNum).remove();
     });
     $('#res' + resNum).mouseover(function(e) {
         $('#res' + resNum).addClass('mousedOver');
@@ -64,7 +71,7 @@ function addResClickListener(resNum, phone, email) {
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone, email) {
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
-        '<button name="assignTable" id="assignTable" class="btn btn-primary">Assign Table</button>' + 
+        '<button name="assignTable" id="assignTable' + resNum + '" class="btn btn-primary">Assign Table</button>' + 
         '<button name="deleteRes" id="deleteRes' + resNum + '" class="btn btn-primary">Delete</button><hr></div>';
 }
 
