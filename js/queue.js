@@ -8,6 +8,11 @@ function addParty() {
     var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
+    console.log(name);
+    console.log(time);
+    console.log(date);
+    console.log(size);
+
     if (name != '' && time != '' && date != '' && size != '') {
         hideSidebar();
     
@@ -38,15 +43,12 @@ function addResClickListener(resNum, phone, email) {
     $('#res' + resNum).click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
         var optsDiv = $('#optionsRes' + resNum);
+        console.log(optsDiv);
+        console.log(optsDiv.val());
         if (optsDiv.val() != undefined) {
             optsDiv.remove();
         }
         else {
-            //remove all other options panels
-            for (var i = 0; i < 25; i++) {
-                $('#optionsRes' + i).remove();
-            }
-            //put on this options panel as the only one
             $('#res' + resNum).append(optionsPanel(resNum, phone, email));
 
             //add event listeners in options panel
@@ -71,17 +73,20 @@ function addResClickListener(resNum, phone, email) {
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone, email) {
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
-        '<button name="assignTable" id="assignTable' + resNum + '" class="btn btn-primary">Assign Table</button>' + 
+        '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr> <td name="assignTable" onclick="assignTableFunc()" id="assignTable" class="col-md-4 queue-column">Assign Table</td>' + 
+        '<td name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table>';
+    /*
+    Dirk's Previous code:
+    return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
+        '<button name="assignTable" id="assignTable" class="btn btn-primary">Assign Table</button>' + 
+>>>>>>> Formatted Queue Assign Table Buttons
         '<button name="deleteRes" id="deleteRes' + resNum + '" class="btn btn-primary">Delete</button><hr></div>';
+    */
 }
 
 $(document).ready(function() {
     $('#addPartyConfirm').click(function (e) {
         resNum = resNum + 1;
         addParty();
-    });
-
-    $('#myModal').blur(function() {
-        console.log('Document blur');
     });
 });
