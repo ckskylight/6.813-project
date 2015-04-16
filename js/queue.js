@@ -38,6 +38,10 @@ function addParty() {
     }
 }
 
+function deleteReservation(resNum) {
+    $('#res' + resNum).remove();
+}
+
 //creates a select listener for each reservation added to the queue
 function addResClickListener(resNum, phone, email) {
     $('#res' + resNum).click(function(e) {
@@ -53,12 +57,12 @@ function addResClickListener(resNum, phone, email) {
 
             //add event listeners in options panel
             $('#deleteRes' + resNum).click(function(e) {
-                $('#res' + resNum).remove();
+                deleteReservation(resNum);
             });
             $('#assignTable' + resNum).click(function(e) {
                 console.log('in Assign table');
+                deleteReservation(resNum);
                 hideSidebar();
-                $('#res' + resNum).remove();
             });
         }
     });
@@ -73,7 +77,8 @@ function addResClickListener(resNum, phone, email) {
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone, email) {
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
-        '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr> <td name="assignTable" onclick="assignTableFunc()" id="assignTable" class="col-md-4 queue-column">Assign Table</td>' + 
+        '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr>' + 
+        '<td name="assignTable" onclick="assignTableFunc()" id="assignTable' + resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
         '<td name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table>';
     /*
     Dirk's Previous code:
