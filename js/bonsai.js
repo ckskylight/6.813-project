@@ -171,7 +171,7 @@ var TableUI = function(model) {
 
         var rows = 2;
         var cols = 4;
-        var xOffset = 85;
+        var xOffset = 185;
         var yOffset = 100;
         var tableSizes = [[100, 150, 150, 150], [100, 150, 100, 100]];
 
