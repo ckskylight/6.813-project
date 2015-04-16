@@ -131,6 +131,9 @@ $(document).ready(function() {
             optsDiv.remove();
         }
         else {
+            for (var i = 0; i < 100; i++) {
+                $('#optionsRes' + i).remove();
+            }
             $('#res1').append(optionsPanel(1, '555-123-4567', 'tmaestro@mit.edu'));
 
             //add event listeners in options panel
