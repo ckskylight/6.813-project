@@ -68,6 +68,20 @@ input[type="color"]:focus,
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(182,182,182,.6);
 }
 
+
+div.modal-content{
+        -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            -0-box-shadow: none;
+        box-shadow: none;
+        border:none;
+    }
+
+@media .modal-content{
+ border: 0px solid rgba(0,0,0,.2);
+
+}
+
 .search-box {
   border-color: rgba(182,64,255,.6);
   outline: 0;
@@ -141,6 +155,10 @@ aside  a { color:#fff; text-decoration:none;}
 .first-column {
   width: 40%;
   float: left;
+}
+
+td{
+    vertical-align: bottom;
 }
 
 .second-column {
