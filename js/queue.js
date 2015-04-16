@@ -80,10 +80,13 @@ function addResClickListener(resNum, phone, email) {
 
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone, email) {
-    return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
+    return '<div id="optionsRes' + resNum + '">' +
+        '<table style="width:100%;max-width:100%;font-weight:200;"> <tr style="padding-top:10px">' + 
+        '<td name="Phone" id="Phone" class="queue-column" style="max-width:122px">'+phone+'</td>' + 
+        '<td name="Email" id="Email" class="queue-column style="max-width:122px">'+email+'</td></tr></table>' + 
         '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr>' + 
         '<td style="font-weight:400" name="assignTable" onclick="assignTableFunc()" id="assignTable' + resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
-        '<td style="font-weight:400" name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table>';
+        '<td style="font-weight:400" name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table></div>';
     /*
     Dirk's Previous code:
     return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
