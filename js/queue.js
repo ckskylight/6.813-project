@@ -54,6 +54,9 @@ function addResClickListener(resNum, phone, email) {
             optsDiv.remove();
         }
         else {
+            for (var i = 0; i < 100; i++) {
+                $('#optionsRes' + i).remove();
+            }
             $('#res' + resNum).append(optionsPanel(resNum, phone, email));
 
             //add event listeners in options panel
