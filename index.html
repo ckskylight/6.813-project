@@ -134,44 +134,43 @@
 
     <!-- Button trigger modal -->
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade my-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
-        <div class="modal-content" style="height:400px">
+        <div class="modal-content my-modal" style="height:400px">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <center> <h2 class="modal-title" id="myModalLabel">Table Details</h2> </center>
+            <button type="button" class="close" style="color:#A040FF;"data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <center> <h2 class="modal-title" id="myModalLabel" style="font-weight:200">Table Details</h2> </center>
           </div>
           <div class="modal-body">
             <div class="first-column">
               <img src="chef.jpg" style="width:100%">
             </div>
-            <div class="second-column">
+            <div class="second-column" style="display:table-cell">
               <center>
-
-                <table class = "table">
+                <table class = "table" style="vertical-align:center">
                   <tr class = "row">
                     <td class="light-font">Server</td>
-                    <td  class="light-font"id="server">John</td>
+                    <td  class="light-font"id="server"style="text-align:right">John</td>
                   </tr>
 
                   <tr class = "row">
                     <td class="light-font">Customer Name</td>
-                    <td  class="light-font" id="name">Jack</td>
+                    <td  class="light-font" id="name" style="text-align:right">Jack</td>
                   </tr>
 
                   <tr class = "row">
                     <td class="light-font">Time Seated</td>
-                    <td  class="light-font" id="time-seated">30</td>
+                    <td  class="light-font" id="time-seated" style="text-align:right">30</td>
                   </tr>
 
                   <tr class = "row">
                     <td class="light-font">Estimated Time Remaining</td>
-                    <td class="light-font" id="est-time-remaining">10</td>
+                    <td class="light-font" id="est-time-remaining" style="vertical-align:middle;text-align:right">10</td>
                   </tr>
 
                   <tr class = "row" style="border-bottom: 1px solid #ddd">
                     <td class="light-font">Party Size</td>
-                    <td  class="light-font" id="party-size">5</td>
+                    <td  class="light-font" id="party-size" style="text-align:right">5</td>
                   </tr>
 
                 </table>
