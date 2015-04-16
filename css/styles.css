@@ -1,23 +1,34 @@
 #leftMenuPull {
-    position: absolute;
+    position: relative;
     float: left;
     display: inline-block;
     margin-left: 0px;
 
-    background: #999;
+    background: #ccc;
     height: 100%;
-    width: 30px;
+    width: 60px;
 
     cursor: pointer;
+    color: black;
+}
+
+#leftMenuPull:hover {
+    color: rgba(160,64,255,1);
 }
 
 #rightMenuPull {
+    position: relative;
     float: right;
-    background: #999;
+    background: #ccc;
     height: 100%;
-    width: 30px;
+    width: 60px;
 
     cursor: pointer;
+    color: black;
+}
+
+#rightMenuPull:hover {
+    color: rgba(160,64,255,1);
 }
 
 #tableLayout {
@@ -26,6 +37,28 @@
 
 .hidden {
     visibility: hidden;
+}
+
+#right-arrow {
+    font-size: 2.5em;
+    color: inherit;
+    position: absolute;
+    margin: auto;
+    top: 360;
+    left: 11;
+    right: 0;
+    bottom: 0;
+}
+
+#left-arrow {
+    font-size: 2.5em;
+    color: inherit;
+    position: absolute;
+    margin: auto;
+    top: 360;
+    left: 11;
+    right: 0;
+    bottom: 0;
 }
 
 #arrowImgRight {
@@ -46,7 +79,7 @@
     margin: auto;
     top: 0;
     //left: 0;
-    right: 0;
+    right: 15;
     bottom: 0;
 }
 
