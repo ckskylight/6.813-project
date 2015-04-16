@@ -1,7 +1,7 @@
 var resNum = 2; //number of reservations made (to uniquely identify them)
 
-var partyData = [];
-
+var partyData = {1: {name: 'CK', time: '11 am', date: '', size: '6', phone: '555-123-4567', email: 'tmaestro@mit.edu'}};
+//var partyData = {};
 function addParty() {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
@@ -10,14 +10,11 @@ function addParty() {
     var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
-    console.log(name);
-    console.log(time);
-    console.log(date);
-    console.log(size);
-
     if (name != '' && time != '' && date != '' && size != '') {
-        partyData.push({resNum: {'name': name, 'time': time, 'date': date, 'size': size, 'phone': phone, 'email': email}});
+        partyData[resNum] = {name: name, time: time, date: date, size: size, phone: phone, email: email};
+        console.log('partyData in addParty:');
         console.log(partyData);
+        //partyData[resNum] = {name: }
         hideSidebar();
     
         var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
@@ -67,6 +64,18 @@ function addResClickListener(resNum, phone, email) {
                 console.log('in Assign table');
                 deleteReservation(resNum);
                 hideSidebarRight();
+
+                console.log('Data going to bonsai:');
+                console.log('name: ' + partyData[resNum].name);
+                console.log('size: ' + partyData[resNum].size);
+
+                bonsai.sendMessage({
+                    command: "assign",
+                    details: {
+                        name: partyData[resNum].name,
+                        partySize: partyData[resNum].size
+                    }
+                });
             });
         }
     });
@@ -126,6 +135,14 @@ $(document).ready(function() {
                 console.log('in Assign table');
                 deleteReservation(1);
                 hideSidebarRight();
+
+                bonsai.sendMessage({
+                    command: "assign",
+                    details: {
+                        name: partyData['1'].name,
+                        partySize: partyData['1'].size
+                    }
+                });
             });
         }
     });

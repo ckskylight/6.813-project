@@ -7,8 +7,19 @@ var hideSidebar =  function() {
     });;
 }
 
+// hide sidebar and overlay
+function hideSidebarRight() {
+    sidebarRight.css('margin-left', 1500 + 'px');
+
+    overlayRight.fadeTo('500', 0, function() {
+        overlayRight.hide();
+    });;
+}
+
 var sidebarLeft;
 var overlay;
+var sidebarRight;
+var overlayRight;
 
 $(document).ready(function() {
     // show sidebar and overlay
@@ -36,22 +47,13 @@ $(document).ready(function() {
         });
     }
 
-    // hide sidebar and overlay
-    function hideSidebarRight() {
-        sidebarRight.css('margin-left', 1500 + 'px');
-
-        overlayRight.fadeTo('500', 0, function() {
-            overlayRight.hide();
-        });;
-    }
-
     // selectors
     sidebarLeft = $('[data-sidebar-left]');
-    var sidebarRight = $('[data-sidebar-right]');
+    sidebarRight = $('[data-sidebar-right]');
     var buttonLeft = $('[data-sidebar-button]');
     var buttonRight = $('[data-sidebar-button-right]');
     overlay = $('[data-sidebar-overlay]');
-    var overlayRight = $('[data-sidebar-overlay-right]');
+    overlayRight = $('[data-sidebar-overlay-right]');
 
     // add height to content area
     overlay.parent().css('min-height', 'inherit');
