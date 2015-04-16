@@ -1,5 +1,7 @@
 var resNum = 0; //number of reservations made (to uniquely identify them)
 
+var partyData = [];
+
 function addParty() {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
@@ -14,6 +16,8 @@ function addParty() {
     console.log(size);
 
     if (name != '' && time != '' && date != '' && size != '') {
+        partyData.push({resNum: {'name': name, 'time': time, 'date': date, 'size': size, 'phone': phone, 'email': email}});
+        console.log(partyData);
         hideSidebar();
     
         var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
