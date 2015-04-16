@@ -62,7 +62,7 @@ function addResClickListener(resNum, phone, email) {
             $('#assignTable' + resNum).click(function(e) {
                 console.log('in Assign table');
                 deleteReservation(resNum);
-                hideSidebar();
+                hideSidebarRight();
             });
         }
     });
@@ -94,4 +94,11 @@ $(document).ready(function() {
         resNum = resNum + 1;
         addParty();
     });
+    /*
+    $(document).keypress(function(e) {
+        if (e.which == 13) { //enter pressed
+            resNum = resNum + 1;
+            addParty();
+        }
+    });*/
 });
