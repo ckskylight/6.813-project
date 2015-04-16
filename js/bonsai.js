@@ -157,7 +157,7 @@ var TableUI = function(model) {
 
     }
 
-    var darkShadeRect = new Rect(0,0,900,600)
+    var darkShadeRect = new Rect(0,0,1100,550)
         .fill('#00000000')
         .on('click', function(e) {
             stage.sendMessage({
