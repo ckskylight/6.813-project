@@ -1,4 +1,4 @@
-var resNum = 2; //number of reservations made (to uniquely identify them)
+var resNum = 1; //number of reservations made (to uniquely identify them)
 
 var partyData = {1: {name: 'CK', time: '11 am', date: '', size: '6', phone: '555-123-4567', email: 'tmaestro@mit.edu'}};
 //var partyData = {};
@@ -14,7 +14,11 @@ function addParty() {
         partyData[resNum] = {name: name, time: time, date: date, size: size, phone: phone, email: email};
         console.log('partyData in addParty:');
         console.log(partyData);
-        //partyData[resNum] = {name: }
+
+        //add to local storage
+        var partyDataStr = JSON.stringify(partyData);
+        localStorage['partyData'] = partyDataStr;
+
         hideSidebar();
     
         var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
@@ -97,15 +101,10 @@ function optionsPanel(resNum, phone, email) {
         '<td name="Phone" id="Phone" class="queue-column" style="max-width:122px;padding-top:10px">'+phone+'</td>' + 
         '<td name="Email" id="Email" class="queue-column style="max-width:122px;padding-top:10px>'+email+'</td></tr></table>' + 
         '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr>' + 
-        '<td style="font-weight:400" name="assignTable" onclick="assignTableFunc()" id="assignTable' + resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
-        '<td style="font-weight:400" name="deleteRes" id="deleteRes' + resNum + '" class="col-md-4 queue-column">Delete</td></tr></table></div>';
-    /*
-    Dirk's Previous code:
-    return '<div id="optionsRes' + resNum + '"><div>' + phone + '</div> <div>' + email + '</div>' +
-        '<button name="assignTable" id="assignTable" class="btn btn-primary">Assign Table</button>' + 
->>>>>>> Formatted Queue Assign Table Buttons
-        '<button name="deleteRes" id="deleteRes' + resNum + '" class="btn btn-primary">Delete</button><hr></div>';
-    */
+        '<td style="font-weight:400" name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
+        resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
+        '<td style="font-weight:400" name="deleteRes" id="deleteRes' + resNum + 
+        '" class="col-md-4 queue-column">Delete</td></tr></table></div>';
 }
 
 $(document).ready(function() {
