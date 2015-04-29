@@ -1,7 +1,36 @@
 var resNum = 1; //number of reservations made (to uniquely identify them)
 
 var partyData = {1: {name: 'CK', time: '11 am', date: '', size: '6', phone: '555-123-4567', email: 'tmaestro@mit.edu'}};
-//var partyData = {};
+
+//from http://stackoverflow.com/questions/5223/length-of-a-javascript-object-that-is-associative-array
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
+//creates html with specific info
+function addPartyData(resNum, time, name, size) {
+    var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
+            '<table style="width:100%;max-width:100%;font-weight:200;"><tr>' +
+            '<td class="col-md-4 queue-column">' + time + '</td>' +
+            '<td class="col-md-4 queue-column">' + name + '</td>' +
+            '<td class="col-md-4 queue-column">' + size + '</td>' +
+            '</tr></table></div>';
+    return html;
+}
+
+//take an arbitrary time string, and parse out the actual time
+function parseTime(inp) {
+    var re = /^\s*(\d+)\s*[\:|\d|\s]*([a|p|A|P}])/;
+    var matches = re.exec(inp);
+    return matches;
+}
+
+//adds a new party to the queue, and rearranges parties by time
 function addParty() {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
@@ -21,26 +50,41 @@ function addParty() {
 
         hideSidebar();
     
-        var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
-                '<table style="width:100%;max-width:100%;font-weight:200;"><tr>' +
-                '<td class="col-md-4 queue-column">' + time + '</td>' +
-                '<td class="col-md-4 queue-column">' + name + '</td>' +
-                '<td class="col-md-4 queue-column">' + size + '</td>' +
-                '</tr></table>';
-
-        /*var html = '<div class="inQueue" id="res' + resNum + '">' + 
-                '<div>' + time + '</div>' +
-                '<div>' + date + '</div' +
-                '<div>' + name + '</div>' +
-                '<div>' + size + '</div>' +
-                '<div>?</div>';*/
-        //html = html + optionsPanel(resNum, phone, email);
-        html = html + '</div>';
+        var html = addPartyData(resNum, time, name, size);
 
         $('#queueContent').after(html);
-
         addResClickListener(resNum, phone, email);
     }
+
+    //clear queue
+    $('#queueContent').remove();
+    //add back in everything in sorted order
+
+    var partyDataList = [];
+
+    //sort list of reservations
+    for (var i = 1; i <= Object.size(partyData); i++) {
+        var data = partyData[i];
+        partyDataList.push(data);
+    }
+
+    
+    var partyDataSorted = partyDataList.sort(function(a,b) {
+        var aTime = parseTime(a.time);
+        if (aTime[1] == 'p' || aTime[1] == 'P') {
+            aTime[0] += 12; //convert to 24 hour time
+        }
+        var bTime = parseTime(b.time);
+        if (bTime[1] == 'p' || bTime[1] == 'P') {
+            bTime[0] += 12; //convert to 24 hour time
+        }
+        console.log(aTime);
+
+        return parseInt(a.time) - parseInt(b.time);
+    });
+    console.log('partyDataSorted: ');
+    console.log(partyDataSorted);
+
 }
 
 function deleteReservation(resNum) {
