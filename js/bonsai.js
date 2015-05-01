@@ -36,6 +36,11 @@ var TableUI = function(model) {
 
     var tables = [];
 
+    var LEFT = 0;
+    var RIGHT = 1;
+    var TOP = 2;
+    var BOTTOM = 3;
+
     var removeShading = function() {
         darkShadeRect.animate('0.5s', {
             fillColor: '#00000000'
@@ -101,9 +106,13 @@ var TableUI = function(model) {
                     // Collision detection
                     for (var i=0; i < rectList.length; i++) {
                         var rect = rectList[i];
-                        if (rect != this && isCollide(this,rect)) {
+                        var collideResult = isCollide(this,rect);
+                        if (rect != this && collideResult[0]) {
                             console.log("Collide with rect " + i);
-                            connectRects(rect, this);
+                            connectRects(rect, this, collideResult[1]);
+                            var num = tables[i].number;
+                            num.attr('x', rect.attr('x') + rect.attr('height')/2 - 25);
+                            num.attr('y', rect.attr('y') + rect.attr('height')/2 - 25);
                         }
                     }
                 });
@@ -120,14 +129,42 @@ var TableUI = function(model) {
         return points;
     }
 
-    var connectRects = function(s, o) {  // for now we want to connect the bottom of s to top of o
+    var connectRects = function(s, o, side) {  // for now we want to connect the bottom of s to top of o
         var sPoints = collectRectPoints(s);
         var oPoints = collectRectPoints(o);
 
-        // we want to position the top left of o on the bottom left of s
-        sBottomLeft = sPoints[2];
-        o.attr('x', sBottomLeft[0]);
-        o.attr('y', sBottomLeft[1]);
+        var width = o.attr('width');
+        var height = o.attr('height');
+
+        console.log(side);
+
+        if (side == BOTTOM) {
+            sBottomLeft = sPoints[2];
+            o.attr('x', sBottomLeft[0]);
+            o.attr('y', sBottomLeft[1]);
+        }
+        else if (side == LEFT) {
+            sTopLeft = sPoints[0];
+            o.attr('x', sTopLeft[0] - width);
+            o.attr('y', sTopLeft[1]);
+        }
+        else if (side == RIGHT) {
+            sTopRight = sPoints[1];
+            o.attr('x', sTopRight[0]);
+            o.attr('y', sTopRight[1]);
+        }
+        else if (side == TOP) {
+            sTopLeft = sPoints[0];
+            o.attr('x', sTopLeft[0]);
+            o.attr('y', sTopLeft[1] - height);
+        }
+    }
+
+    var pointDistance = function(x1, y1, x2, y2) {
+        var a = x1 - x2;
+        var b = y1 - y2;
+        var dist = Math.sqrt(Math.pow(a,2) + Math.pow(b,2));
+        return dist;
     }
 
     var isCollide = function(s, o) { // self, other
@@ -135,32 +172,82 @@ var TableUI = function(model) {
         var oPoints = collectRectPoints(o);
 
         var inside = false;
+        var side = null;
+
+        var topLeft = false;
+        var topRight = false;
+        var bottomLeft = false;
+        var bottomRight = false;
 
         for (var i=0; i < sPoints.length; i++) {
             var x = sPoints[i][0];
             var y = sPoints[i][1];
             var pointInside = true;
+
+            var pointDistances = [];
+
             for (var j=0; j < oPoints.length; j++) {
                 var oPoint = oPoints[j];
+                pointDistances.push(pointDistance(x,y,oPoint[0],oPoint[1]));
+                // top left
                 if (j == 0 && !(x >= oPoint[0] && y >= oPoint[1])) {
                     pointInside = false;
                 }
-                else if (j == 1 && !(x <= oPoint[0] && y >= oPoint[1])) {
+                // top right
+                if (j == 1 && !(x <= oPoint[0] && y >= oPoint[1])) {
                     pointInside = false;
                 }
-                else if (j == 2 && !(x >= oPoint[0] && y <= oPoint[1])) {
+                // bottom left
+                if (j == 2 && !(x >= oPoint[0] && y <= oPoint[1])) {
                     pointInside = false;
                 }
-                else if (j == 3 && !(x <= oPoint[0] && y <= oPoint[1])) {
+                // bottom right
+                if (j == 3 && !(x <= oPoint[0] && y <= oPoint[1])) {
                     pointInside = false;
                 }
             }
 
-            if (pointInside == true) inside = true;
+            if (pointInside == true) {
+                var minDist = 100000;
+                var minDistIdx = 0;
+                var minDist2 = 100000;
+                var minDistIdx2 = 0;
+                for (var k=0; k < pointDistances.length; k++) {
+                    if (pointDistances[k] < minDist) {
+                        minDist = pointDistances[k];
+                        minDistIdx = k;
+                    }
+                }
+                for (var k=0; k < pointDistances.length; k++) {
+                    if (pointDistances[k] < minDist2 && pointDistances[k] > minDist) {
+                        minDist2 = pointDistances[k];
+                        minDistIdx2 = k;
+                    }
+                }
+                if (minDistIdx == 0) topLeft = true;
+                else if (minDistIdx == 1) topRight = true;
+                else if (minDistIdx == 2) bottomLeft = true;
+                else if (minDistIdx == 3) bottomRight = true;
+                if (minDistIdx2 == 0) topLeft = true;
+                else if (minDistIdx2 == 1) topRight = true;
+                else if (minDistIdx2 == 2) bottomLeft = true;
+                else if (minDistIdx2 == 3) bottomRight = true;
+                inside = true;
+                break;
+            }
         }
 
-        return inside;
+        if (inside) {
+            console.log(topLeft + "," + topRight + "," + bottomLeft + "," + bottomRight);
+            if (topLeft && topRight) side = TOP;
+            else if (topLeft && bottomLeft) side = LEFT;
+            else if (topRight && bottomRight) side = RIGHT;
+            else if (bottomRight && bottomLeft) side = BOTTOM;
+        }
 
+        console.log("side: "  + side);
+
+        return [inside, side];
     }
 
     var darkShadeRect = new Rect(0,0,1100,550)
@@ -224,9 +311,10 @@ var TableUI = function(model) {
                         for (var i=0; i < rectList.length; i++) {
                             var rect = rectList[i];
                             if (rect != this) {
-                                if (isCollide(this,rect)) {
+                                var collideResult = isCollide(this,rect);
+                                if (collideResult[0]) {
                                     console.log("Collide with rect " + i);
-                                    connectRects(rect, this);
+                                    connectRects(rect, this, collideResult[1]);
                                     var num = tables[i].number;
                                     num.attr('x', rect.attr('x') + rect.attr('height')/2 - 25);
                                     num.attr('y', rect.attr('y') + rect.attr('height')/2 - 25);
