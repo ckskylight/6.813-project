@@ -67,39 +67,60 @@ var TableUI = function(model) {
                     curRect = this;
                     //console.log(curRect);
                 })
-                .on('click', function(e) {
-                    // Look for the rect's index and use that to modify
-                    // the table
-                    if (assignMode) {
-                        for (var k=0; k < rectList.length; k++) {
-                            if (rectList[k] == this) {
-                                tables[k].info.name = currentCustomerInfo.name;
-                                tables[k].info.partySize = currentCustomerInfo.partySize;
-                                this.animate('1s', {
-                                    fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#DDDDDDAA',100]])
-                                });
-                                //this.fill(
-                                    //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                                //);
+                                    .on('dblclick', function(e) {
+                        // Look for the rect's index and use that to modify
+                        // the table
+                        if (assignMode) {
+                            for (var k=0; k < rectList.length; k++) {
+                                if (rectList[k] == this) {
+                                    tables[k].info.name = currentCustomerInfo.name;
+                                    tables[k].info.partySize = currentCustomerInfo.partySize;
+                                    this.animate('1s', {
+                                        fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                    });
+                                    //this.fill(
+                                        //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                    //);
+                                }
                             }
+                            console.log(tables);
+                            removeShading();
+                            assignMode = false;
                         }
-                        console.log(tables);
-                        removeShading();
-                        assignMode = false;
-                    }
-                    else {
-                        var info = null;
-                        for (var k=0; k < rectList.length; k++) {
-                            if (rectList[k] == this) {
-                                info = tables[k].info
+                        else {
+                            var info = null;
+                            for (var k=0; k < rectList.length; k++) {
+                                if (rectList[k] == this) {
+                                    info = tables[k].info
+                                }
                             }
+                            stage.sendMessage({
+                                command: "modal",
+                                details: info
+                            });
                         }
-                        stage.sendMessage({
-                            command: "modal",
-                            details: info
-                        });
-                    }
-                })
+                    })
+                    .on('click', function(e) {
+                        // Look for the rect's index and use that to modify
+                        // the table
+                        if (assignMode) {
+                            for (var k=0; k < rectList.length; k++) {
+                                if (rectList[k] == this) {
+                                    tables[k].info.name = currentCustomerInfo.name;
+                                    tables[k].info.partySize = currentCustomerInfo.partySize;
+                                    this.animate('1s', {
+                                        fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                    });
+                                    //this.fill(
+                                        //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                    //);
+                                }
+                            }
+                            console.log(tables);
+                            removeShading();
+                            assignMode = false;
+                        }
+                    })
                 .on('drag', function(e) {
                     this.attr('x', e.x - xoffset);
                     this.attr('y', e.y - yoffset);
@@ -327,7 +348,7 @@ var TableUI = function(model) {
                             }
                         }
                     })
-                    .on('click', function(e) {
+                    .on('dblclick', function(e) {
                         // Look for the rect's index and use that to modify
                         // the table
                         if (assignMode) {
@@ -358,6 +379,27 @@ var TableUI = function(model) {
                                 command: "modal",
                                 details: info
                             });
+                        }
+                    })
+                    .on('click', function(e) {
+                        // Look for the rect's index and use that to modify
+                        // the table
+                        if (assignMode) {
+                            for (var k=0; k < rectList.length; k++) {
+                                if (rectList[k] == this) {
+                                    tables[k].info.name = currentCustomerInfo.name;
+                                    tables[k].info.partySize = currentCustomerInfo.partySize;
+                                    this.animate('1s', {
+                                        fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                    });
+                                    //this.fill(
+                                        //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                    //);
+                                }
+                            }
+                            console.log(tables);
+                            removeShading();
+                            assignMode = false;
                         }
                     });
 
