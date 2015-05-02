@@ -344,14 +344,14 @@ table {
 }
 
 .modal-dynamic-info {
-  border-top: 1px solid rgba(160,64,255,1.0);
-  border-bottom: 1px solid rgba(160,64,255,1.0);
-  border-right: 1px solid rgba(160,64,255,1.0);
+  border-top: 1px solid rgba(160,64,255,.1);
+  border-bottom: 1px solid rgba(160,64,255,0.1);
+  border-right: 1px solid rgba(160,64,255,0.1);
   border-left: none;
 }
 
 .modal-static-info {
   font-weight: 400;
-  border-top: 1px solid rgba(160,64,255,1.0);
-  border-bottom: 1px solid rgba(160,64,255,1.0);
+  border-top: 1px solid rgba(160,64,255,0.1);
+  border-bottom: 1px solid rgba(160,64,255,0.1);
 }

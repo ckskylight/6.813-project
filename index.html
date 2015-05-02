@@ -136,7 +136,7 @@
     <div class="modal fade my-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
       <div class="modal-dialog">
         <div class="modal-content my-modal" style="height:400px;border-radius:0px;">
-          <div class="modal-header inQueue bs-callout bs-callout-info" style="border-bottom:none">
+          <div class="modal-header inQueue bs-callout bs-callout-info" style="border:none">
             <button type="button" class="close" style="color:rgba(160,64,255,1.0);margin-top: -8px;font-size:50px;margin-right: 8px;shadow: none;text-shadow: none;" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <center> <h2 id="myModalLabel">Table Details</h2> </center>
           </div>
@@ -147,10 +147,10 @@
             </center>
             </div>
             <div class="second-column" style="display:table-cell;display:table-cell;margin-top: -10;margin-right: 10px;">
-              <div id="res1"><table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Server</td><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">John</td></tr></tbody></table></div>
-              <div id="res1"><table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Customer</td><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">CK</td></tr></tbody></table></div>
-              <div id="res1"><table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Seated At</td><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">3 pm</td></tr></tbody></table></div>
-              <div id="res1"><table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Party Size</td><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">5</td></tr></tbody></table></div>
+              <table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Server</td><div id="res1"><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">John</td></div></tr></tbody></table>
+              <table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Customer</td><div id="res1"><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">CK</td></div></tr></tbody></table>
+              <table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Seated At</td><div id="res1"><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">3 PM</td></div></tr></tbody></table>
+              <table style="width:100%;max-width:100%;font-weight:200;margin-bottom:15px;"><tbody><tr><td class="col-md-4 queue-column bs-callout modal-static-info" style="font-weight:400;max-width:12px;">Party Size</td><div id="res1"><td class="col-md-4 queue-column inQueue bs-callout bs-callout-info modal-dynamic-info">6</td></div></tr></tbody></table>
             </div>
         </div>
       </div>
@@ -247,6 +247,15 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
+    </script>
+
+    <script text="text/javascript">
+      $('#res1').mouseover(function(e) {
+          $('#res1').addClass('mousedOver');
+      });
+      $('#res1').mouseout(function(e) {
+          $('#res1').removeClass('mousedOver');
+      });
     </script>
 
 
