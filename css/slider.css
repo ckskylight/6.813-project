@@ -321,7 +321,7 @@ table {
 .bs-callout {
   margin: 20px 0;
   padding: 15px 30px 15px 15px;
-  border-left: 5px solid #eee;
+  border-left: 5px solid rgba(160,64,255,1.0);
 }
 .bs-callout h4 {
   margin-top: 0;
@@ -341,4 +341,17 @@ table {
 
 .queue-column{
     text-align:center;
+}
+
+.modal-dynamic-info {
+  border-top: 1px solid rgba(160,64,255,1.0);
+  border-bottom: 1px solid rgba(160,64,255,1.0);
+  border-right: 1px solid rgba(160,64,255,1.0);
+  border-left: none;
+}
+
+.modal-static-info {
+  font-weight: 400;
+  border-top: 1px solid rgba(160,64,255,1.0);
+  border-bottom: 1px solid rgba(160,64,255,1.0);
 }
