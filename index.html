@@ -55,25 +55,20 @@
                  <input class="mine btn btn-lg" id="partyName" type="text" placeholder="Name" required>
               </div>
              <div class="input-group">
-                 <input class="mine btn btn-lg" id="partyTime" type="text" placeholder="Time" required>
+                 <input class="mine btn btn-lg" id="partyTime" type="time" placeholder="Time" required>
               </div>
                 <div class="input-group">
-                 <input class="mine btn btn-lg" id="partyDate" type="text" placeholder="Date" required>
+                 <input class="mine btn btn-lg" id="partyDate" type="date" placeholder="Date" required>
               </div>
             <div class="input-group">
-                 <input class="mine btn btn-lg" id="partySize" type="text" placeholder="Party Size" required>
+                 <input class="mine btn btn-lg" id="partySize" type="number" placeholder="Party Size" required>
               </div>
-
             <hr>
 
             <h4 style="font-weight:200;padding:10px">Optional</h4>
 
              <div class="input-group">
                  <input class="btn btn-lg mine" id="partyPhone" type="text" placeholder="Phone">
-              </div>
-
-            <div class="input-group">
-                 <input class="btn btn-lg mine" id="partyEmail" type="text" placeholder="Email">
               </div>
             <hr>
 
@@ -124,7 +119,28 @@
                 -->
 
                 <h4 style="font-weight:200;padding:10px">Today</h4>
-                <div class="inQueue bs-callout bs-callout-info" id="res1"><table style="width:100%;max-width:100%;font-weight:200;"><tbody><tr><td class="col-md-4 queue-column">11 am</td><td class="col-md-4 queue-column">CK</td><td class="col-md-4 queue-column">6</td></tr></tbody></table></div>
+
+                <div class="inQueue bs-callout bs-callout-info" id="res1" style="border: 1px solid rgba(160,64,255,1.0);
+    border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;">
+
+
+
+                  <table style="width:100%;max-width:100%;font-weight:200;margin-left:0px">
+                    <tbody>
+                      <tr>
+                        <td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">11</td>
+                        <td class="queue-column"  style="text-align:left;word-wrap:break-word;"> 30 </td>
+                        <td rowspan="2"class="queue-column" style="text-align:left;font-size:30px">6</td>
+                        <td class="queue-column">CK</td>
+                      </tr>
+                      <tr>
+                        <td class="queue-column" style="text-align:left;word-wrap:break-word;"> am</td>
+                        <td class="queue-column">(123)456-789</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
             </div>
             <hr style="margin-top:10px">
             </div>

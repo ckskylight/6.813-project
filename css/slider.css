@@ -355,3 +355,18 @@ table {
   border-top: 1px solid rgba(160,64,255,0.1);
   border-bottom: 1px solid rgba(160,64,255,0.1);
 }
+
+.big-box,
+.mini-box {
+    background-color: #10BCFF;
+    color: white;
+    text-align: center;
+    margin: 2px;
+    font-size: 1.5em;
+}
+.big-box {
+    height: 30px
+}
+.mini-box {
+    height: 15px
+}
