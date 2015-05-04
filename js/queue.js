@@ -1,6 +1,7 @@
 var resNum = 1; //number of reservations made (to uniquely identify them)
 
-var partyData = {1: {name: 'CK', time: '11 am', date: '', size: '6', phone: '555-123-4567', email: 'tmaestro@mit.edu'}};
+var exFullDate = new Date(2015,4,4,11,0);
+var partyData = [{resNum: 1, name: 'CK', time: '11:00', date: '', size: '6', phone: '555-123-4567', fullDate: exFullDate}];
 
 //from http://stackoverflow.com/questions/5223/length-of-a-javascript-object-that-is-associative-array
 Object.size = function(obj) {
@@ -36,54 +37,43 @@ function addParty() {
     var time = $('#partyTime').val();
     var date = $('#partyDate').val();
     var phone = $('#partyPhone').val();
-    var email = $('#partyEmail').val();
     var size = $('#partySize').val();
 
+    var re = /^\s*(\d+):(\d+)\s*/;
+    var matches = re.exec(time);
+    var fullDate = new Date(2015,4,4,matches[1],matches[2]); //TODO: hardcoded day and month for the time being
+
     if (name != '' && time != '' && date != '' && size != '') {
-        partyData[resNum] = {name: name, time: time, date: date, size: size, phone: phone, email: email};
+        partyData.push({resNum: resNum, name: name, time: time, date: date, size: size, phone: phone, fullDate: fullDate});
         console.log('partyData in addParty:');
         console.log(partyData);
 
-        //add to local storage
-        var partyDataStr = JSON.stringify(partyData);
-        localStorage['partyData'] = partyDataStr;
-
         hideSidebar();
-    
-        var html = addPartyData(resNum, time, name, size);
-
-        $('#queueContent').after(html);
-        addResClickListener(resNum, phone, email);
+        addResClickListener(resNum, phone);
     }
 
     //clear queue
-    $('#queueContent').remove();
+    $('#queueContent').empty();
     //add back in everything in sorted order
 
-    var partyDataList = [];
-
-    //sort list of reservations
-    for (var i = 1; i <= Object.size(partyData); i++) {
-        var data = partyData[i];
-        partyDataList.push(data);
-    }
-
-    
-    var partyDataSorted = partyDataList.sort(function(a,b) {
-        var aTime = parseTime(a.time);
-        if (aTime[1] == 'p' || aTime[1] == 'P') {
-            aTime[0] += 12; //convert to 24 hour time
-        }
-        var bTime = parseTime(b.time);
-        if (bTime[1] == 'p' || bTime[1] == 'P') {
-            bTime[0] += 12; //convert to 24 hour time
-        }
-        console.log(aTime);
-
-        return parseInt(a.time) - parseInt(b.time);
+    var partyDataSorted = partyData.sort(function(a,b) {
+        return a.fullDate > b.fullDate;
     });
+
     console.log('partyDataSorted: ');
     console.log(partyDataSorted);
+
+    var html = '';
+    for (var j = 0; j < Object.size(partyDataSorted); j++) {
+        var data = partyDataSorted[j];
+        console.log('data: ');
+        console.log(data);
+
+        html += addPartyData(data['resNum'], data['time'], data['name'], data['size']);
+    }
+    console.log('html: ');
+    console.log(html);
+    $('#queueContent').after(html);
 
 }
 
@@ -92,12 +82,11 @@ function deleteReservation(resNum) {
 }
 
 //creates a select listener for each reservation added to the queue
-function addResClickListener(resNum, phone, email) {
+function addResClickListener(resNum, phone) {
     $('#res' + resNum).click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
         var optsDiv = $('#optionsRes' + resNum);
-        console.log(optsDiv);
-        console.log(optsDiv.val());
+
         if (optsDiv.val() != undefined) {
             optsDiv.remove();
         }
@@ -105,7 +94,7 @@ function addResClickListener(resNum, phone, email) {
             for (var i = 0; i < 100; i++) {
                 $('#optionsRes' + i).remove();
             }
-            $('#res' + resNum).append(optionsPanel(resNum, phone, email));
+            $('#res' + resNum).append(optionsPanel(resNum, phone));
 
             //add event listeners in options panel
             $('#deleteRes' + resNum).click(function(e) {
@@ -139,11 +128,9 @@ function addResClickListener(resNum, phone, email) {
 }
 
 //returns the hidden options panel, which the listener can unhide
-function optionsPanel(resNum, phone, email) {
+function optionsPanel(resNum, phone) {
     return '<div id="optionsRes' + resNum + '">' +
-        '<table style="width:100%;max-width:100%;font-weight:200;"> <tr style="padding-top:10px">' + 
-        '<td name="Phone" id="Phone" class="queue-column" style="max-width:122px;padding-top:10px">'+phone+'</td>' + 
-        '<td name="Email" id="Email" class="queue-column style="max-width:122px;padding-top:10px>'+email+'</td></tr></table>' + 
+        '<table style="width:100%;max-width:100%;font-weight:200;"> <tr style="padding-top:10px"></tr></table>' + 
         '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr>' + 
         '<td style="font-weight:400" name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
         resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
