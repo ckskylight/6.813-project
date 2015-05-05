@@ -417,17 +417,19 @@ table {
 }
 
 .assignTable{
-   border-right:5px solid rgba(160,64,255,1.0);
+   border-right:1px solid rgba(160,64,255,1.0);
    font-weight:400;
    vertical-align:middle;
-   border-right: 5px solid rgba(160,64,255,1.0);
+   border-right: 1px solid rgba(160,64,255,1.0);
    padding:15px;
+   color:rgba(160, 64, 255, 1.0);
 }
 
 .deleteTable{
   font-weight:400;
   vertical-align:middle;
   padding: 15px;
+  color: rgba(160, 64, 255, 1.0);
 }
 
 .deleteTable:hover{
@@ -437,7 +439,7 @@ table {
 }
 
 .resNum{
-  border-top: 5px solid rgba(160,64,255,1.0);
-  border-bottom: 5px solid rgba(160, 64, 255, 1.0);
-  border-right: 4px solid rgba(160, 64, 255, 1.0);
+  border-top: 1px solid rgba(160,64,255,1.0);
+  border-bottom: 0px solid rgba(160, 64, 255, 1.0);
+  border-right: 0px solid rgba(160, 64, 255, 1.0);
 }
