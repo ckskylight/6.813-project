@@ -73,7 +73,7 @@ function addParty() {
     }
     console.log('html: ');
     console.log(html);
-    $('#queueContent').after(html);
+    $('#queueContent').append(html);
 
 }
 
