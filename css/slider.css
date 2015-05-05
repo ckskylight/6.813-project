@@ -398,10 +398,48 @@ table {
 .regular-queue-button {
   background: white;
   color:black;
-
-
 }
 
 .add-table{
-  border-right=5px solid rgba(160,64,255,1.0);font-weight:400;vertical-align:middle;border-right: 5px solid rgba(160,64,255,1.0);padding:15px;
+  border-right:5px solid rgba(160,64,255,1.0);font-weight:400;vertical-align:middle;border-right: 5px solid rgba(160,64,255,1.0);padding:15px;
+}
+
+#deleteRes:hover{
+  font-weight:400;
+  background: rgba(160, 64, 255, 1.0);
+  color: white;
+}
+
+.assignTable:hover{
+  font-weight:400;
+  background: rgba(160, 64, 255, 1.0);
+  color: white;
+}
+
+.assignTable{
+   border-right:1px solid rgba(160,64,255,1.0);
+   font-weight:400;
+   vertical-align:middle;
+   border-right: 1px solid rgba(160,64,255,1.0);
+   padding:15px;
+   color:rgba(160, 64, 255, 1.0);
+}
+
+.deleteTable{
+  font-weight:400;
+  vertical-align:middle;
+  padding: 15px;
+  color: rgba(160, 64, 255, 1.0);
+}
+
+.deleteTable:hover{
+  font-weight:400;
+  background: rgba(160, 64, 255, 1.0);
+  color: white;
+}
+
+.resNum{
+  border-top: 1px solid rgba(160,64,255,1.0);
+  border-bottom: 0px solid rgba(160, 64, 255, 1.0);
+  border-right: 0px solid rgba(160, 64, 255, 1.0);
 }

@@ -17,7 +17,7 @@ Object.size = function(obj) {
 function addPartyData(resNum, time, name, size, phone) {
     var time_military_hour = time.split(':')[0];
     var time_min  = time.split(':')[1];
-    var time_hour = time_military_hour <= 12 ? time_military_hour: time_military_hour % 12;
+    var time_hour = time_military_hour > 12 ? time_military_hour % 12: time_military_hour;
     var time_am_pm = time_military_hour/12 >= 1 ? 'PM' : 'AM';
 
     /*
@@ -40,7 +40,7 @@ function addPartyData(resNum, time, name, size, phone) {
                   '<tr>'+ 
                     '<td class="queue-column" style="text-align:left;word-wrap:break-word;">' + time_am_pm + '</td>' + 
                     '<td class="queue-column" style="text-align:right">' + phone + '</td>' + 
-                  '</tr>' +  
+                  '</tr>' + 
                 '</tbody>' +
               '</table>' +
             '</center>' +
@@ -168,30 +168,17 @@ function addResClickListener(resNum, phone) {
             });
         }
     });
-    $('#deleteRes').mouseover(function(e) {
-        $('#deleteRes').addClass('moused-over-queue-button' );
-    });
-    $('#deleteRes').mouseout(function(e) {
-        $('#deleteRes').removeClass('moused-over-queue-button ');
-    });
-
-    $('#assignTable').mouseover(function(e) {
-        $('#assignTable').addClass('moused-over-queue-button ');
-    });
-    $('#assignTable').mouseout(function(e) {
-        $('#assignTable').removeClass('moused-over-queue-button ');
-    });
 }
 
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone) {
-    return '<div style="border-top: 5px solid rgba(160,64,255,1.0);border=4px solid rgba(160,64,255,1.0);border-bottom: 5px solid rgba(160, 64, 255, 1.0);border-right: 4px solid rgba(160, 64, 255, 1.0);" id="optionsRes' + resNum + '" >' +
+    return '<div class="resNum" id="optionsRes' + resNum + '" >' +
         '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr style="padding-top:10px"></tr></table>' + 
         '<div style="border=5px solid rgba(160,64,255,1.0)"><table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr>' + 
-        '<td style="border-right=5px solid rgba(160,64,255,1.0);font-weight:400;vertical-align:middle;border-right: 5px solid rgba(160,64,255,1.0);padding:15px;" name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
-        resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
-        '<td style="font-weight:400;vertical-align:middle;padding: 15px;" name="deleteRes" id="deleteRes' + resNum + 
-        '" class="col-md-4 queue-column">Delete</td></tr></table></div></div>';
+        '<td name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
+        resNum + '" class="col-md-4 queue-column assignTable">Assign Table</td>' + 
+        '<td name="deleteRes" id="deleteRes' + resNum + 
+        '" class="col-md-4 queue-column deleteTable">Delete</td></tr></table></div></div>';
 }
 
 $(document).ready(function() {
