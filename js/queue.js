@@ -15,25 +15,17 @@ Object.size = function(obj) {
 
 //creates html with specific info
 function addPartyData(resNum, time, name, size, phone) {
-    /*var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
-            '<table style="width:100%;max-width:100%;font-weight:200;"><tr>' +
-            '<td class="col-md-4 queue-column">' + time + '</td>' +
-            '<td class="col-md-4 queue-column">' + name + '</td>' +
-            '<td class="col-md-4 queue-column">' + size + '</td>' +
-            '</tr></table></div>';
-    return html;*/
-
     var time_military_hour = time.split(':')[0];
     var time_min  = time.split(':')[1];
     var time_hour = time_military_hour <= 12 ? time_military_hour: time_military_hour % 12;
     var time_am_pm = time_military_hour/12 >= 1 ? 'PM' : 'AM';
 
-    
+    /*
     console.log("time_military_hour: " + time_military_hour.toString());
     console.log("time_min: " + time_min.toString());
     console.log("time_hour: " + time_hour.toString());
     console.log("time_am_pm: " + time_am_pm.toString());
-    
+    */
 
      var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="margin-top:20px;margin-bottom:20px;border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding:0px">' + 
               '<center style="padding:15px">' + 
@@ -81,15 +73,18 @@ function parseTime(inp) {
 function addParty() {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
-    console.log('time:');
-    console.log(time);
     var date = $('#partyDate').val();
     var phone = $('#partyPhone').val();
     var size = $('#partySize').val();
 
     var re = /^\s*(\d+):(\d+)\s*/;
     var matches = re.exec(time);
-    var fullDate = new Date(2015,4,4,matches[1],matches[2]); //TODO: hardcoded day and month for the time being
+
+    var reDate = /^(\d+)-(\d+)-(\d+)$/;
+    var matchesDate = reDate.exec(date);
+    console.log('matchesDate: ');
+    console.log(matchesDate);
+    var fullDate = new Date(matchesDate[1],matchesDate[2],matchesDate[3],matches[1],matches[2]); //TODO: hardcoded day and month for the time being
 
     if (name != '' && time != '' && date != '' && size != '') {
         partyData.push({resNum: resNum, name: name, time: time, date: date, size: size, phone: phone, fullDate: fullDate});
@@ -110,10 +105,20 @@ function addParty() {
     console.log('partyDataSorted: ');
     console.log(partyDataSorted);
 
+    var prevDate = partyDataSorted[0]['fullDate'].getDate(); //bug: if reservations are made a month exactly apart, breaks. We don't care
     for (var j = 0; j < Object.size(partyDataSorted); j++) {
         var data = partyDataSorted[j];
 
         var html = addPartyData(data['resNum'], data['time'], data['name'], data['size'], data['phone']);
+        var date = data['fullDate'].getDate();
+        console.log('prevDate: ' + prevDate);
+        console.log('date: ' + date);
+        if (date != prevDate) {
+            console.log('different date');
+            html = '<hr>' + html;
+            prevDate = date;
+        }
+
         $('#queueContent').append(html);
         addResClickListener(data['resNum'], data['phone']);
     }
