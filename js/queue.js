@@ -130,23 +130,30 @@ function addResClickListener(resNum, phone) {
             });
         }
     });
-    $('#res' + resNum).mouseover(function(e) {
-        $('#res' + resNum).addClass('mousedOver');
+    $('#deleteRes').mouseover(function(e) {
+        $('#deleteRes').addClass('moused-over-queue-button' );
     });
-    $('#res' + resNum).mouseout(function(e) {
-        $('#res' + resNum).removeClass('mousedOver');
+    $('#deleteRes').mouseout(function(e) {
+        $('#deleteRes').removeClass('moused-over-queue-button ');
+    });
+
+    $('#assignTable').mouseover(function(e) {
+        $('#assignTable').addClass('moused-over-queue-button ');
+    });
+    $('#assignTable').mouseout(function(e) {
+        $('#assignTable').removeClass('moused-over-queue-button ');
     });
 }
 
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone) {
-    return '<div id="optionsRes' + resNum + '">' +
-        '<table style="width:100%;max-width:100%;font-weight:200;"> <tr style="padding-top:10px"></tr></table>' + 
-        '<hr><table style="width:100%;max-width:100%;font-weight:200;"> <tr>' + 
-        '<td style="font-weight:400" name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
+    return '<div style="border-top: 5px solid rgba(160,64,255,1.0);border=4px solid rgba(160,64,255,1.0);border-bottom: 5px solid rgba(160, 64, 255, 1.0);border-right: 4px solid rgba(160, 64, 255, 1.0);" id="optionsRes' + resNum + '" >' +
+        '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr style="padding-top:10px"></tr></table>' + 
+        '<div style="border=5px solid rgba(160,64,255,1.0)"><table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr>' + 
+        '<td style="border-right=5px solid rgba(160,64,255,1.0);font-weight:400;vertical-align:middle;border-right: 5px solid rgba(160,64,255,1.0);padding:15px;" name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
         resNum + '" class="col-md-4 queue-column">Assign Table</td>' + 
-        '<td style="font-weight:400" name="deleteRes" id="deleteRes' + resNum + 
-        '" class="col-md-4 queue-column">Delete</td></tr></table></div>';
+        '<td style="font-weight:400;vertical-align:middle;padding: 15px;" name="deleteRes" id="deleteRes' + resNum + 
+        '" class="col-md-4 queue-column">Delete</td></tr></table></div></div>';
 }
 
 $(document).ready(function() {

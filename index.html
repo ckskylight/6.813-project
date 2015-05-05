@@ -48,37 +48,38 @@
 
             <div style="margin-bottom:20px;margin-top:0px;margin:10px">
                 <center> <h2> Add Party </h2> </center>
+                <br>
             </div>
              <form action="#">
-                <center>
-              <div class="input-group">
+
+              <div class="required input-group">
                  <input class="mine btn btn-lg" id="partyName" type="text" placeholder="Name" required>
               </div>
-             <div class="input-group">
+             <div class="required input-group">
                  <input class="mine btn btn-lg" id="partyTime" type="time" placeholder="Time" required>
               </div>
-                <div class="input-group">
+                <div class="required input-group">
                  <input class="mine btn btn-lg" id="partyDate" type="date" placeholder="Date" required>
               </div>
-            <div class="input-group">
+            <div class="required input-group">
                  <input class="mine btn btn-lg" id="partySize" type="number" placeholder="Party Size" required>
               </div>
-            <hr>
-
-            <h4 style="font-weight:200;padding:10px">Optional</h4>
-
-             <div class="input-group">
+            <center>
+             <div class="optional input-group">
                  <input class="btn btn-lg mine" id="partyPhone" type="text" placeholder="Phone">
               </div>
+              <br>
             <hr>
 
-            <div class="input-group">
+            <!-- <div class="input-group"> -->
+
+
             <button class="confirm-btn btn btn-lg" style="color:#fff;border-radius:4px;margin:10px;width:150px;"name="addPartyConfirm" id="addPartyConfirm">Confirm</button>
-            </div>
+            <!-- </div> -->
 
             <h4 style="font-weight:200"> Estimated Wait: 15 min </h4>
              </form>
-        </center>
+            </center>
         </div>
 
     </aside>
@@ -92,33 +93,33 @@
             </center>
 
             <!-- search box -->
-            <div class="input-group">
-                <center>
-             <input class="mine btn btn-lg" id="search" style="width:100%;max-width:100%;margin-top:10px" type="search" placeholder="Search by Name or Party Size" required>
+            <hr>
 
         </center>
         <h4 style="font-weight:200;padding:10px">Today</h4>
         <div id="queueContent">
 
-            <div class="inQueue bs-callout bs-callout-info" id="res1" style="border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;">
-              <table style="width:100%;max-width:100%;font-weight:200;margin-left:0px">
+            <div class="inQueue bs-callout bs-callout-info" id="res1" style="border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;padding: none;padding: 0px;">
+              <center style="padding:15px">
+              <table style="font-weight:200;">
                 <tbody>
                   <tr>
                     <td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">11</td>
                     <td class="queue-column"  style="text-align:left;word-wrap:break-word;"> 30 </td>
-                    <td rowspan="2"class="queue-column" style="text-align:left;font-size:30px">6</td>
-                    <td class="queue-column">CK</td>
+                      <td rowspan="2" class="queue-column" style="text-align: center;font-size:30px;width: 103px;">6 <span class="glyphicon glyphicon-user" aria-hidden="true"></span></td>
+                    <td class="queue-column" style="font-weight:400;text-align:right">CK Ong</td>
                   </tr>
                   <tr>
                     <td class="queue-column" style="text-align:left;word-wrap:break-word;"> am</td>
-                    <td class="queue-column">(123)456-789</td>
+                    <td class="queue-column" style="text-align:right">(123)456-789</td>
                   </tr>
                 </tbody>
               </table>
+            </center>
             </div>
         </div>
         <hr>
-            
+
 
             </div>
             <hr style="margin-top:10px">
@@ -128,7 +129,7 @@
 
     <!-- Button trigger modal -->
     <!-- Modal -->
-    <div class="modal fade my-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+    <div class="modal fade my-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content my-modal" style="height:400px;border-radius:0px;">
           <div class="modal-header inQueue bs-callout bs-callout-info" style="border:none">
@@ -197,6 +198,26 @@
             });
         }
 
+        var addTableFunc = function() {
+          console.log("adding table");
+          bonsai.sendMessage({
+            command: "add table",
+            details: [6]
+            });
+        }
+
+        var cancelAddTableFunc = function() {
+          bonsai.sendMessage({
+            command: "cancel add table",
+            });
+        }
+
+        var saveTableFunc = function() {
+          bonsai.sendMessage({
+            command: "save table",
+            });
+        }
+
         var openModal = function(data) {
           console.log('modal');
           console.log(data);
@@ -219,6 +240,9 @@
     </div>
 
     <div id="navbar">
+        <button onclick="addTableFunc()">Add Table</button>
+        <button onclick="cancelAddTableFunc()">Cancel Add Table</button>
+        <button onclick="saveTableFunc()">Save Table</button>
         Add Table | Remove Table | Reset Configuration
     </div>
 
