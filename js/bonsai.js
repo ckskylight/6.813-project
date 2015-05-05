@@ -22,6 +22,12 @@ var TableUI = function(model) {
             showNotFull();
             assignMode = true;
         }
+        else if (data.command == "add table") {
+            addTable(data.details);
+        }
+        else if (data.command == "cancel add table") {
+            cancelAddTable();
+        }
     });
 
     var currentCustomerInfo = null;
@@ -34,6 +40,8 @@ var TableUI = function(model) {
     var timeList = [];
     var assignMode = false;
 
+    var curAddingTable = null;
+
     var tables = [];
 
     var LEFT = 0;
@@ -41,7 +49,47 @@ var TableUI = function(model) {
     var TOP = 2;
     var BOTTOM = 3;
 
-    var redrawRect = function(i) {
+    var addTable = function(details) {
+        drawRect(null, details);
+    }
+
+    var saveTable = function() {
+    }
+
+    var cancelAddTable = function() {
+        curAddingTable[0].destroy();
+        curAddingTable[1].destroy();
+        tables.pop();
+        rectList.pop();
+        redrawAllRects();
+    }
+
+    var drawRect = function(i, newRectDetails) {
+        if (newRectDetails.length  > 0) {
+            // newRectDetails
+            // [capacity]
+            var table = new Table();
+            table.info["capacity"] = newRectDetails[0];
+            // TODO: Be able to change size relative to capacity later
+            var size = 130;
+
+            var numLabel = new Text(table.info.capacity).attr('fontSize', '80px')
+                .attr('x', 450  + size/2 - 25)
+                .attr('y', 200  + size/2 - 25)
+                .addTo(stage);
+
+            var newRect = new Rect(450, 200, size,size)
+                .addTo(stage)
+                .fill("#FF504AAA");
+
+            table.number = numLabel;
+            rectList.push(newRect);
+            tables.push(table);
+            curAddingTable = [newRect, numLabel];
+        }
+
+        if (i == null) i = rectList.length - 1;
+
         var rect = rectList[i];
         rect.destroy();
         rect.addTo(stage)
@@ -54,101 +102,122 @@ var TableUI = function(model) {
             yoffset = e.y - y;
             curRect = this;
             //console.log(curRect);
-        })
-        .on('dblclick', function(e) {
-            // Look for the rect's index and use that to modify
-            // the table
-            if (assignMode) {
-                for (var k=0; k < rectList.length; k++) {
-                    if (rectList[k] == this) {
-                        tables[k].info.name = currentCustomerInfo.name;
-                        tables[k].info.partySize = currentCustomerInfo.partySize;
-                        this.animate('1s', {
-                            fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                        });
-                        //this.fill(
-                            //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                        //);
+        });
+
+        if (newRectDetails.length == 0) {
+            rect.on('dblclick', function(e) {
+                // Look for the rect's index and use that to modify
+                // the table
+                if (assignMode) {
+                    for (var k=0; k < rectList.length; k++) {
+                        if (rectList[k] == this) {
+                            tables[k].info.name = currentCustomerInfo.name;
+                            tables[k].info.partySize = currentCustomerInfo.partySize;
+                            this.animate('1s', {
+                                fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                            });
+                        }
                     }
+                    console.log(tables);
+                    removeShading();
+                    assignMode = false;
                 }
-                console.log(tables);
-                removeShading();
-                assignMode = false;
-            }
-            else {
-                var info = null;
-                for (var k=0; k < rectList.length; k++) {
-                    if (rectList[k] == this) {
-                        info = tables[k].info
+                else {
+                    var info = null;
+                    for (var k=0; k < rectList.length; k++) {
+                        if (rectList[k] == this) {
+                            info = tables[k].info
+                        }
                     }
+                    stage.sendMessage({
+                        command: "modal",
+                        details: info
+                    });
                 }
-                stage.sendMessage({
-                    command: "modal",
-                    details: info
-                });
-            }
-        })
-        .on('click', function(e) {
-            // Look for the rect's index and use that to modify
-            // the table
-            if (assignMode) {
-                for (var k=0; k < rectList.length; k++) {
-                    if (rectList[k] == this) {
-                        tables[k].info.name = currentCustomerInfo.name;
-                        tables[k].info.partySize = currentCustomerInfo.partySize;
-                        this.animate('1s', {
-                            fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                        });
-                        //this.fill(
-                            //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                        //);
+            })
+            .on('click', function(e) {
+                // Look for the rect's index and use that to modify
+                // the table
+                if (assignMode) {
+                    for (var k=0; k < rectList.length; k++) {
+                        if (rectList[k] == this) {
+                            tables[k].info.name = currentCustomerInfo.name;
+                            tables[k].info.partySize = currentCustomerInfo.partySize;
+                            this.animate('1s', {
+                                fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                            });
+                        }
                     }
+                    console.log(tables);
+                    removeShading();
+                    assignMode = false;
                 }
-                console.log(tables);
-                removeShading();
-                assignMode = false;
-            }
-        })
-        .on('drag', function(e) {
-            this.attr('x', e.x - xoffset);
-            this.attr('y', e.y - yoffset);
-            // Collision detection
-            for (var i=0; i < rectList.length; i++) {
-                var rect = rectList[i];
-                if (rect != this) {
-                    var collideResult = isCollide(this,rect,true);
-                    if (collideResult[0]) {
-                        connectRects(rect, this, collideResult[1]);
-                        var num = tables[i].number;
-                        for (var j=0; j < rectList.length; j++) {
-                            var rect2 = rectList[j];
-                            if (rect2 == this) {
-                                var num = tables[j].number;
-                                num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
-                                num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+            });
+        }
+        if (newRectDetails.length == 0) {
+            rect.on('drag', function(e) {
+                this.attr('x', e.x - xoffset);
+                this.attr('y', e.y - yoffset);
+                // Collision detection
+                for (var i=0; i < rectList.length; i++) {
+                    var rect = rectList[i];
+                    if (rect != this) {
+                        var collideResult = isCollide(this,rect,true);
+                        if (collideResult[0]) {
+                            connectRects(rect, this, collideResult[1]);
+                            var num = tables[i].number;
+                            for (var j=0; j < rectList.length; j++) {
+                                var rect2 = rectList[j];
+                                if (rect2 == this) {
+                                    var num = tables[j].number;
+                                    num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
+                                    num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                                }
                             }
                         }
                     }
+                    else if (rect == this) {
+                        var num = tables[i].number;
+                        console.log(num.attr('x') + "," + num.attr('y'));
+                        num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                        num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                        console.log(num.attr('x') + "," + num.attr('y'));
+                    }
                 }
-                else if (rect == this) {
-                    var num = tables[i].number;
-                    console.log(num.attr('x') + "," + num.attr('y'));
-                    num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
-                    num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
-                    console.log(num.attr('x') + "," + num.attr('y'));
+            });
+        }
+        else {
+            rect.on('drag', function(e) {
+                this.attr('x', e.x - xoffset);
+                this.attr('y', e.y - yoffset);
+                // Collision detection
+                for (var i=0; i < rectList.length; i++) {
+                    var rect = rectList[i];
+                    if (rect == this) {
+                        var num = tables[i].number;
+                        console.log(num.attr('x') + "," + num.attr('y'));
+                        num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                        num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                        console.log(num.attr('x') + "," + num.attr('y'));
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+
+    var redrawAllRects = function() {
+        for (var i=0; i < tables.length; i++) {
+            drawRect(i, []);
+        }
     }
 
     var removeShading = function() {
         darkShadeRect.animate('0.5s', {
             fillColor: '#00000000'
         });
-        for (var i=0; i < timeList.length; i++) {
-            redrawRect(i);
-        }
+        redrawAllRects();
     }
+
 
     var showNotFull = function() {
         darkShadeRect.addTo(stage);
@@ -157,7 +226,7 @@ var TableUI = function(model) {
         });
         for (var i=0; i < timeList.length; i++) {
             if (timeList[i] == 0) {
-                redrawRect(i);
+                drawRect(i, []);
             }
         }
     }
@@ -440,9 +509,6 @@ var TableUI = function(model) {
                                     this.animate('1s', {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
-                                    //this.fill(
-                                        //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                                    //);
                                 }
                             }
                             console.log(tables);
