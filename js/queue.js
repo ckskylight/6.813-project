@@ -95,9 +95,10 @@ function deleteReservation(resNum) {
 
 //creates a select listener for each reservation added to the queue
 function addResClickListener(resNum, phone) {
-    console.log('in addResClickListener');
+    console.log('in addResClickListener. resNum: ' + resNum);
 
-    $('#res' + resNum).click(function(e) {
+    $('#res2').click(function(e) { //TODO: put back resNum
+        console.log('IN CLICK');
         //$('#optionsRes' + resNum).removeClass('hidden');
         var optsDiv = $('#optionsRes' + resNum);
 
@@ -154,9 +155,13 @@ $(document).ready(function() {
         addParty();
     });
 
-    $('#res2').click(function() {
-        console.log('CLICKED');
+    $('#pushHere').click(function() {
+        console.log('listeners attached to res1');
+        console.log($("#res1").data("events"));
+        console.log($('#res1'));
     });
+    
+
     /*
     $(document).keypress(function(e) {
         if (e.which == 13) { //enter pressed
@@ -168,9 +173,8 @@ $(document).ready(function() {
     //listeners for hard-coded example
     $('#res1').click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
+        console.log('IN HARDCODED CLICK');
         var optsDiv = $('#optionsRes1');
-        console.log(optsDiv);
-        console.log(optsDiv.val());
         if (optsDiv.val() != undefined) {
             optsDiv.remove();
         }
@@ -178,7 +182,7 @@ $(document).ready(function() {
             for (var i = 0; i < 100; i++) {
                 $('#optionsRes' + i).remove();
             }
-            $('#res1').append(optionsPanel(1, '555-123-4567', 'tmaestro@mit.edu'));
+            $('#res1').append(optionsPanel(1, '555-123-4567'));
 
             //add event listeners in options panel
             $('#deleteRes1').click(function(e) {
