@@ -28,6 +28,9 @@ var TableUI = function(model) {
         else if (data.command == "cancel add table") {
             cancelAddTable();
         }
+        else if (data.command == "save table") {
+            saveTable();
+        }
     });
 
     var currentCustomerInfo = null;
@@ -54,6 +57,11 @@ var TableUI = function(model) {
     }
 
     var saveTable = function() {
+        curAddingTable[0].fill("#FFFFFF00");
+        curAddingTable[0].fill(
+            gradient.linear('top', [['#A040FFAA',0] , ['#DDDDDDAA',0]])
+            );
+        redrawAllRects();
     }
 
     var cancelAddTable = function() {
@@ -61,6 +69,7 @@ var TableUI = function(model) {
         curAddingTable[1].destroy();
         tables.pop();
         rectList.pop();
+        timeList.pop();
         redrawAllRects();
     }
 
@@ -85,6 +94,7 @@ var TableUI = function(model) {
             table.number = numLabel;
             rectList.push(newRect);
             tables.push(table);
+            timeList.push(0);
             curAddingTable = [newRect, numLabel];
         }
 
@@ -476,9 +486,6 @@ var TableUI = function(model) {
                                     this.animate('1s', {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
-                                    //this.fill(
-                                        //gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
-                                    //);
                                 }
                             }
                             console.log(tables);

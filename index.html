@@ -211,6 +211,12 @@
             });
         }
 
+        var saveTableFunc = function() {
+          bonsai.sendMessage({
+            command: "save table",
+            });
+        }
+
         var openModal = function(data) {
           console.log('modal');
           console.log(data);
@@ -235,6 +241,7 @@
     <div id="navbar">
         <button onclick="addTableFunc()">Add Table</button>
         <button onclick="cancelAddTableFunc()">Cancel Add Table</button>
+        <button onclick="saveTableFunc()">Save Table</button>
         Add Table | Remove Table | Reset Configuration
     </div>
 
