@@ -46,27 +46,16 @@ function addPartyData(resNum, time, name, size, phone) {
             '</center>' +
             '</div>'
 
-
-    /*
-    var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="border: 1px solid ' + 
-        'rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;">' + 
-        '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"><tbody><tr>' + 
-        '<td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">' + time + '</td>' + 
-        '<td class="queue-column" style="text-align:left;word-wrap:break-word;">&nbsp;</td>' +  //TODO: hardcoded minutes
-        '<td rowspan="2"class="queue-column" style="text-align:left;font-size:30px">' + size + '</td>' + 
-        '<td class="queue-column">' + name + '</td></tr><tr>' + 
-        '<td class="queue-column" style="text-align:left;word-wrap:break-word;"> am</td>' +  //TODO: hardcoded am/pm
-        '<td class="queue-column">' + phone + '</td></tr></tbody></table></div>'
-    */
     return html;
-
 }
 
-//take an arbitrary time string, and parse out the actual time
-function parseTime(inp) {
-    var re = /^\s*(\d+)\s*[\:|\d|\s]*([a|p|A|P}])/;
-    var matches = re.exec(inp);
-    return matches;
+//create a printable version of the day and month
+function makePrintDate(dateIn) {
+    var date = dateIn.getDate();
+    var month = dateIn.getMonth();
+
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return months[month] + ' ' + date;
 }
 
 //adds a new party to the queue, and rearranges parties by time
@@ -82,9 +71,7 @@ function addParty() {
 
     var reDate = /^(\d+)-(\d+)-(\d+)$/;
     var matchesDate = reDate.exec(date);
-    console.log('matchesDate: ');
-    console.log(matchesDate);
-    var fullDate = new Date(matchesDate[1],matchesDate[2],matchesDate[3],matches[1],matches[2]); //TODO: hardcoded day and month for the time being
+    var fullDate = new Date(matchesDate[1],matchesDate[2],matchesDate[3],matches[1],matches[2]);
 
     if (name != '' && time != '' && date != '' && size != '') {
         partyData.push({resNum: resNum, name: name, time: time, date: date, size: size, phone: phone, fullDate: fullDate});
@@ -115,7 +102,9 @@ function addParty() {
         console.log('date: ' + date);
         if (date != prevDate) {
             console.log('different date');
-            html = '<hr>' + html;
+
+            var printDate = makePrintDate(data['fullDate']);
+            html = '<hr><h4 style="font-weight:200;padding:10px;padding-left:0px">' + printDate +'</h4>' + html;
             prevDate = date;
         }
 
