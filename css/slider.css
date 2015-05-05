@@ -388,3 +388,20 @@ table {
 .mini-box {
     height: 15px
 }
+
+.moused-over-queue-button {
+  font-weight:400;
+  background: rgba(160, 64, 255, 1.0);
+  color: white;
+}
+
+.regular-queue-button {
+  background: white;
+  color:black;
+
+
+}
+
+.add-table{
+  border-right=5px solid rgba(160,64,255,1.0);font-weight:400;vertical-align:middle;border-right: 5px solid rgba(160,64,255,1.0);padding:15px;
+}
