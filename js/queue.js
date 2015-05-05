@@ -26,14 +26,14 @@ function addPartyData(resNum, time, name, size, phone) { //TODO: pass in phone
     var time_military_hour = time.split(':')[0];
     var time_min  = time.split(':')[1];
     var time_hour = time_military_hour <= 12 ? time_military_hour: time_military_hour % 12;
-    var time_am_pm = time_military_hour/13 >= 1 ? 'PM' : 'AM';
+    var time_am_pm = time_military_hour/12 >= 1 ? 'PM' : 'AM';
 
-    /*
+    
     console.log("time_military_hour: " + time_military_hour.toString());
     console.log("time_min: " + time_min.toString());
     console.log("time_hour: " + time_hour.toString());
     console.log("time_am_pm: " + time_am_pm.toString());
-    */
+    
 
      var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="margin-top:20px;margin-bottom:20px;border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding:0px">' + 
               '<center style="padding:15px">' + 
