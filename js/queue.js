@@ -14,14 +14,26 @@ Object.size = function(obj) {
 
 
 //creates html with specific info
-function addPartyData(resNum, time, name, size) {
-    var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
+function addPartyData(resNum, time, name, size, phone) { //TODO: pass in phone
+    /*var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
             '<table style="width:100%;max-width:100%;font-weight:200;"><tr>' +
             '<td class="col-md-4 queue-column">' + time + '</td>' +
             '<td class="col-md-4 queue-column">' + name + '</td>' +
             '<td class="col-md-4 queue-column">' + size + '</td>' +
             '</tr></table></div>';
+    return html;*/
+
+    var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="border: 1px solid ' + 
+        'rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;">' + 
+        '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"><tbody><tr>' + 
+        '<td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">' + time + '</td>' + 
+        '<td class="queue-column" style="text-align:left;word-wrap:break-word;"> 30 </td>' +  //TODO: hardcoded minutes
+        '<td rowspan="2"class="queue-column" style="text-align:left;font-size:30px">' + size + '</td>' + 
+        '<td class="queue-column">' + name + '</td></tr><tr>' + 
+        '<td class="queue-column" style="text-align:left;word-wrap:break-word;"> am</td>' +  //TODO: hardcoded am/pm
+        '<td class="queue-column">' + phone + '</td></tr></tbody></table></div>';
     return html;
+
 }
 
 //take an arbitrary time string, and parse out the actual time
