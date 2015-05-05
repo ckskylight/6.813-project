@@ -107,7 +107,7 @@ div.modal-content{
     box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
     -webkit-box-shadow: inset 0 0px 0px rgba(0,0,0,0.0);
     font-weight:200;
-    ;
+    
 }
 
 .mine {
@@ -202,6 +202,11 @@ select.frecuency:focus {
     margin: 10px auto;
     width: 100%;
 }
+.required.input-group {
+  margin-left: 51px;
+}
+.required:after {content:" *"; }
+
 input.btn.btn-lg,
 input.btn.btn-lg:focus {
     outline: none;
@@ -209,6 +214,13 @@ input.btn.btn-lg:focus {
     height: 45px;
     /*border-top-left-radius: 0;
     border-bottom-left-radius: 0;*/
+    border-color: rgba(182,182,182,.6);
+    outline: 0;
+    outline: thin dotted \9;
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(182,182,182,.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(182,182,182,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(182,182,182,.6);
 }
 input.btn.btn-lg:active {
     outline: none;
