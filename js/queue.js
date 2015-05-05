@@ -1,4 +1,4 @@
-var resNum = 1; //number of reservations made (to uniquely identify them)
+var resNum = 4; //number of reservations made (to uniquely identify them)
 
 var exFullDate = new Date(2015,4,4,11,0);
 var partyData = [{resNum: 1, name: 'CK', time: '11:00', date: '', size: '6', phone: '555-123-4567', fullDate: exFullDate}];
@@ -14,7 +14,7 @@ Object.size = function(obj) {
 
 
 //creates html with specific info
-function addPartyData(resNum, time, name, size, phone) { //TODO: pass in phone
+function addPartyData(resNum, time, name, size, phone) {
     /*var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '">' + 
             '<table style="width:100%;max-width:100%;font-weight:200;"><tr>' +
             '<td class="col-md-4 queue-column">' + time + '</td>' +
@@ -74,18 +74,15 @@ function addParty() {
     console.log('partyDataSorted: ');
     console.log(partyDataSorted);
 
-    var html = '';
     for (var j = 0; j < Object.size(partyDataSorted); j++) {
         var data = partyDataSorted[j];
-        console.log('data: ');
-        console.log(data);
 
-        html += addPartyData(data['resNum'], data['time'], data['name'], data['size']);
+        var html = addPartyData(data['resNum'], data['time'], data['name'], data['size'], data['phone']);
+        $('#queueContent').append(html);
         addResClickListener(data['resNum'], data['phone']);
     }
     console.log('html: ');
     console.log(html);
-    $('#queueContent').append(html);
 
 }
 
@@ -97,7 +94,7 @@ function deleteReservation(resNum) {
 function addResClickListener(resNum, phone) {
     console.log('in addResClickListener. resNum: ' + resNum);
 
-    $('#res2').click(function(e) { //TODO: put back resNum
+    $('#res' + resNum).click(function(e) {
         console.log('IN CLICK');
         //$('#optionsRes' + resNum).removeClass('hidden');
         var optsDiv = $('#optionsRes' + resNum);
@@ -168,6 +165,9 @@ $(document).ready(function() {
         console.log($('#res1'));
     });
     
+    $('#res5').click(function() {
+        console.log('5 CLICKED');
+    });
 
     /*
     $(document).keypress(function(e) {
