@@ -127,13 +127,21 @@ var TableUI = function(model) {
                     // Collision detection
                     for (var i=0; i < rectList.length; i++) {
                         var rect = rectList[i];
-                        var collideResult = isCollide(this,rect);
+                        var collideResult = isCollide(this,rect,true);
                         if (rect != this && collideResult[0]) {
                             console.log("Collide with rect " + i);
                             connectRects(rect, this, collideResult[1]);
                             var num = tables[i].number;
+                            console.log(tables);
+                            console.log("number: ");
+                            console.log(num.id);
                             num.attr('x', rect.attr('x') + rect.attr('height')/2 - 25);
                             num.attr('y', rect.attr('y') + rect.attr('height')/2 - 25);
+                        }
+                        else {
+                            var num = tables[i].number;
+                            num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                            num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
                         }
                     }
                 });
@@ -188,7 +196,7 @@ var TableUI = function(model) {
         return dist;
     }
 
-    var isCollide = function(s, o) { // self, other
+    var isCollide = function(s, o, recurse) { // self, other
         var sPoints = collectRectPoints(s);
         var oPoints = collectRectPoints(o);
 
@@ -229,6 +237,7 @@ var TableUI = function(model) {
             }
 
             if (pointInside == true) {
+                console.log("point inside!");
                 var minDist = 100000;
                 var minDistIdx = 0;
                 var minDist2 = 100000;
@@ -265,10 +274,29 @@ var TableUI = function(model) {
             else if (topRight && bottomRight) side = RIGHT;
             else if (bottomRight && bottomLeft) side = BOTTOM;
         }
+        else if (!inside && recurse) {
+            var flipCollide = isCollide(o,s,false);
+            if (flipCollide[0]) {
+                inside = true;
+                var flipSide = flipCollide[1];
+                if (flipSide == TOP) {
+                    side = BOTTOM;
+                }
+                else if (flipSide == BOTTOM) {
+                    side = TOP;
+                }
+                else if (flipSide == LEFT) {
+                    side = RIGHT;
+                }
+                else if (flipSide == RIGHT) {
+                    side = LEFT;
+                }
+            }
+        }
 
-        console.log("side: "  + side);
+        //console.log("side: "  + side);
 
-        return [inside, side];
+        return [inside, side]; // side is relative to self
     }
 
     var darkShadeRect = new Rect(0,0,1100,550)
@@ -332,19 +360,26 @@ var TableUI = function(model) {
                         for (var i=0; i < rectList.length; i++) {
                             var rect = rectList[i];
                             if (rect != this) {
-                                var collideResult = isCollide(this,rect);
+                                var collideResult = isCollide(this,rect,true);
                                 if (collideResult[0]) {
-                                    console.log("Collide with rect " + i);
                                     connectRects(rect, this, collideResult[1]);
                                     var num = tables[i].number;
-                                    num.attr('x', rect.attr('x') + rect.attr('height')/2 - 25);
-                                    num.attr('y', rect.attr('y') + rect.attr('height')/2 - 25);
+                                    for (var j=0; j < rectList.length; j++) {
+                                        var rect2 = rectList[j];
+                                        if (rect2 == this) {
+                                            var num = tables[j].number;
+                                            num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
+                                            num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                                        }
+                                    }
                                 }
                             }
-                            else {
+                            else if (rect == this) {
                                 var num = tables[i].number;
+                                console.log(num.attr('x') + "," + num.attr('y'));
                                 num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
                                 num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                                console.log(num.attr('x') + "," + num.attr('y'));
                             }
                         }
                     })
