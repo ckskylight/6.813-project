@@ -27,7 +27,7 @@ function addPartyData(resNum, time, name, size, phone) { //TODO: pass in phone
         'rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;">' + 
         '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"><tbody><tr>' + 
         '<td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">' + time + '</td>' + 
-        '<td class="queue-column" style="text-align:left;word-wrap:break-word;"> 30 </td>' +  //TODO: hardcoded minutes
+        '<td class="queue-column" style="text-align:left;word-wrap:break-word;">&nbsp;</td>' +  //TODO: hardcoded minutes
         '<td rowspan="2"class="queue-column" style="text-align:left;font-size:30px">' + size + '</td>' + 
         '<td class="queue-column">' + name + '</td></tr><tr>' + 
         '<td class="queue-column" style="text-align:left;word-wrap:break-word;"> am</td>' +  //TODO: hardcoded am/pm
@@ -61,7 +61,6 @@ function addParty() {
         console.log(partyData);
 
         hideSidebar();
-        addResClickListener(resNum, phone);
     }
 
     //clear queue
@@ -82,6 +81,7 @@ function addParty() {
         console.log(data);
 
         html += addPartyData(data['resNum'], data['time'], data['name'], data['size']);
+        addResClickListener(data['resNum'], data['phone']);
     }
     console.log('html: ');
     console.log(html);
@@ -95,6 +95,8 @@ function deleteReservation(resNum) {
 
 //creates a select listener for each reservation added to the queue
 function addResClickListener(resNum, phone) {
+    console.log('in addResClickListener');
+
     $('#res' + resNum).click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
         var optsDiv = $('#optionsRes' + resNum);
@@ -116,10 +118,6 @@ function addResClickListener(resNum, phone) {
                 console.log('in Assign table');
                 deleteReservation(resNum);
                 hideSidebarRight();
-
-                console.log('Data going to bonsai:');
-                console.log('name: ' + partyData[resNum].name);
-                console.log('size: ' + partyData[resNum].size);
 
                 bonsai.sendMessage({
                     command: "assign",
@@ -154,6 +152,10 @@ $(document).ready(function() {
     $('#addPartyConfirm').click(function (e) {
         resNum = resNum + 1;
         addParty();
+    });
+
+    $('#res2').click(function() {
+        console.log('CLICKED');
     });
     /*
     $(document).keypress(function(e) {
