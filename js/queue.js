@@ -23,6 +23,39 @@ function addPartyData(resNum, time, name, size, phone) { //TODO: pass in phone
             '</tr></table></div>';
     return html;*/
 
+    var time_military_hour = time.split(':')[0];
+    var time_min  = time.split(':')[1];
+    var time_hour = time_military_hour <= 12 ? time_military_hour: time_military_hour % 12;
+    var time_am_pm = time_military_hour/13 >= 1 ? 'PM' : 'AM';
+
+    /*
+    console.log("time_military_hour: " + time_military_hour.toString());
+    console.log("time_min: " + time_min.toString());
+    console.log("time_hour: " + time_hour.toString());
+    console.log("time_am_pm: " + time_am_pm.toString());
+    */
+
+     var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="margin-top:20px;margin-bottom:20px;border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding:0px">' + 
+              '<center style="padding:15px">' + 
+              '<table style="font-weight:200;">' + 
+                '<tbody>' + 
+                  '<tr>' + 
+                    '<td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">'+time_hour+'</td>' +
+                    '<td class="queue-column"  style="text-align:left;word-wrap:break-word;">' + time_min +  '</td>' + 
+                    '<td rowspan="2" class="queue-column" style="text-align: center;font-size:30px;width: 103px;">' + size + '<span class="glyphicon glyphicon-user" aria-hidden="true"></span></td>' + 
+                    '<td class="queue-column" style="font-weight:400;text-align:right">' + name + '</td>' +
+                  '</tr>' + 
+                  '<tr>'+ 
+                    '<td class="queue-column" style="text-align:left;word-wrap:break-word;">' + time_am_pm + '</td>' + 
+                    '<td class="queue-column" style="text-align:right">' + phone + '</td>' + 
+                  '</tr>' + 
+                '</tbody>' +
+              '</table>' +
+            '</center>' +
+            '</div>'
+
+
+    /*
     var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="border: 1px solid ' + 
         'rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;">' + 
         '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"><tbody><tr>' + 
@@ -31,7 +64,8 @@ function addPartyData(resNum, time, name, size, phone) { //TODO: pass in phone
         '<td rowspan="2"class="queue-column" style="text-align:left;font-size:30px">' + size + '</td>' + 
         '<td class="queue-column">' + name + '</td></tr><tr>' + 
         '<td class="queue-column" style="text-align:left;word-wrap:break-word;"> am</td>' +  //TODO: hardcoded am/pm
-        '<td class="queue-column">' + phone + '</td></tr></tbody></table></div>';
+        '<td class="queue-column">' + phone + '</td></tr></tbody></table></div>'
+    */
     return html;
 
 }
@@ -47,6 +81,8 @@ function parseTime(inp) {
 function addParty() {
     var name = $('#partyName').val();
     var time = $('#partyTime').val();
+    console.log('time:');
+    console.log(time);
     var date = $('#partyDate').val();
     var phone = $('#partyPhone').val();
     var size = $('#partySize').val();
