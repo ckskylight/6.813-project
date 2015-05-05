@@ -1,7 +1,7 @@
 var resNum = 4; //number of reservations made (to uniquely identify them)
 
 var exFullDate = new Date(2015,4,4,11,0);
-var partyData = [{resNum: 1, name: 'CK', time: '11:00', date: '', size: '6', phone: '555-123-4567', fullDate: exFullDate}];
+var partyData = [{resNum: 1, name: 'CK', time: '11:00', date: '', size: '6', phone: '5551234567', fullDate: exFullDate}];
 
 //from http://stackoverflow.com/questions/5223/length-of-a-javascript-object-that-is-associative-array
 Object.size = function(obj) {
@@ -17,17 +17,20 @@ Object.size = function(obj) {
 function addPartyData(resNum, time, name, size, phone) {
     var time_military_hour = time.split(':')[0];
     var time_min  = time.split(':')[1];
-    var time_hour = time_military_hour > 12 ? time_military_hour % 12: time_military_hour;
+    var time_hour = time_military_hour > 12 ? time_military_hour % 12 : time_military_hour;
+    var time_hour = time_hour == 00 ? 12: time_hour;
     var time_am_pm = time_military_hour/12 >= 1 ? 'PM' : 'AM';
 
     /*
     console.log("time_military_hour: " + time_military_hour.toString());
     console.log("time_min: " + time_min.toString());
     console.log("time_hour: " + time_hour.toString());
+    console.log("time_military_hour > 12: ");
+    console.log(time_military_hour > 12);
     console.log("time_am_pm: " + time_am_pm.toString());
     */
 
-     var html = '<div class="inQueue bs-callout bs-callout-info" id="res' + resNum + '" style="margin-top:20px;margin-bottom:20px;border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding:0px">' + 
+     var html = '<div class="inQueue queueItem bs-callout bs-callout-info" id="res' + resNum + '">' + 
               '<center style="padding:15px">' + 
               '<table style="font-weight:200;">' + 
                 '<tbody>' + 
@@ -162,7 +165,7 @@ function addResClickListener(resNum, phone) {
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone) {
     return '<div class="resNum" id="optionsRes' + resNum + '" >' +
-        '<table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr style="padding-top:10px"></tr></table>' + 
+        '<table class="optionsTable"> <tr style="padding-top:10px"></tr></table>' + 
         '<div style="border=5px solid rgba(160,64,255,1.0)"><table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr>' + 
         '<td name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
         resNum + '" class="col-md-4 queue-column assignTable">Assign Table</td>' + 
@@ -206,7 +209,7 @@ $(document).ready(function() {
             for (var i = 0; i < 100; i++) {
                 $('#optionsRes' + i).remove();
             }
-            $('#res1').append(optionsPanel(1, '555-123-4567'));
+            $('#res1').append(optionsPanel(1, '5551234567'));
 
             //add event listeners in options panel
             $('#deleteRes1').click(function(e) {
