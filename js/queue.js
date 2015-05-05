@@ -48,7 +48,7 @@ function addPartyData(resNum, time, name, size, phone) {
                   '<tr>'+ 
                     '<td class="queue-column" style="text-align:left;word-wrap:break-word;">' + time_am_pm + '</td>' + 
                     '<td class="queue-column" style="text-align:right">' + phone + '</td>' + 
-                  '</tr>' + 
+                  '</tr>' +  
                 '</tbody>' +
               '</table>' +
             '</center>' +
