@@ -495,7 +495,7 @@ td{
     content: "";
   }
 
-  .server-data-button, .server-data-button:hover, .server-data-button:active, .server-data-button:focus, .server-data-button:disabled{
+  .server-data-button, .server-data-button:hover, .server-data-button:active, .server-label-button:visited, .server-data-button:focus, .server-data-button:disabled{
     font-weight:400;
     background-color:white;
     color: rgba(160, 64, 255, 1.0);
@@ -506,21 +506,24 @@ td{
 
 
 
-  .server-label-button, .server-label-button:hover, .server-label-button:active, .server-label-button:focus, .server-label-button:disabled {
+  .server-label-button, .server-label-button:hover, .server-label-button:visited, .server-label-button:active, .server-label-button:focus, .server-label-button:disabled {
     font-weight:400;
     background: rgba(160, 64, 255, 1.0);
     color: white;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
     cursor: auto;
+
   }
 
-.btn:active{
+.btn, .btn:focus, .btn:active, .btn{
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: none;
     transition: none;
+    outline: 0px auto -webkit-focus-ring-color
 }
+
 
 
 
