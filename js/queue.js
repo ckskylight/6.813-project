@@ -1,7 +1,7 @@
-var resNum = 4; //number of reservations made (to uniquely identify them)
+var resNum = 0; //number of reservations made (to uniquely identify them)
 
 var exFullDate = new Date(2015,4,4,11,0);
-var partyData = [{resNum: 1, name: 'CK', time: '11:00', date: '', size: '6', phone: '5551234567', fullDate: exFullDate}];
+var partyData = [{resNum: 0, name: 'CK', time: '11:00', date: '', size: '6', phone: '5551234567', fullDate: exFullDate}];
 
 //from http://stackoverflow.com/questions/5223/length-of-a-javascript-object-that-is-associative-array
 Object.size = function(obj) {
@@ -30,38 +30,38 @@ function addPartyData(resNum, time, name, size, phone) {
     console.log("time_am_pm: " + time_am_pm.toString());
     */
 
-     var html = '<div class="inQueue queueItem bs-callout bs-callout-info" style="padding-top:15px; padding-bottom:15px; border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;padding: none;padding: 0px; " id="res' + resNum + '">' + 
-              '<center style="padding:15px 10px ; height:78px;">' + 
-               '<div style="height:50px; line-height: 46px; position: absolute;">' + 
-                '<div style="width: 65%; font-size: 40px; float: left;text-align: center; line-height: 46px;">' + time_hour + '</div>' + 
-                '<div style="margin-left: 44px; margin-top: 4px;line-height: 23px;   ">' + time_min + '</div>' + 
-                '<div style="margin-left: 48px; margin-top: -6px;line-height: 23px;   ">' + time_am_pm + '</div>' + 
+     var html = '<div class="inQueue queueItem bs-callout bs-callout-info" style="padding-top:15px; padding-bottom:15px; border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;padding: none;padding: 0px; " id="res' + resNum + '">' +
+              '<center style="padding:15px 10px ; height:78px;">' +
+               '<div style="height:50px; line-height: 46px; position: absolute;">' +
+                '<div style="width: 65%; font-size: 40px; float: left;text-align: center; line-height: 46px;">' + time_hour + '</div>' +
+                '<div style="margin-left: 44px; margin-top: 4px;line-height: 23px;   ">' + time_min + '</div>' +
+                '<div style="margin-left: 48px; margin-top: -6px;line-height: 23px;   ">' + time_am_pm + '</div>' +
               '</div>' +
-              '<div style="margin-left: 60px; line-height: 46px; font-size: 40px; width: 38%; position: absolute; ">' + size + '<span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 30px;"></span></div>' + 
+              '<div style="margin-left: 60px; line-height: 46px; font-size: 40px; width: 38%; position: absolute; ">' + size + '<span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 30px;"></span></div>' +
 
-              '<div style="height:50px; line-height: 46px; position: absolute;">' + 
+              '<div style="height:50px; line-height: 46px; position: absolute;">' +
                 '<div style="margin-left: 150px; margin-top: 4px;line-height: 23px; width: 50%;  text-align: right; word-wrap:break-word;">' + name + '</div>'
-                '<div style="margin-left: 150px; margin-top: -6px;line-height: 23px; width: 50%;  text-align: right;   ">' + phone + '</div>' + 
-              '</div> ' + 
+                '<div style="margin-left: 150px; margin-top: -6px;line-height: 23px; width: 50%;  text-align: right;   ">' + phone + '</div>' +
+              '</div> ' +
             '</center>' +
             '</div>'
 
 
      /*
-     var html = '<div class="inQueue queueItem bs-callout bs-callout-info" id="res' + resNum + '">' + 
-              '<center style="padding:15px">' + 
-              '<table style="font-weight:200;">' + 
-                '<tbody>' + 
-                  '<tr>' + 
+     var html = '<div class="inQueue queueItem bs-callout bs-callout-info" id="res' + resNum + '">' +
+              '<center style="padding:15px">' +
+              '<table style="font-weight:200;">' +
+                '<tbody>' +
+                  '<tr>' +
                     '<td rowspan="2" class="queue-column" width="1%" style="text-align:left;font-size:30px">'+time_hour+'</td>' +
-                    '<td class="queue-column"  style="text-align:left;word-wrap:break-word;">' + time_min +  '</td>' + 
-                    '<td rowspan="2" class="queue-column" style="text-align: center;font-size:30px;width: 103px;">' + size + '<span class="glyphicon glyphicon-user" aria-hidden="true"></span></td>' + 
+                    '<td class="queue-column"  style="text-align:left;word-wrap:break-word;">' + time_min +  '</td>' +
+                    '<td rowspan="2" class="queue-column" style="text-align: center;font-size:30px;width: 103px;">' + size + '<span class="glyphicon glyphicon-user" aria-hidden="true"></span></td>' +
                     '<td class="queue-column" style="font-weight:400;text-align:right">' + name + '</td>' +
-                  '</tr>' + 
-                  '<tr>'+ 
-                    '<td class="queue-column" style="text-align:left;word-wrap:break-word;">' + time_am_pm + '</td>' + 
-                    '<td class="queue-column" style="text-align:right">' + phone + '</td>' + 
-                  '</tr>' + 
+                  '</tr>' +
+                  '<tr>'+
+                    '<td class="queue-column" style="text-align:left;word-wrap:break-word;">' + time_am_pm + '</td>' +
+                    '<td class="queue-column" style="text-align:right">' + phone + '</td>' +
+                  '</tr>' +
                 '</tbody>' +
               '</table>' +
             '</center>' +
@@ -167,6 +167,9 @@ function addResClickListener(resNum, phone) {
                 deleteReservation(resNum);
                 hideSidebarRight();
 
+                console.log(partyData);
+                console.log(resNum);
+
                 bonsai.sendMessage({
                     command: "assign",
                     details: {
@@ -182,11 +185,11 @@ function addResClickListener(resNum, phone) {
 //returns the hidden options panel, which the listener can unhide
 function optionsPanel(resNum, phone) {
     return '<div class="resNum" id="optionsRes' + resNum + '" >' +
-        '<table class="optionsTable"> <tr style="padding-top:10px"></tr></table>' + 
-        '<div style="border=5px solid rgba(160,64,255,1.0)"><table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr>' + 
-        '<td name="assignTable" onclick="assignTableFunc()" id="assignTable' + 
-        resNum + '" class="col-md-4 queue-column assignTable">Assign Table</td>' + 
-        '<td name="deleteRes" id="deleteRes' + resNum + 
+        '<table class="optionsTable"> <tr style="padding-top:10px"></tr></table>' +
+        '<div style="border=5px solid rgba(160,64,255,1.0)"><table style="width:100%;max-width:100%;font-weight:200;margin-left:0px"> <tr>' +
+        '<td name="assignTable" onclick="assignTableFunc()" id="assignTable' +
+        resNum + '" class="col-md-4 queue-column assignTable">Assign Table</td>' +
+        '<td name="deleteRes" id="deleteRes' + resNum +
         '" class="col-md-4 queue-column deleteTable">Delete</td></tr></table></div></div>';
 }
 
@@ -198,10 +201,10 @@ $(document).ready(function() {
 
     $('#pushHere').click(function() {
         console.log('listeners attached to res1');
-        console.log($("#res1").data("events"));
-        console.log($('#res1'));
+        console.log($("#res0").data("events"));
+        console.log($('#res0'));
     });
-    
+
     $('#res5').click(function() {
         console.log('5 CLICKED');
     });
@@ -215,10 +218,10 @@ $(document).ready(function() {
     });*/
 
     //listeners for hard-coded example
-    $('#res1').click(function(e) {
+    $('#res0').click(function(e) {
         //$('#optionsRes' + resNum).removeClass('hidden');
         console.log('IN HARDCODED CLICK');
-        var optsDiv = $('#optionsRes1');
+        var optsDiv = $('#optionsRes0');
         if (optsDiv.val() != undefined) {
             optsDiv.remove();
         }
@@ -226,31 +229,31 @@ $(document).ready(function() {
             for (var i = 0; i < 100; i++) {
                 $('#optionsRes' + i).remove();
             }
-            $('#res1').append(optionsPanel(1, '5551234567'));
+            $('#res0').append(optionsPanel(0, '5551234567'));
 
             //add event listeners in options panel
-            $('#deleteRes1').click(function(e) {
-                deleteReservation(1);
+            $('#deleteRes0').click(function(e) {
+                deleteReservation(0);
             });
-            $('#assignTable1').click(function(e) {
+            $('#assignTable0').click(function(e) {
                 console.log('in Assign table');
-                deleteReservation(1);
+                deleteReservation(0);
                 hideSidebarRight();
 
                 bonsai.sendMessage({
                     command: "assign",
                     details: {
-                        name: partyData['1'].name,
-                        partySize: partyData['1'].size
+                        name: partyData[0].name,
+                        partySize: partyData[0].size
                     }
                 });
             });
         }
     });
-    $('#res1').mouseover(function(e) {
-        $('#res1').addClass('mousedOver');
+    $('#res0').mouseover(function(e) {
+        $('#res0').addClass('mousedOver');
     });
-    $('#res1').mouseout(function(e) {
-        $('#res1').removeClass('mousedOver');
+    $('#res0').mouseout(function(e) {
+        $('#res0').removeClass('mousedOver');
     });
 });

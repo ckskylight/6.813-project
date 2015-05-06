@@ -96,7 +96,7 @@
         <h4 style="font-weight:200;padding:10px;padding-left:0px">Today</h4>
         <div id="queueContent">
 
-            <div class="inQueue bs-callout bs-callout-info resNum" id="res1" style="border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;padding: none;padding: 0px; ">
+            <div class="inQueue bs-callout bs-callout-info resNum" id="res0" style="border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;padding: none;padding: 0px; ">
               <center style="padding:15px 10px ; height:78px;">
               <div style="height:50px; line-height: 46px; position: absolute;">
                 <div style="width: 65%; font-size: 40px; float: left;text-align: center; line-height: 46px;">11</div>
@@ -227,13 +227,6 @@
         var assignTableFunc = function() {
           $("#assigningTableBtns").removeClass('hidden');
           $("#normalBtns").addClass('hidden');
-          bonsai.sendMessage({
-            command: "assign",
-            details: {
-              name: "person",
-              partySize: 3
-              }
-            });
         }
 
         var cancelAssignTableFunc = function() {
