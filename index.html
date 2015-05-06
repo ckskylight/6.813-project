@@ -50,19 +50,19 @@
              <form action="#">
                 <center>
               <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyName" type="text" placeholder="Name" autofocus required />
+                 <input class="mine btn btn-lg input-button" style="width:250px" id="partyName" type="text" placeholder="Name" autofocus required />
               </div>
 
               <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyDate" type="text" placeholder="Date" required />
+                 <input class="mine btn btn-lg input-button" style="width:250px" id="partyDate" type="text" placeholder="Date" required />
               </div>
              
              <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyTime" type="text" placeholder="Time"   required />
+                 <input class="mine btn btn-lg input-button" style="width:250px" id="partyTime" type="text" placeholder="Time"   required />
               </div>
 
             <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partySize" type="text" placeholder="Party Size" min="1" required />
+                 <input class="mine btn btn-lg input-button" style="width:250px" id="partySize" type="text" placeholder="Party Size" min="1" required />
               </div>
             <hr>
 
@@ -357,6 +357,7 @@
         var a = document.getElementById("partyTime");
         a.type='time';  
         a.placeholder = '';
+        a.style.cssText='margin-left:45px;padding-left:15px';
         console.log("partyTime!");
       });
 
@@ -365,7 +366,7 @@
         a.type='date'; 
         a.placeholder = '';
         console.log("partyDate Focus!");
-        a.style.cssText='padding-left:70px;width:200px;';
+        a.style.cssText='padding-left:50px;width:250px;';
       });
 
       $("#partySize").click(function(){
@@ -389,7 +390,7 @@
         a.type='date'; 
         a.placeholder = '';
         console.log("partyDate Focus!");
-        a.style.cssText='padding-left:70px;width:200px;';
+        a.style.cssText='padding-left:50px;width:250px;';
       });
 
       $( "#partySize" ).focus(function() {
