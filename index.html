@@ -197,6 +197,10 @@
           if (data.command === 'modal') {
             openModal(data);
           }
+          else if (data.command == 'assign done') {
+            $("#assigningTableBtns").addClass('hidden');
+            $("#normalBtns").removeClass('hidden');
+          }
         });
 
         var messageFunc = function() {
@@ -218,6 +222,8 @@
         }
 
         var assignTableFunc = function() {
+          $("#assigningTableBtns").removeClass('hidden');
+          $("#normalBtns").addClass('hidden');
           bonsai.sendMessage({
             command: "assign",
             details: {
@@ -228,6 +234,8 @@
         }
 
         var cancelAssignTableFunc = function() {
+          $("#assigningTableBtns").addClass('hidden');
+          $("#normalBtns").removeClass('hidden');
           bonsai.sendMessage({
             command: "cancel assign"
             });
@@ -322,8 +330,8 @@
         <button onclick="cancelDeleteTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Cancel </button>
     </div>
     <div class="row hidden" style="padding-top:30px" id="assigningTableBtns">
-        <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> DISPLAY INFO </button>
-        <button onclick="cancelAssignTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> CANCEL </button>
+        <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Display Info </button>
+        <button onclick="cancelAssignTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Cancel </button>
     </div>
   </center>
 

@@ -46,6 +46,10 @@ var TableUI = function(model) {
             deleteAllTables();
             drawTablesInternal();
         }
+        else if (data.command == "cancel assign") {
+            removeShading();
+            assignMode = false;
+        }
     });
 
     var currentCustomerInfo = null;
@@ -239,6 +243,9 @@ var TableUI = function(model) {
                     console.log(tables);
                     removeShading();
                     assignMode = false;
+                    stage.sendMessage({
+                        command: "assign done"
+                    });
                 }
                 else if (deleteMode) {
                     toggleSelectTableToDelete(this);
@@ -596,6 +603,9 @@ var TableUI = function(model) {
                             console.log(tables);
                             removeShading();
                             assignMode = false;
+                            stage.sendMessage({
+                                command: "assign done"
+                            });
                         }
                         else if (deleteMode) {
                             toggleSelectTableToDelete(this);
