@@ -227,6 +227,12 @@
             });
         }
 
+        var cancelAssignTableFunc = function() {
+          bonsai.sendMessage({
+            command: "cancel assign"
+            });
+        }
+
         var addTableFunc = function() {
           $("#normalBtns").addClass('hidden');
           $("#addingTableBtns").removeClass('hidden');
@@ -274,6 +280,12 @@
             });
         }
 
+        var resetTablesFunc = function() {
+          bonsai.sendMessage({
+            command: "reset tables"
+            });
+        }
+
         var openModal = function(data) {
           console.log('modal');
           console.log(data);
@@ -299,7 +311,7 @@
     <div class="row" style="padding-top:30px" id="normalBtns">
         <button onclick="addTableFunc()" class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Add Table </button>
         <button onclick="deleteTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Remove Table </button>
-        <button class="btn btn-lg nav-button-reset" style="width:15%;border-style:solid;border-color:#A040FF"> Reset Configuration </button>
+        <button onclick="resetTablesFunc()" class="btn btn-lg nav-button-reset" style="width:15%;border-style:solid;border-color:#A040FF"> Reset Configuration </button>
     </div>
     <div class="row hidden" style="padding-top:30px" id="addingTableBtns">
         <button onclick="saveTableFunc()" class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Confirm </button>
@@ -311,7 +323,7 @@
     </div>
     <div class="row hidden" style="padding-top:30px" id="assigningTableBtns">
         <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> DISPLAY INFO </button>
-        <button class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> CANCEL </button>
+        <button onclick="cancelAssignTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> CANCEL </button>
     </div>
   </center>
 

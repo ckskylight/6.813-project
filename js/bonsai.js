@@ -42,6 +42,10 @@ var TableUI = function(model) {
         else if (data.command == "cancel delete table") {
             deselectAllTables();
         }
+        else if (data.command == "reset tables") {
+            deleteAllTables();
+            drawTablesInternal();
+        }
     });
 
     var currentCustomerInfo = null;
@@ -94,6 +98,14 @@ var TableUI = function(model) {
         }
     }
 
+    var deleteAllTables = function() {
+        for (var i=0; i < tables.length; i++) {
+            tables[i].selected = true;
+        }
+        deleteSelectedTables();
+    }
+
+
     var deleteSelectedTables = function() {
         var deleteIdx = [];
         for (var i=0; i < tables.length; i++) {
@@ -117,7 +129,7 @@ var TableUI = function(model) {
         deleteMode = false;
         for (var i=0; i < tables.length; i++) {
             tables[i].selected = false;
-            rectList[i].stroke("#FFFFFF", 0);
+            rectList[i].stroke("#FFFFFF00", 0);
         }
     }
 
@@ -221,6 +233,7 @@ var TableUI = function(model) {
                             this.animate('1s', {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
+                            timeList[k] = 40;
                         }
                     }
                     console.log(tables);
@@ -459,8 +472,12 @@ var TableUI = function(model) {
             });
         });
 
-
     this.drawTables = function() {
+        drawTablesInternal();
+    }
+
+    var drawTablesInternal = function() {
+        console.log("draw called");
         var time_percent = 80;
 
         var rows = 2;
@@ -573,6 +590,7 @@ var TableUI = function(model) {
                                     this.animate('1s', {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
+                                    timeList[k] = 40;
                                 }
                             }
                             console.log(tables);
