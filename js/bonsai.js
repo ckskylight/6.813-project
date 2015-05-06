@@ -52,13 +52,13 @@ var TableUI = function(model) {
     var curRect = null;
     var rectList = [];
     var timeList = [];
+    var tables = [];
     var assignMode = false;
 
     var deleteMode = false;
 
     var curAddingTable = null;
 
-    var tables = [];
 
     var LEFT = 0;
     var RIGHT = 1;
@@ -95,15 +95,26 @@ var TableUI = function(model) {
     }
 
     var deleteSelectedTables = function() {
+        var deleteIdx = [];
         for (var i=0; i < tables.length; i++) {
             if (tables[i].selected) {
                 rectList[i].destroy();
                 tables[i].number.destroy();
+                deleteIdx.push(i);
             }
+        }
+        deleteIdx.sort(function(a,b) {
+            return b-a;
+        });
+        for (var i=0; i < deleteIdx.length; i++) {
+            tables.splice(deleteIdx[i], 1);
+            timeList.splice(deleteIdx[i], 1);
+            rectList.splice(deleteIdx[i], 1);
         }
     }
 
     var deselectAllTables = function() {
+        deleteMode = false;
         for (var i=0; i < tables.length; i++) {
             tables[i].selected = false;
             rectList[i].stroke("#FFFFFF", 0);
