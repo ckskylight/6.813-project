@@ -516,13 +516,14 @@ td{
 
   }
 
-.btn, .btn:focus, .btn:active, .btn{
+.btn, .btn:visited, .btn:focus, .btn:active, .btn{
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: none;
     transition: none;
     outline: 0px auto -webkit-focus-ring-color;
     color:inherit;
+    border-radius:4px;
 }
 
 
