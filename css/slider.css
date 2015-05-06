@@ -392,7 +392,6 @@ td{
   overflow: hidden;
 }
 .add-table{
-  border-right:5px solid rgba(160,64,255,1.0);
   font-weight:400;
   vertical-align:middle;
   border-right: 5px solid rgba(160,64,255,1.0);
@@ -455,11 +454,18 @@ td{
 }
 
 .innerOptionsTable{
-  width:100%;max-width:100%;font-weight:200;margin-left:0px;
+  width:100%;
+  max-width:100%;
+  font-weight:200;
+  margin-left:0px;
 }
 
 .input-button{
   margin-top:15px;
+}
+
+.btn:focus {
+  background-color: red;
 }
 
 
