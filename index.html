@@ -50,16 +50,19 @@
              <form action="#">
                 <center>
               <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyName" type="text" placeholder="Name" autofocus required>
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyName" type="text" placeholder="Name" autofocus required />
               </div>
+
+              <div class="input-group">
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyDate" type="text" placeholder="Date" required />
+              </div>
+             
              <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyTime" type="text" placeholder="Time"  onclick="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onblur ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" required>
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyTime" type="text" placeholder="Time"   required />
               </div>
-                <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyDate" type="text" onclick="{this.type='date'}{this.placeholder=''}{this.style.cssText='margin-left:50px'}" placeholder="Date" required>
-              </div>
+
             <div class="input-group">
-                 <input class="mine btn btn-lg input-button" style="width:200px" id="partySize" type="text" placeholder="Party Size" min="1" onclick="{this.type='number'}{this.min='1'}{this.placeholder=''}"required>
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partySize" type="text" placeholder="Party Size" min="1" required />
               </div>
             <hr>
 
@@ -349,7 +352,72 @@
 
     <!-- https://code.jquery.com/jquery-2.1.3.min.js -->
 
-    <script src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+       $("#partyTime").click(function(){
+        var a = document.getElementById("partyTime");
+        a.type='time';  
+        a.placeholder = '';
+        console.log("partyTime!");
+      });
+
+      $("#partyDate").click(function(){
+        var a = document.getElementById("partyDate");
+        a.type="date";  
+        a.placeholder = '';
+        console.log("partyDate!");
+      });
+
+      $("#partySize").click(function(){
+        var a = document.getElementById("partySize");
+        a.type='number';  
+        a.min='1';
+        a.placeholder='';
+        console.log("partyTime");
+      });
+
+      $( "#partyTime" ).focus(function() {
+        var a = document.getElementById("partyTime");
+        a.type='time';  
+        a.placeholder='';
+        console.log("partyTime Focus!");
+      });
+
+      $( "#partyDate" ).focus(function() {
+        var a = document.getElementById("partyDate");
+        a.type='date'; 
+        a.placeholder = '';
+        console.log("partyDate Focus!");
+      });
+
+      $( "#partySize" ).focus(function() {
+        var a = document.getElementById("partySize");
+        a.type='number';  
+        a.min='1';
+        a.placeholder='';
+        console.log("partySize Focus!");
+      });
+
+    </script>
+
+    <!--
+                  <div class="input-group">
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyName" type="text" placeholder="Name" autofocus required>
+              </div>
+
+              <div class="input-group">
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyDate" type="text" onclick="{this.type='date'}{this.placeholder=''}{this.style.cssText='margin-left:50px'}" placeholder="Date" required>
+              </div>
+             
+             <div class="input-group">
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partyTime" type="text" placeholder="Time"  onclick="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onblur ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onfocus ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onactive ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" required>
+              </div>
+
+            <div class="input-group">
+                 <input class="mine btn btn-lg input-button" style="width:200px" id="partySize" type="text" placeholder="Party Size" min="1" onclick="{this.type='number'}{this.min='1'}{this.placeholder=''}{this.default='1'}" onactive="{this.type='number'}{this.min='1'}{this.placeholder=''}{this.default='1'}" onclick="{this.type='number'}{this.min='1'}{this.placeholder=''}{this.default='1'}"required>
+              </div>
+      -->
+
+      <script src="js/jquery-2.1.3.min.js"></script>
     <script src="js/queue.js"></script>
     <script src="js/slider.js"></script>
     <script src="js/main.js"></script>

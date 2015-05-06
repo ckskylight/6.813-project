@@ -140,7 +140,8 @@
     background-color: #A040FF;
     color: white;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    box-shadow: 0 0 0 rgba(0,0,0,0)
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    outline: none;
 }
 
 .nav-button-add, .nav-button-add:focus{
@@ -150,7 +151,8 @@
     background-color: #FF504A;
     color: white;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    box-shadow: 0 0 0 rgba(0,0,0,0)
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    outline: none;
 }
 
 .nav-button-delete, .nav-button-delete:focus{
@@ -160,7 +162,8 @@
     background-color: #E84384;
     color: white;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    box-shadow: 0 0 0 rgba(0,0,0,0)
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+    outline: none;
 }
 
 .nav-button-reset, .nav-button-reset:focus{
@@ -171,23 +174,27 @@
     color: white;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
     box-shadow: 0 0 0 rgba(0,0,0,0);
+    outline: none;
 }
 
 .nav-button-reset:hover, .nav-button-reset:active{
     background-color: white;
     color: #A040FF;
+    outline: none;
 }
 
 
 .nav-button-delete:hover, .nav-button-delete:active{
     background-color: white;
     color: #E84384;
+    outline: none;
 
 }
 
 .nav-button-add:hover, .nav-button-add:active{
     background-color: white;
     color: #FF504A;
+    outline: none;
 }
 
 
