@@ -65,6 +65,7 @@ var TableUI = function(model) {
     var assignMode = false;
 
     var deleteMode = false;
+    var addMode = false;
 
     var curAddingTable = null;
 
@@ -87,6 +88,7 @@ var TableUI = function(model) {
 
     var addTable = function(details) {
         drawRect(null, details);
+        addMode = true;
     }
 
     var toggleSelectTableToDelete = function(rect) {
@@ -144,6 +146,7 @@ var TableUI = function(model) {
             gradient.linear('top', [['#A040FFAA',0] , ['#DDDDDDAA',0]])
             );
         redrawAllRects();
+        addMode = false;
     }
 
     var cancelAddTable = function() {
@@ -153,6 +156,7 @@ var TableUI = function(model) {
         rectList.pop();
         timeList.pop();
         redrawAllRects();
+        addMode = false;
     }
 
     var drawRect = function(i, newRectDetails) {
@@ -273,30 +277,32 @@ var TableUI = function(model) {
         }
         if (newRectDetails.length == 0) {
             rect.on('drag', function(e) {
-                this.attr('x', e.x - xoffset);
-                this.attr('y', e.y - yoffset);
-                // Collision detection
-                for (var i=0; i < rectList.length; i++) {
-                    var rect = rectList[i];
-                    if (rect != this) {
-                        var collideResult = isCollide(this,rect,true);
-                        if (collideResult[0]) {
-                            connectRects(rect, this, collideResult[1]);
-                            var num = tables[i].number;
-                            for (var j=0; j < rectList.length; j++) {
-                                var rect2 = rectList[j];
-                                if (rect2 == this) {
-                                    var num = tables[j].number;
-                                    num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
-                                    num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                if (!addMode && !deleteMode) {
+                    this.attr('x', e.x - xoffset);
+                    this.attr('y', e.y - yoffset);
+                    // Collision detection
+                    for (var i=0; i < rectList.length; i++) {
+                        var rect = rectList[i];
+                        if (rect != this) {
+                            var collideResult = isCollide(this,rect,true);
+                            if (collideResult[0]) {
+                                connectRects(rect, this, collideResult[1]);
+                                var num = tables[i].number;
+                                for (var j=0; j < rectList.length; j++) {
+                                    var rect2 = rectList[j];
+                                    if (rect2 == this) {
+                                        var num = tables[j].number;
+                                        num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
+                                        num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                                    }
                                 }
                             }
                         }
-                    }
-                    else if (rect == this) {
-                        var num = tables[i].number;
-                        num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
-                        num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                        else if (rect == this) {
+                            var num = tables[i].number;
+                            num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                            num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                        }
                     }
                 }
             });
@@ -584,30 +590,32 @@ var TableUI = function(model) {
                         curRect = this;
                     })
                     .on('drag', function(e) {
-                        this.attr('x', e.x - xoffset);
-                        this.attr('y', e.y - yoffset);
-                        // Collision detection
-                        for (var i=0; i < rectList.length; i++) {
-                            var rect = rectList[i];
-                            if (rect != this) {
-                                var collideResult = isCollide(this,rect,true);
-                                if (collideResult[0]) {
-                                    connectRects(rect, this, collideResult[1]);
-                                    var num = tables[i].number;
-                                    for (var j=0; j < rectList.length; j++) {
-                                        var rect2 = rectList[j];
-                                        if (rect2 == this) {
-                                            var num = tables[j].number;
-                                            num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
-                                            num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                        if (!addMode && !deleteMode) {
+                            this.attr('x', e.x - xoffset);
+                            this.attr('y', e.y - yoffset);
+                            // Collision detection
+                            for (var i=0; i < rectList.length; i++) {
+                                var rect = rectList[i];
+                                if (rect != this) {
+                                    var collideResult = isCollide(this,rect,true);
+                                    if (collideResult[0]) {
+                                        connectRects(rect, this, collideResult[1]);
+                                        var num = tables[i].number;
+                                        for (var j=0; j < rectList.length; j++) {
+                                            var rect2 = rectList[j];
+                                            if (rect2 == this) {
+                                                var num = tables[j].number;
+                                                num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
+                                                num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            else if (rect == this) {
-                                var num = tables[i].number;
-                                num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
-                                num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                                else if (rect == this) {
+                                    var num = tables[i].number;
+                                    num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                                    num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                                }
                             }
                         }
                     })
