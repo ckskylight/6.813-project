@@ -31,6 +31,9 @@ var TableUI = function(model) {
         else if (data.command == "save table") {
             saveTable();
         }
+        else if (data.command == "delete table") {
+            activateDelete();
+        }
     });
 
     var currentCustomerInfo = null;
@@ -43,6 +46,8 @@ var TableUI = function(model) {
     var timeList = [];
     var assignMode = false;
 
+    var deleteMode = false;
+
     var curAddingTable = null;
 
     var tables = [];
@@ -51,6 +56,10 @@ var TableUI = function(model) {
     var RIGHT = 1;
     var TOP = 2;
     var BOTTOM = 3;
+
+    var activateDelete = function() {
+        deleteMode = true;
+    }
 
     var addTable = function(details) {
         drawRect(null, details);
