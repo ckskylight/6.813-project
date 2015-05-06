@@ -155,17 +155,17 @@
             <center>
 
               <div class="row" style="padding-bottom:30px;padding-top:15px">
-                <button class="btn btn-lg server-label-button" style="border-style:solid;border-color:#FF504A;background-color: FF504A;color:white;"/> Customer Name
+                <button id="name" class="btn btn-lg server-label-button" style="border-style:solid;border-color:#FF504A;background-color: FF504A;color:white;"/> Customer Name
                 <button class="btn btn-lg server-data-button" style="border-style:solid;border-color:#FF504A;color: FF504A;"/> CK Ong
               </div>
 
               <div class="row" style="padding-bottom:30px;padding-top:15px">
-                <button class="btn btn-lg server-label-button" style="border-style:solid;border-color: #E84384;background-color: #E84384;color:white;"/> Party Size
+                <button id="party-size" class="btn btn-lg server-label-button" style="border-style:solid;border-color: #E84384;background-color: #E84384;color:white;"/> Party Size
                 <button class="btn btn-lg server-data-button" style="border-style:solid;border-color: #E84384;/* color: FF44EC; */color: ##E84384;color: #E84384;"/> 6
               </div>
 
               <div class="row" style="padding-bottom:30px;padding-top:15px">
-                <button class="btn btn-lg server-label-button" style="border-style:solid;border-color: #A040FF;color:white;"> Time Seated
+                <button class="btn btn-lg server-label-button" id="time-seated" style="border-style:solid;border-color: #A040FF;color:white;"> Time Seated
                 <button class="btn btn-lg server-data-button" style="border-style:solid;border-color:#A040FF; color:#A040FF;"/> 3 PM
               </div>
 
@@ -362,9 +362,10 @@
 
       $("#partyDate").click(function(){
         var a = document.getElementById("partyDate");
-        a.type="date";  
+        a.type='date'; 
         a.placeholder = '';
-        console.log("partyDate!");
+        console.log("partyDate Focus!");
+        a.style.cssText='padding-left:70px;width:200px;';
       });
 
       $("#partySize").click(function(){
@@ -379,6 +380,7 @@
         var a = document.getElementById("partyTime");
         a.type='time';  
         a.placeholder='';
+        a.style.cssText='margin-left:45px';
         console.log("partyTime Focus!");
       });
 
@@ -387,6 +389,7 @@
         a.type='date'; 
         a.placeholder = '';
         console.log("partyDate Focus!");
+        a.style.cssText='padding-left:70px;width:200px;';
       });
 
       $( "#partySize" ).focus(function() {
