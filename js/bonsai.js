@@ -9,6 +9,8 @@ var Table = function() {
     this.connectedTables = [];
 }
 
+// hi
+
 var TableUI = function(model) {
 
     stage.on('message', function(data) {
