@@ -56,7 +56,7 @@
               <div class="input-group">
                  <input class="mine btn btn-lg input-button" style="width:250px" id="partyDate" type="text" placeholder="Date" required />
               </div>
-             
+
              <div class="input-group">
                  <input class="mine btn btn-lg input-button" style="width:250px" id="partyTime" type="text" placeholder="Time"   required />
               </div>
@@ -155,18 +155,18 @@
             <center>
 
               <div class="row" style="padding-bottom:30px;padding-top:15px">
-                <button id="name" class="btn btn-lg server-label-button" style="border-style:solid;border-color:#FF504A;background-color: FF504A;color:white;border-top-right-radius: 0;border-bottom-right-radius: 0;"/> Customer Name
-                <button class="btn btn-lg server-data-button" style="border-style:solid;border-color:#FF504A;color: FF504A;border-top-left-radius: 0;border-bottom-left-radius: 0;"/> CK Ong
+                <button class="btn btn-lg server-label-button" style="border-style:solid;border-color:#FF504A;background-color: FF504A;color:white;border-top-right-radius: 0;border-bottom-right-radius: 0;"/> Customer Name
+                <button id="name" class="btn btn-lg server-data-button" style="border-style:solid;border-color:#FF504A;color: FF504A;border-top-left-radius: 0;border-bottom-left-radius: 0;"/> CK Ong
               </div>
 
               <div class="row" style="padding-bottom:30px;padding-top:15px">
-                <button id="party-size" class="btn btn-lg server-label-button" style="border-style:solid;border-color: #E84384;background-color: #E84384;color:white;border-top-right-radius: 0;border-bottom-right-radius: 0;"/> Party Size
-                <button class="btn btn-lg server-data-button" style="border-style:solid;border-color: #E84384;/* color: FF44EC; */color: ##E84384;color: #E84384;border-top-left-radius: 0;border-bottom-left-radius: 0;"/> 6
+                <button class="btn btn-lg server-label-button" style="border-style:solid;border-color: #E84384;background-color: #E84384;color:white;border-top-right-radius: 0;border-bottom-right-radius: 0;"/> Party Size
+                <button id="party-size" class="btn btn-lg server-data-button" style="border-style:solid;border-color: #E84384;/* color: FF44EC; */color: ##E84384;color: #E84384;border-top-left-radius: 0;border-bottom-left-radius: 0;"/> 6
               </div>
 
               <div class="row" style="padding-bottom:30px;padding-top:15px">
-                <button class="btn btn-lg server-label-button" id="time-seated" style="border-style:solid;border-color: #A040FF;color:white;border-top-right-radius: 0;border-bottom-right-radius: 0;"> Time Seated
-                <button class="btn btn-lg server-data-button" style="border-style:solid;border-color:#A040FF; color:#A040FF;border-top-left-radius: 0;border-bottom-left-radius: 0;"/> 3 PM
+                <button class="btn btn-lg server-label-button" style="border-style:solid;border-color: #A040FF;color:white;border-top-right-radius: 0;border-bottom-right-radius: 0;"> Time Seated
+                <button id="time-seated" class="btn btn-lg server-data-button" style="border-style:solid;border-color:#A040FF; color:#A040FF;border-top-left-radius: 0;border-bottom-left-radius: 0;"/> 3 PM
               </div>
 
             </center>
@@ -355,7 +355,7 @@
     <script type="text/javascript">
        $("#partyTime").click(function(){
         var a = document.getElementById("partyTime");
-        a.type='time';  
+        a.type='time';
         a.placeholder = '';
         a.style.cssText='padding-left:45px;width:250px';
         console.log("partyTime!");
@@ -363,7 +363,7 @@
 
       $("#partyDate").click(function(){
         var a = document.getElementById("partyDate");
-        a.type='date'; 
+        a.type='date';
         a.placeholder = '';
         console.log("partyDate Focus!");
         a.style.cssText='padding-left:50px;width:250px;';
@@ -371,7 +371,7 @@
 
       $("#partySize").click(function(){
         var a = document.getElementById("partySize");
-        a.type='number';  
+        a.type='number';
         a.min='1';
         a.placeholder='';
         console.log("partyTime");
@@ -380,7 +380,7 @@
 
       $( "#partyTime" ).focus(function() {
         var a = document.getElementById("partyTime");
-        a.type='time';  
+        a.type='time';
         a.placeholder='';
         a.style.cssText='padding-left:45px;width:250px';
         console.log("partyTime Focus!");
@@ -388,7 +388,7 @@
 
       $( "#partyDate" ).focus(function() {
         var a = document.getElementById("partyDate");
-        a.type='date'; 
+        a.type='date';
         a.placeholder = '';
         console.log("partyDate Focus!");
         a.style.cssText='padding-left:50px;width:250px;';
@@ -396,7 +396,7 @@
 
       $( "#partySize" ).focus(function() {
         var a = document.getElementById("partySize");
-        a.type='number';  
+        a.type='number';
         a.min='1';
         a.placeholder='';
         a.style.cssText='padding-left:30px;width:250px;';
@@ -413,7 +413,7 @@
               <div class="input-group">
                  <input class="mine btn btn-lg input-button" style="width:200px" id="partyDate" type="text" onclick="{this.type='date'}{this.placeholder=''}{this.style.cssText='margin-left:50px'}" placeholder="Date" required>
               </div>
-             
+
              <div class="input-group">
                  <input class="mine btn btn-lg input-button" style="width:200px" id="partyTime" type="text" placeholder="Time"  onclick="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onblur ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onfocus ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" onactive ="{this.type='time'}{this.placeholder=''}{this.style.cssText='margin-left:45px'}" required>
               </div>
