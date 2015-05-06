@@ -69,7 +69,7 @@
             <h4 style="font-weight:200;padding:10px">Optional</h4>
 
              <div class="input-group">
-                 <input class="btn btn-lg mine" id="partyPhone" type="tel" placeholder="Phone">
+                 <input class="btn btn-lg mine"  style="width:250px" id="partyPhone" type="tel" placeholder="Phone">
               </div>
             <hr>
 
@@ -357,7 +357,7 @@
         var a = document.getElementById("partyTime");
         a.type='time';  
         a.placeholder = '';
-        a.style.cssText='margin-left:45px;padding-left:15px';
+        a.style.cssText='padding-left:45px;width:250px';
         console.log("partyTime!");
       });
 
@@ -375,13 +375,15 @@
         a.min='1';
         a.placeholder='';
         console.log("partyTime");
+        a.value="1";
+        a.style.cssText='padding-left:30px;width:250px;';
       });
 
       $( "#partyTime" ).focus(function() {
         var a = document.getElementById("partyTime");
         a.type='time';  
         a.placeholder='';
-        a.style.cssText='margin-left:45px';
+        a.style.cssText='padding-left:45px;width:250px';
         console.log("partyTime Focus!");
       });
 
@@ -398,6 +400,8 @@
         a.type='number';  
         a.min='1';
         a.placeholder='';
+        a.value="1";
+        a.style.cssText='padding-left:30px;width:250px;';
         console.log("partySize Focus!");
       });
 
