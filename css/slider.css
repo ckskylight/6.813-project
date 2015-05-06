@@ -521,7 +521,8 @@ td{
     box-shadow: none;
     -webkit-transition: none;
     transition: none;
-    outline: 0px auto -webkit-focus-ring-color
+    outline: 0px auto -webkit-focus-ring-color;
+    color:white;
 }
 
 

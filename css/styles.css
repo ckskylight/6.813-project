@@ -170,38 +170,28 @@
     background-color: #A040FF;
     color: white;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    box-shadow: 0 0 0 rgba(0,0,0,0)
+    box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
 .nav-button-reset:hover{
     background-color: white;
     color: #A040FF;
+    border-radius:4px;
 }
 
 
 .nav-button-delete:hover{
     background-color: white;
     color: #E84384;
+    border-radius:4px;
+
 }
 
 .nav-button-add:hover{
     background-color: white;
     color: #FF504A;
+    border-radius:4px;
 }
 
-.nav-button-reset:focus{
-    background-color: white;
-    color: #A040FF;
-}
-
-.nav-button-delete:focus{
-    background-color: white;
-    color: #E84384;
-}
-
-.nav-button-add:focus{
-    background-color: white;
-    color: #FF504A;
-}
 
 
