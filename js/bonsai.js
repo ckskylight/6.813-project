@@ -6,6 +6,7 @@ var Table = function() {
     };
     this.number = null;
     this.selected = false;
+    this.connectedTables = [];
 }
 
 var TableUI = function(model) {
@@ -42,6 +43,14 @@ var TableUI = function(model) {
         else if (data.command == "cancel delete table") {
             deselectAllTables();
         }
+        else if (data.command == "reset tables") {
+            deleteAllTables();
+            drawTablesInternal();
+        }
+        else if (data.command == "cancel assign") {
+            removeShading();
+            assignMode = false;
+        }
     });
 
     var currentCustomerInfo = null;
@@ -56,6 +65,7 @@ var TableUI = function(model) {
     var assignMode = false;
 
     var deleteMode = false;
+    var addMode = false;
 
     var curAddingTable = null;
 
@@ -78,6 +88,7 @@ var TableUI = function(model) {
 
     var addTable = function(details) {
         drawRect(null, details);
+        addMode = true;
     }
 
     var toggleSelectTableToDelete = function(rect) {
@@ -93,6 +104,14 @@ var TableUI = function(model) {
             }
         }
     }
+
+    var deleteAllTables = function() {
+        for (var i=0; i < tables.length; i++) {
+            tables[i].selected = true;
+        }
+        deleteSelectedTables();
+    }
+
 
     var deleteSelectedTables = function() {
         var deleteIdx = [];
@@ -117,7 +136,7 @@ var TableUI = function(model) {
         deleteMode = false;
         for (var i=0; i < tables.length; i++) {
             tables[i].selected = false;
-            rectList[i].stroke("#FFFFFF", 0);
+            rectList[i].stroke("#FFFFFF00", 0);
         }
     }
 
@@ -127,6 +146,7 @@ var TableUI = function(model) {
             gradient.linear('top', [['#A040FFAA',0] , ['#DDDDDDAA',0]])
             );
         redrawAllRects();
+        addMode = false;
     }
 
     var cancelAddTable = function() {
@@ -136,6 +156,7 @@ var TableUI = function(model) {
         rectList.pop();
         timeList.pop();
         redrawAllRects();
+        addMode = false;
     }
 
     var drawRect = function(i, newRectDetails) {
@@ -191,6 +212,15 @@ var TableUI = function(model) {
                             this.animate('1s', {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
+                            // also fill its connected tables
+                            var connected = tables[k].connectedTables;
+                            console.log(connected);
+                            for (var n=0; n < connected.length; n++) {
+                                connected[n].animate('1s', {
+                                    fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                });
+                                //timeList[k] = 40;
+                            }
                         }
                     }
                     console.log(tables);
@@ -221,11 +251,24 @@ var TableUI = function(model) {
                             this.animate('1s', {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
+                            timeList[k] = 40;
+                            // also fill its connected tables
+                            var connected = tables[k].connectedTables;
+                            console.log(connected);
+                            for (var n=0; n < connected.length; n++) {
+                                connected[n].animate('1s', {
+                                    fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                });
+                                //timeList[k] = 40;
+                            }
                         }
                     }
                     console.log(tables);
                     removeShading();
                     assignMode = false;
+                    stage.sendMessage({
+                        command: "assign done"
+                    });
                 }
                 else if (deleteMode) {
                     toggleSelectTableToDelete(this);
@@ -234,30 +277,32 @@ var TableUI = function(model) {
         }
         if (newRectDetails.length == 0) {
             rect.on('drag', function(e) {
-                this.attr('x', e.x - xoffset);
-                this.attr('y', e.y - yoffset);
-                // Collision detection
-                for (var i=0; i < rectList.length; i++) {
-                    var rect = rectList[i];
-                    if (rect != this) {
-                        var collideResult = isCollide(this,rect,true);
-                        if (collideResult[0]) {
-                            connectRects(rect, this, collideResult[1]);
-                            var num = tables[i].number;
-                            for (var j=0; j < rectList.length; j++) {
-                                var rect2 = rectList[j];
-                                if (rect2 == this) {
-                                    var num = tables[j].number;
-                                    num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
-                                    num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                if (!addMode && !deleteMode) {
+                    this.attr('x', e.x - xoffset);
+                    this.attr('y', e.y - yoffset);
+                    // Collision detection
+                    for (var i=0; i < rectList.length; i++) {
+                        var rect = rectList[i];
+                        if (rect != this) {
+                            var collideResult = isCollide(this,rect,true);
+                            if (collideResult[0]) {
+                                connectRects(rect, this, collideResult[1]);
+                                var num = tables[i].number;
+                                for (var j=0; j < rectList.length; j++) {
+                                    var rect2 = rectList[j];
+                                    if (rect2 == this) {
+                                        var num = tables[j].number;
+                                        num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
+                                        num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                                    }
                                 }
                             }
                         }
-                    }
-                    else if (rect == this) {
-                        var num = tables[i].number;
-                        num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
-                        num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                        else if (rect == this) {
+                            var num = tables[i].number;
+                            num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                            num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                        }
                     }
                 }
             });
@@ -314,7 +359,43 @@ var TableUI = function(model) {
         return points;
     }
 
-    var connectRects = function(s, o, side) {  // for now we want to connect the bottom of s to top of o
+    var addToConnectedTables = function(s, o) {
+        // add o to s's connectedTables list
+        // Look for s's index
+        var sIdx = null;
+        for (var i=0; i < rectList.length; i++) {
+            if (rectList[i] == s) sIdx = i;
+        }
+
+        // Check whether o is in s's list
+        var insideS = false;
+        var tablesList = tables[sIdx].connectedTables;
+        for (var i=0; i < tablesList.length; i++) {
+            if (tablesList[i] == o) insideS = true;
+        }
+
+        if (!insideS) {
+            tablesList.push(o);
+        }
+
+        console.log(tables[sIdx].connectedTables);
+    }
+
+    var removeConnectedTables = function(s) {
+        for (var i=0; i < rectList.length; i++) {
+            if (rectList[i] == s) {
+                rectList[i].connectedTables = [];
+            }
+        }
+    }
+
+    var connectRects = function(s, o, side) {
+        // add s and o to each other's connectedTables list
+        removeConnectedTables(s);
+        removeConnectedTables(o);
+        addToConnectedTables(s,o);
+        addToConnectedTables(o,s);
+
         var sPoints = collectRectPoints(s);
         var oPoints = collectRectPoints(o);
 
@@ -459,8 +540,12 @@ var TableUI = function(model) {
             });
         });
 
-
     this.drawTables = function() {
+        drawTablesInternal();
+    }
+
+    var drawTablesInternal = function() {
+        console.log("draw called");
         var time_percent = 80;
 
         var rows = 2;
@@ -505,30 +590,32 @@ var TableUI = function(model) {
                         curRect = this;
                     })
                     .on('drag', function(e) {
-                        this.attr('x', e.x - xoffset);
-                        this.attr('y', e.y - yoffset);
-                        // Collision detection
-                        for (var i=0; i < rectList.length; i++) {
-                            var rect = rectList[i];
-                            if (rect != this) {
-                                var collideResult = isCollide(this,rect,true);
-                                if (collideResult[0]) {
-                                    connectRects(rect, this, collideResult[1]);
-                                    var num = tables[i].number;
-                                    for (var j=0; j < rectList.length; j++) {
-                                        var rect2 = rectList[j];
-                                        if (rect2 == this) {
-                                            var num = tables[j].number;
-                                            num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
-                                            num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                        if (!addMode && !deleteMode) {
+                            this.attr('x', e.x - xoffset);
+                            this.attr('y', e.y - yoffset);
+                            // Collision detection
+                            for (var i=0; i < rectList.length; i++) {
+                                var rect = rectList[i];
+                                if (rect != this) {
+                                    var collideResult = isCollide(this,rect,true);
+                                    if (collideResult[0]) {
+                                        connectRects(rect, this, collideResult[1]);
+                                        var num = tables[i].number;
+                                        for (var j=0; j < rectList.length; j++) {
+                                            var rect2 = rectList[j];
+                                            if (rect2 == this) {
+                                                var num = tables[j].number;
+                                                num.attr('x', this.attr('x') + this.attr('height')/2 - 25);
+                                                num.attr('y', this.attr('y') + this.attr('height')/2 - 25);
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            else if (rect == this) {
-                                var num = tables[i].number;
-                                num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
-                                num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                                else if (rect == this) {
+                                    var num = tables[i].number;
+                                    num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
+                                    num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
+                                }
                             }
                         }
                     })
@@ -548,6 +635,9 @@ var TableUI = function(model) {
                             console.log(tables);
                             removeShading();
                             assignMode = false;
+                            stage.sendMessage({
+                                command: "assign done"
+                            });
                         }
                         else {
                             var info = null;
@@ -573,11 +663,25 @@ var TableUI = function(model) {
                                     this.animate('1s', {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
+                                    timeList[k] = 40;
+
+                                    // also fill its connected tables
+                                    var connected = tables[k].connectedTables;
+                                    console.log(connected);
+                                    for (var n=0; n < connected.length; n++) {
+                                        connected[n].animate('1s', {
+                                            fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                        });
+                                        //timeList[k] = 40;
+                                    }
                                 }
                             }
                             console.log(tables);
                             removeShading();
                             assignMode = false;
+                            stage.sendMessage({
+                                command: "assign done"
+                            });
                         }
                         else if (deleteMode) {
                             toggleSelectTableToDelete(this);
