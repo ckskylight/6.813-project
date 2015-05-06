@@ -228,19 +228,49 @@
         }
 
         var addTableFunc = function() {
+          $("#normalBtns").addClass('hidden');
+          $("#addingTableBtns").removeClass('hidden');
           bonsai.sendMessage({
             command: "add table",
             details: [6]
             });
         }
         var cancelAddTableFunc = function() {
+          $("#normalBtns").removeClass('hidden');
+          $("#addingTableBtns").addClass('hidden');
           bonsai.sendMessage({
             command: "cancel add table"
             });
         }
         var saveTableFunc = function() {
+          $("#normalBtns").removeClass('hidden');
+          $("#addingTableBtns").addClass('hidden');
           bonsai.sendMessage({
             command: "save table"
+            });
+        }
+
+        var deleteTableFunc = function() {
+          $("#normalBtns").addClass('hidden');
+          $("#deletingTableBtns").removeClass('hidden');
+          bonsai.sendMessage({
+            command: "delete table"
+            });
+        }
+
+        var cancelDeleteTableFunc = function() {
+          $("#normalBtns").removeClass('hidden');
+          $("#deletingTableBtns").addClass('hidden');
+          bonsai.sendMessage({
+            command: "cancel delete table"
+            });
+        }
+
+        var saveDeleteTableFunc = function() {
+          $("#normalBtns").removeClass('hidden');
+          $("#deletingTableBtns").addClass('hidden');
+          bonsai.sendMessage({
+            command: "save delete table"
             });
         }
 
@@ -267,17 +297,17 @@
 
     <center>
     <div class="row" style="padding-top:30px" id="normalBtns">
-        <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Add Table </button>
-        <button class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Remove Table </button>
+        <button onclick="addTableFunc()" class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Add Table </button>
+        <button onclick="deleteTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Remove Table </button>
         <button class="btn btn-lg nav-button-reset" style="width:15%;border-style:solid;border-color:#A040FF"> Reset Configuration </button>
     </div>
     <div class="row hidden" style="padding-top:30px" id="addingTableBtns">
-        <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Confirm </button>
-        <button class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Cancel </button>
+        <button onclick="saveTableFunc()" class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Confirm </button>
+        <button onclick="cancelAddTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Cancel </button>
     </div>
     <div class="row hidden" style="padding-top:30px" id="deletingTableBtns">
-        <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Confirm </button>
-        <button class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Cancel </button>
+        <button onclick="saveDeleteTableFunc()" class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> Confirm </button>
+        <button onclick="cancelDeleteTableFunc()" class="btn btn-lg nav-button-delete" style="width:15%;border-style:solid;border-color:#E84384"> Cancel </button>
     </div>
     <div class="row hidden" style="padding-top:30px" id="assigningTableBtns">
         <button class="btn btn-lg nav-button-add" style="width:15%;border-style:solid;border-color:#FF504A"> DISPLAY INFO </button>

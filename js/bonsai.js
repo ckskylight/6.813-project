@@ -5,6 +5,7 @@ var Table = function() {
         capacity: 0
     };
     this.number = null;
+    this.selected = false;
 }
 
 var TableUI = function(model) {
@@ -34,6 +35,13 @@ var TableUI = function(model) {
         else if (data.command == "delete table") {
             activateDelete();
         }
+        else if (data.command == "save delete table") {
+            deleteSelectedTables();
+            deselectAllTables();
+        }
+        else if (data.command == "cancel delete table") {
+            deselectAllTables();
+        }
     });
 
     var currentCustomerInfo = null;
@@ -59,10 +67,47 @@ var TableUI = function(model) {
 
     var activateDelete = function() {
         deleteMode = true;
+        addDeleteStroke();
+    }
+
+    var addDeleteStroke = function() {
+        for (var i=0; i < rectList.length; i++) {
+            rectList[i].stroke('#696969', 4);
+        }
     }
 
     var addTable = function(details) {
         drawRect(null, details);
+    }
+
+    var toggleSelectTableToDelete = function(rect) {
+        for (var i=0; i < rectList.length; i++) {
+            if (rectList[i] == rect) {
+                if (tables[i].selected) {
+                    rect.stroke("#696969", 4);
+                }
+                else {
+                    rect.stroke("#FF504A", 4);
+                }
+                tables[i].selected = !tables[i].selected;
+            }
+        }
+    }
+
+    var deleteSelectedTables = function() {
+        for (var i=0; i < tables.length; i++) {
+            if (tables[i].selected) {
+                rectList[i].destroy();
+                tables[i].number.destroy();
+            }
+        }
+    }
+
+    var deselectAllTables = function() {
+        for (var i=0; i < tables.length; i++) {
+            tables[i].selected = false;
+            rectList[i].stroke("#FFFFFF", 0);
+        }
     }
 
     var saveTable = function() {
@@ -171,6 +216,9 @@ var TableUI = function(model) {
                     removeShading();
                     assignMode = false;
                 }
+                else if (deleteMode) {
+                    toggleSelectTableToDelete(this);
+                }
             });
         }
         if (newRectDetails.length == 0) {
@@ -197,10 +245,8 @@ var TableUI = function(model) {
                     }
                     else if (rect == this) {
                         var num = tables[i].number;
-                        console.log(num.attr('x') + "," + num.attr('y'));
                         num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
                         num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
-                        console.log(num.attr('x') + "," + num.attr('y'));
                     }
                 }
             });
@@ -214,10 +260,8 @@ var TableUI = function(model) {
                     var rect = rectList[i];
                     if (rect == this) {
                         var num = tables[i].number;
-                        console.log(num.attr('x') + "," + num.attr('y'));
                         num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
                         num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
-                        console.log(num.attr('x') + "," + num.attr('y'));
                     }
                 }
             });
@@ -266,7 +310,6 @@ var TableUI = function(model) {
         var width = o.attr('width');
         var height = o.attr('height');
 
-        console.log(side);
 
         if (side == BOTTOM) {
             sBottomLeft = sPoints[2];
@@ -338,7 +381,6 @@ var TableUI = function(model) {
             }
 
             if (pointInside == true) {
-                console.log("point inside!");
                 var minDist = 100000;
                 var minDistIdx = 0;
                 var minDist2 = 100000;
@@ -369,7 +411,6 @@ var TableUI = function(model) {
         }
 
         if (inside) {
-            console.log(topLeft + "," + topRight + "," + bottomLeft + "," + bottomRight);
             if (topLeft && topRight) side = TOP;
             else if (topLeft && bottomLeft) side = LEFT;
             else if (topRight && bottomRight) side = RIGHT;
@@ -395,7 +436,6 @@ var TableUI = function(model) {
             }
         }
 
-        //console.log("side: "  + side);
 
         return [inside, side]; // side is relative to self
     }
@@ -452,7 +492,6 @@ var TableUI = function(model) {
                         xoffset = e.x - x;
                         yoffset = e.y - y;
                         curRect = this;
-                        //console.log(curRect);
                     })
                     .on('drag', function(e) {
                         this.attr('x', e.x - xoffset);
@@ -477,10 +516,8 @@ var TableUI = function(model) {
                             }
                             else if (rect == this) {
                                 var num = tables[i].number;
-                                console.log(num.attr('x') + "," + num.attr('y'));
                                 num.attr('x', this.attr('x') + rect.attr('height')/2 - 25);
                                 num.attr('y', this.attr('y') + rect.attr('height')/2 - 25);
-                                console.log(num.attr('x') + "," + num.attr('y'));
                             }
                         }
                     })
@@ -530,6 +567,9 @@ var TableUI = function(model) {
                             console.log(tables);
                             removeShading();
                             assignMode = false;
+                        }
+                        else if (deleteMode) {
+                            toggleSelectTableToDelete(this);
                         }
                     });
 
