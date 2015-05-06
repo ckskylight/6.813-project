@@ -47,6 +47,8 @@ $(document).ready(function() {
         });
     }
 
+
+
     // selectors
     sidebarLeft = $('[data-sidebar-left]');
     sidebarRight = $('[data-sidebar-right]');
@@ -75,6 +77,10 @@ $(document).ready(function() {
             hideSidebar();
         } else {
             showSidebar();
+            $('#partyDate').datepicker(
+                {
+                    clearBtn: true
+                });
         }
 
         return false;
