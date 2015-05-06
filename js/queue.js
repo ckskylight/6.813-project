@@ -1,5 +1,7 @@
 var resNum = 0; //number of reservations made (to uniquely identify them)
 
+var d = new Date();
+
 var exFullDate = new Date(2015,4,4,11,0);
 var partyData = [{resNum: 0, name: 'CK', time: '11:00', date: '', size: '6', phone: '5551234567', fullDate: exFullDate}];
 
@@ -11,6 +13,14 @@ Object.size = function(obj) {
     }
     return size;
 };
+
+function getSystemTimeString() {
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var timeString = h + ":" + m;
+    console.log(timeString);
+    return timeString;
+}
 
 
 //creates html with specific info
@@ -174,7 +184,8 @@ function addResClickListener(resNum, phone) {
                     command: "assign",
                     details: {
                         name: partyData[resNum].name,
-                        partySize: partyData[resNum].size
+                        partySize: partyData[resNum].size,
+                        timeSeated: getSystemTimeString()
                     }
                 });
             });

@@ -1,15 +1,14 @@
 var Table = function() {
     this.info = {
-        name: "empty",
-        partySize: 0,
-        capacity: 0
+        name: "unassigned",
+        partySize: "unassigned",
+        capacity: 0,
+        timeSeated: "unassigned"
     };
     this.number = null;
     this.selected = false;
     this.connectedTables = [];
 }
-
-// hi
 
 var TableUI = function(model) {
 
@@ -211,6 +210,7 @@ var TableUI = function(model) {
                         if (rectList[k] == this) {
                             tables[k].info.name = currentCustomerInfo.name;
                             tables[k].info.partySize = currentCustomerInfo.partySize;
+                            tables[k].info.timeSeated = currentCustomerInfo.timeSeated;
                             this.animate('1s', {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
@@ -250,6 +250,7 @@ var TableUI = function(model) {
                         if (rectList[k] == this) {
                             tables[k].info.name = currentCustomerInfo.name;
                             tables[k].info.partySize = currentCustomerInfo.partySize;
+                            tables[k].info.timeSeated = currentCustomerInfo.timeSeated;
                             this.animate('1s', {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
@@ -629,6 +630,7 @@ var TableUI = function(model) {
                                 if (rectList[k] == this) {
                                     tables[k].info.name = currentCustomerInfo.name;
                                     tables[k].info.partySize = currentCustomerInfo.partySize;
+                                    tables[k].info.timeSeated = currentCustomerInfo.timeSeated;
                                     this.animate('1s', {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
@@ -662,6 +664,7 @@ var TableUI = function(model) {
                                 if (rectList[k] == this) {
                                     tables[k].info.name = currentCustomerInfo.name;
                                     tables[k].info.partySize = currentCustomerInfo.partySize;
+                                    tables[k].info.timeSeated = currentCustomerInfo.timeSeated;
                                     this.animate('1s', {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
