@@ -101,8 +101,6 @@ function addParty() {
         console.log('prevDate: ' + prevDate);
         console.log('date: ' + date);
         if (date != prevDate) {
-            console.log('different date');
-
             var printDate = makePrintDate(data['fullDate']);
             html = '<hr><h4 style="font-weight:200;padding:10px;padding-left:0px">' + printDate +'</h4>' + html;
             prevDate = date;
