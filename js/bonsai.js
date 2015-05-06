@@ -6,6 +6,7 @@ var Table = function() {
     };
     this.number = null;
     this.selected = false;
+    this.connectedTables = [];
 }
 
 var TableUI = function(model) {
@@ -207,6 +208,15 @@ var TableUI = function(model) {
                             this.animate('1s', {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
+                            // also fill its connected tables
+                            var connected = tables[k].connectedTables;
+                            console.log(connected);
+                            for (var n=0; n < connected.length; n++) {
+                                connected[n].animate('1s', {
+                                    fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                });
+                                //timeList[k] = 40;
+                            }
                         }
                     }
                     console.log(tables);
@@ -238,6 +248,15 @@ var TableUI = function(model) {
                                 fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                             });
                             timeList[k] = 40;
+                            // also fill its connected tables
+                            var connected = tables[k].connectedTables;
+                            console.log(connected);
+                            for (var n=0; n < connected.length; n++) {
+                                connected[n].animate('1s', {
+                                    fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                });
+                                //timeList[k] = 40;
+                            }
                         }
                     }
                     console.log(tables);
@@ -334,7 +353,43 @@ var TableUI = function(model) {
         return points;
     }
 
-    var connectRects = function(s, o, side) {  // for now we want to connect the bottom of s to top of o
+    var addToConnectedTables = function(s, o) {
+        // add o to s's connectedTables list
+        // Look for s's index
+        var sIdx = null;
+        for (var i=0; i < rectList.length; i++) {
+            if (rectList[i] == s) sIdx = i;
+        }
+
+        // Check whether o is in s's list
+        var insideS = false;
+        var tablesList = tables[sIdx].connectedTables;
+        for (var i=0; i < tablesList.length; i++) {
+            if (tablesList[i] == o) insideS = true;
+        }
+
+        if (!insideS) {
+            tablesList.push(o);
+        }
+
+        console.log(tables[sIdx].connectedTables);
+    }
+
+    var removeConnectedTables = function(s) {
+        for (var i=0; i < rectList.length; i++) {
+            if (rectList[i] == s) {
+                rectList[i].connectedTables = [];
+            }
+        }
+    }
+
+    var connectRects = function(s, o, side) {
+        // add s and o to each other's connectedTables list
+        removeConnectedTables(s);
+        removeConnectedTables(o);
+        addToConnectedTables(s,o);
+        addToConnectedTables(o,s);
+
         var sPoints = collectRectPoints(s);
         var oPoints = collectRectPoints(o);
 
@@ -572,6 +627,9 @@ var TableUI = function(model) {
                             console.log(tables);
                             removeShading();
                             assignMode = false;
+                            stage.sendMessage({
+                                command: "assign done"
+                            });
                         }
                         else {
                             var info = null;
@@ -598,6 +656,16 @@ var TableUI = function(model) {
                                         fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
                                     });
                                     timeList[k] = 40;
+
+                                    // also fill its connected tables
+                                    var connected = tables[k].connectedTables;
+                                    console.log(connected);
+                                    for (var n=0; n < connected.length; n++) {
+                                        connected[n].animate('1s', {
+                                            fillGradient: gradient.linear('top', [['#A040FFAA',100] , ['#CCCCCCAA',100]])
+                                        });
+                                        //timeList[k] = 40;
+                                    }
                                 }
                             }
                             console.log(tables);
