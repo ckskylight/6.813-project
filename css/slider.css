@@ -522,7 +522,7 @@ td{
     -webkit-transition: none;
     transition: none;
     outline: 0px auto -webkit-focus-ring-color;
-    color:white;
+    color:inherit;
 }
 
 

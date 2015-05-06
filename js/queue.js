@@ -30,6 +30,24 @@ function addPartyData(resNum, time, name, size, phone) {
     console.log("time_am_pm: " + time_am_pm.toString());
     */
 
+     var html = '<div class="inQueue queueItem bs-callout bs-callout-info" style="padding-top:15px; padding-bottom:15px; border: 1px solid rgba(160,64,255,1.0);border-left: 5px solid rgba(160,64,255,1.0);background-color:#fff;padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 0px;padding: none;padding: 0px; " id="res' + resNum + '">' + 
+              '<center style="padding:15px 10px ; height:78px;">' + 
+               '<div style="height:50px; line-height: 46px; position: absolute;">' + 
+                '<div style="width: 65%; font-size: 40px; float: left;text-align: center; line-height: 46px;">' + time_hour + '</div>' + 
+                '<div style="margin-left: 44px; margin-top: 4px;line-height: 23px;   ">' + time_min + '</div>' + 
+                '<div style="margin-left: 48px; margin-top: -6px;line-height: 23px;   ">' + time_am_pm + '</div>' + 
+              '</div>' +
+              '<div style="margin-left: 60px; line-height: 46px; font-size: 40px; width: 38%; position: absolute; ">' + size + '<span class="glyphicon glyphicon-user" aria-hidden="true" style="font-size: 30px;"></span></div>' + 
+
+              '<div style="height:50px; line-height: 46px; position: absolute;">' + 
+                '<div style="margin-left: 150px; margin-top: 4px;line-height: 23px; width: 50%;  text-align: right; word-wrap:break-word;">' + name + '</div>'
+                '<div style="margin-left: 150px; margin-top: -6px;line-height: 23px; width: 50%;  text-align: right;   ">' + phone + '</div>' + 
+              '</div> ' + 
+            '</center>' +
+            '</div>'
+
+
+     /*
      var html = '<div class="inQueue queueItem bs-callout bs-callout-info" id="res' + resNum + '">' + 
               '<center style="padding:15px">' + 
               '<table style="font-weight:200;">' + 
@@ -48,6 +66,7 @@ function addPartyData(resNum, time, name, size, phone) {
               '</table>' +
             '</center>' +
             '</div>'
+    */
 
     return html;
 }
